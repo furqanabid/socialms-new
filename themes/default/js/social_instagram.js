@@ -2,21 +2,25 @@ $(function(){
 	// 添加一个instagram 帐号到column
 	$('.instagram_add_to_column').click(function(){
 		var id = $("#instagram_drop_down").val();
+		var that = $(this);
 		if(id == -1)
 		{
 			alert("请选择一个Instagram帐号");
 			return;
 		}
-		$('.instagram_ajax_loader').show();
+		that.closest('.tab-pane').find('.ajax_loader').show();
 
+		// SocialType的值具体查看xzModel文件
 		var data = {
-			id:id,
+			id : id,
+			key : 'instagram_id',
+			social_type : 2,
 			instagramName:$.trim($('#instagram_drop_down option:selected').html()),
 		}
 
 		$.ajax({
 			type: "POST",
-			url: social_module_link+"/instagram/addColumn", 
+			url: root_url+"/userColumn/addColumn", 
 			data: data,
 		}).done(function(result){
 			if(parseInt(result))
@@ -24,7 +28,7 @@ $(function(){
 				var columnId = parseInt(result);
 				// 添加列
 				addNewColumnToPage(columnId, 'instagram', data.id, data.instagramName);
-				$('.instagram_ajax_loader').hide();
+				that.closest('.tab-pane').find('.ajax_loader').hide();
 			}
 		});	
 	})
@@ -48,7 +52,7 @@ $(function(){
 		{
 			$.ajax({
 				type: "POST",
-				url: social_module_link+"/instagram/recent", 
+				url: root_url+"/instagram/recent", 
 				dataType : 'html',
 				data: data,
 			}).done(function(result){
@@ -60,7 +64,7 @@ $(function(){
 		{
 			$.ajax({
 				type: "POST",
-				url: social_module_link+"/instagram/mypost", 
+				url: root_url+"/instagram/mypost", 
 				dataType : 'html',
 				data: data,
 			}).done(function(result){
@@ -72,7 +76,7 @@ $(function(){
 		{
 			$.ajax({
 				type: "POST",
-				url: social_module_link+"/instagram/popular", 
+				url: root_url+"/instagram/popular", 
 				dataType : 'html',
 				data: data,
 			}).done(function(result){
@@ -93,7 +97,7 @@ $(function(){
 
 		if(confirm('您确认删除这个Instagram账号吗？'))
 		{
-			that.closest('.tab-pane').find('.ajax-loader').show();
+			that.closest('.tab-pane').find('.ajax_loader').show();
 			$.ajax({
 				type: "POST",
 				url: root_url+"/instagram/del", 
@@ -103,14 +107,16 @@ $(function(){
 				if(result.success === true)
 				{
 					$('#instagram_drop_down option:selected').remove();
-					that.closest('.tab-pane').find('.ajax-loader').hide();
+					that.closest('.tab-pane').find('.ajax_loader').hide();
 
-					// 删除已经存在的Column
-					var sectionId = $('.instagram_'+id).attr('id') || '';
-					if(sectionId != '')
+					// 如果帐号已经被添加到Column,则删除已经存在的Column
+					if($('.instagram_'+id).length > 0)
 					{
-					    var columnId = sectionId.replace('column_','');
-					    $('.delete_column_'+columnId).trigger('click', [true]);
+						$('.instagram_'+id).each(function(){
+							var sectionId = $(this).attr('id');
+							var columnId = sectionId.replace('column_','');
+							$('.delete_column_'+columnId).trigger('click', [true]);
+						});
 					}
 				}
 			});	
@@ -138,7 +144,7 @@ $(function(){
 				that.closest('.instagram_wrap').find('.social_action_ajax_loader').show();
 				$.ajax({
 					type : 'POST',
-					url : social_module_link+'/instagram/mediaOperate',
+					url : root_url+'/instagram/mediaOperate',
 					data : data,
 					dataType : 'json'
 				}).done(function(result){
@@ -162,7 +168,7 @@ $(function(){
 				data['userid'] = that.attr('data-userid');
 				$.ajax({
 					type : 'POST',
-					url : social_module_link+'/instagram/mediaOperate',
+					url : root_url+'/instagram/mediaOperate',
 					data : data,
 					dataType : 'json'
 				}).done(function(result){
@@ -202,7 +208,7 @@ $(function(){
         	$.ajax({
                 type : 'POST',
                 data : data,
-                url  : social_module_link+'/instagram/mediaOperate',
+                url  : root_url+'/instagram/mediaOperate',
        	 	}).done(function(res){
        	 		that.closest('.instagram_wrap').find('.social_action_msg').slideDown().delay(5000).slideUp();
                 that.attr('disabled',false).val('');
@@ -225,7 +231,7 @@ $(function(){
             type : 'POST',
             data : data,
             dataType : 'html',
-            url  : social_module_link+'/instagram/nextPage',
+            url  : root_url+'/instagram/nextPage',
    	 	}).done(function(result){
    	 		that.hide();
    	 		that.closest('.holder_content').append(result);

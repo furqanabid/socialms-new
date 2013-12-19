@@ -41,6 +41,7 @@ section {
 }
 .ajax_loader{display: none;}
 hr{border-top: 2px solid #ddd;}
+li{list-style-type: none;}
 .social_action{
     border: 1px solid #ddd;
     @include vendor(box-shadow,0px 0px 10px #ddd);
@@ -54,6 +55,30 @@ hr{border-top: 2px solid #ddd;}
         text-decoration: none;
     }
 }
+.holdertop{
+   top: 68px !important;
+}
+.social_feeds_tabs {
+    margin: 0 3px;
+    padding-left: 0;
+    border-bottom:1px solid #ddd;
+
+    .social_menu_tabs {
+        float: left;
+        padding: 6px 10px;
+        border: 1px solid #ddd;
+        border-top:0;
+        border-bottom:0;
+        cursor: pointer;
+        color: black;
+        background-color: #fff
+        ;margin-right: 1px;
+    }
+
+    .currentTabSelected{
+        color: #fff;background-color: #3276b1;
+    }
+ }
 
 /*view tab*/
 #tabview{
@@ -105,6 +130,24 @@ hr{border-top: 2px solid #ddd;}
         }
     }
     
+}
+
+/*齿轮gear*/
+.column_configuration_dropdown{
+    font-size: 18px;
+    margin-right: 5px;
+
+    .column_configuration_a{
+        color: #fff;
+
+        :hover,:focus{
+            color: #ccc;
+        }
+    }
+    .dropdown-menu{
+        width: auto;
+        min-width: 40px;
+    }
 }
 
 /*column内容区域*/

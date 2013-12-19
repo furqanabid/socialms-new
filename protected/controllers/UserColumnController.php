@@ -26,7 +26,7 @@ class UserColumnController extends xzController
     {
         return array(
             array('allow', 
-                'actions'=>array('index','addColumn'),
+                'actions'=>array('addColumn','del'),
                 'users'=>array('@'),
             ),
             array('deny',  
@@ -36,12 +36,14 @@ class UserColumnController extends xzController
     }
 
     /**
-     * 获取所有的column
+     * 删除column
      */
-    public function actionIndex()
+    public function actionDel()
     {
-    	$data = UserColumn::getColumns();
-    	xz::outputJson($data);
+    	if(isset($_POST['column_id']))
+        {
+            UserColumn::model()->findByPk($_POST['column_id'])->deleteData();
+        }
     }
 
     /**
@@ -61,7 +63,7 @@ class UserColumnController extends xzController
             $model = new UserColumn;
             $model->attributes = $inputArray;
             if($model->save())
-                xz::outputJson($model->attributes);
+                echo $model->id;
             else
                 xz::dump($model->getErrors());
 

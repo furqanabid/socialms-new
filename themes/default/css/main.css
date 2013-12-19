@@ -53,6 +53,9 @@ section {
 hr {
   border-top: 2px solid #ddd; }
 
+li {
+  list-style-type: none; }
+
 .social_action {
   border: 1px solid #ddd;
   -webkit-box-shadow: 0px 0px 10px #dddddd;
@@ -66,6 +69,27 @@ hr {
     padding: 4px; }
   .social_action a:hover {
     text-decoration: none; }
+
+.holdertop {
+  top: 68px !important; }
+
+.social_feeds_tabs {
+  margin: 0 3px;
+  padding-left: 0;
+  border-bottom: 1px solid #ddd; }
+  .social_feeds_tabs .social_menu_tabs {
+    float: left;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-top: 0;
+    border-bottom: 0;
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    margin-right: 1px; }
+  .social_feeds_tabs .currentTabSelected {
+    color: #fff;
+    background-color: #3276b1; }
 
 /*view tab*/
 #tabview {
@@ -106,6 +130,18 @@ hr {
       top: 23px !important;
       padding: 15px !important;
       width: 240px; }
+
+/*齿轮gear*/
+.column_configuration_dropdown {
+  font-size: 18px;
+  margin-right: 5px; }
+  .column_configuration_dropdown .column_configuration_a {
+    color: #fff; }
+    .column_configuration_dropdown .column_configuration_a :hover, .column_configuration_dropdown .column_configuration_a :focus {
+      color: #ccc; }
+  .column_configuration_dropdown .dropdown-menu {
+    width: auto;
+    min-width: 40px; }
 
 /*column内容区域*/
 #scrollable_columns {

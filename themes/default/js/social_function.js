@@ -15,12 +15,12 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 	{
         // Rss
 		case "rss":
-			icon = "<img src='"+statics_assets+"/images/social-icons/RSS.png' />";
+			icon = "<img src='"+root_img +"/social-icons/rss.png' />";
 		break;
 
         // Instagram
 		case "instagram":
-			icon = "<img src='"+statics_assets+"/images/social-icons/Instagram.png' />";
+			icon = "<img src='"+root_img +"/social-icons/instagram.png' />";
 			socialTab = "<ul  class='social_feeds_tabs clearfix'> \
 							<li class='social_menu_tabs instagramTab currentTabSelected instagram_most_recent'>我的首页</div> \
 							<li class='social_menu_tabs instagramTab instagram_most_popular'>最近流行</div> \
@@ -30,12 +30,12 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 
         // Pinterest
         case "pinterest":
-            icon = "<img src='"+statics_assets+"/images/social-icons/Pinterest.png' />";
+            icon = "<img src='"+root_img +"/social-icons/Pinterest.png' />";
         break;
 
         // Flickr
         case "flickr":
-            icon = "<img src='"+statics_assets+"/images/social-icons/Flickr.png' />";
+            icon = "<img src='"+root_img +"/social-icons/Flickr.png' />";
             socialTab = "<ul  class='social_feeds_tabs clearfix'> \
                             <li class='social_menu_tabs flickrTab currentTabSelected flickr_most_recent'>首页图片</div> \
                             <li class='social_menu_tabs flickrTab flickr_most_interestingness'>发掘图片</div> \
@@ -45,7 +45,7 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 
         // Linkedin
         case "linkedin":
-            icon = "<img src='"+statics_assets+"/images/social-icons/LinkedIn.png' />";
+            icon = "<img src='"+root_img +"/social-icons/LinkedIn.png' />";
             socialTab = "<ul  class='social_feeds_tabs clearfix'> \
                             <li class='social_menu_tabs linkedinTab currentTabSelected linkedin_company_update'>公司动态</div> \
                             <li class='social_menu_tabs linkedinTab linkedin_my_update'>我的动态</div> \
@@ -54,7 +54,7 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 
          // Reddit
         case "reddit":
-            icon = "<img src='"+statics_assets+"/images/social-icons/Reddit.png' />";
+            icon = "<img src='"+root_img +"/social-icons/Reddit.png' />";
             socialTab = "<ul  class='social_feeds_tabs clearfix'> \
                             <li class='social_menu_tabs redditTab currentTabSelected reddit_new'>最新新闻</div> \
                             <li class='social_menu_tabs redditTab reddit_hot'>热门新闻</div> \
@@ -65,7 +65,7 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 
          // 人人网
         case "renren":
-            icon = "<img src='"+statics_assets+"/images/social-icons/renren.png' />";
+            icon = "<img src='"+root_img +"/social-icons/renren.png' />";
             socialTab = "<ul  class='social_feeds_tabs clearfix'> \
                             <li class='social_menu_tabs renrenTab currentTabSelected renren_home'>首页动态</div> \
                             <li class='social_menu_tabs renrenTab renren_status'>我的状态</div> \
@@ -75,7 +75,7 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 
          // 新浪微博
         case "weibo":
-            icon = "<img src='"+statics_assets+"/images/social-icons/weibo.png' />";
+            icon = "<img src='"+root_img +"/social-icons/weibo.png' />";
             socialTab = "<ul  class='social_feeds_tabs clearfix'> \
                             <li class='social_menu_tabs weiboTab currentTabSelected weibo_home_timeline'>首页动态</div> \
                             <li class='social_menu_tabs weiboTab weibo_user_timeline'>个人主页</div> \
@@ -85,12 +85,12 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 
         // 56视频
         case "video56":
-            icon = "<img src='"+statics_assets+"/images/social-icons/video56.png' />";
+            icon = "<img src='"+root_img +"/social-icons/video56.png' />";
         break;
 
         // 优酷视频
         case "youku":
-            icon = "<img src='"+statics_assets+"/images/social-icons/youku.png' />";
+            icon = "<img src='"+root_img +"/social-icons/youku.png' />";
             socialTab = "<ul class='social_feeds_tabs clearfix'> \
                             <li class='social_menu_tabs youkuTab currentTabSelected youku_category'>最新热门</div> \
                             <li class='social_menu_tabs youkuTab youku_show'>热门电视剧</div> \
@@ -103,8 +103,8 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 	if(socialTab != '')
 		holderTop = 'holdertop';
 
-	var columnHtml = "<section class='insert_columns "+socialType+"_"+socialAccountId+"' id='column_"+columnId+"' style='width:320px;'>"+
-						"<div class='column_title_tab'>"+
+	var columnHtml = "<section class='insert_columns "+socialType+"_"+socialAccountId+"' id='column_"+columnId+"'>"+
+						"<div class='column_title'>"+
 							"<span class='column_title_tab_name'>"+icon+" "+title+"</span>"+
 							"<div class='dropdown pull-right column_configuration_dropdown'>"+
 								"<a href='#' class='dropdown-toggle column_configuration_a' data-toggle='dropdown' >"+
@@ -121,9 +121,9 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 							"</div>"+
 						"</div>"+
 						socialTab + 
-						"<div class='holder "+holderTop+"'>"+	 
-							"<div class='holder_content holder_column_"+columnId+"'>"+							
-								"<img class='ajax_loader' src='"+statics_assets+"/images/ajax-loader.gif' />"+						
+						"<div class='column_container_wrap "+holderTop+"'>"+	 
+							"<div class='column_container holder_column_"+columnId+"'>"+							
+								"<img src='"+root_img +"/ajax-loader.gif' />"+						
 							"</div>"+
 					    "</div>"+
 					"</section>";

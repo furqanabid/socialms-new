@@ -13,7 +13,7 @@
         // 下面所有的JS变量都是在social里面使用的
         Yii::app()->clientScript->registerScript('social_variables','
                 var root_url = "'.$_SERVER['SCRIPT_NAME'].'";
-                var social_module_link = "'.$this->createUrl("/social").'";
+                var root_img = "'.$this->assets_img.'";
         ',CClientScript::POS_HEAD);
     ?>
 	<title>

@@ -103,9 +103,8 @@ class InstagramController extends xzController
     {
         if(isset($_POST['id']))
         {
-            $this->id = $_POST['id'];
-            $data = SocialInstagram::model()->findByPk($this->id);
-            $this->return_data['title'] = $data->instagram_username;
+            $data = SocialInstagram::model()->findByPk($_POST['id']);
+            // 赋值
             $this->instagram->api_access_token = $data->instagram_access_token;
             $this->cacheName = 'instagram_recent_data_'.$data->instagram_userid;
 
@@ -120,22 +119,6 @@ class InstagramController extends xzController
     }
 
     /**
-     * 显示视图
-     * @return [type] [description]
-     */
-    public function show()
-    {
-        $result = $this->renderPartial('load_instagram',array(
-                        'instagram' => $this->api_data,
-                    ),true);  
-
-        $this->return_data['content'] = $result; 
-        Yii::app()->cache->set($this->cacheName, $this->return_data, CACHE_TIME_INSTAGRAM);
-        // 返回数据
-        $this->output();
-    }
-
-    /**
      * 检查是否需要重新缓存
      * @return [type] [description]
      */
@@ -145,13 +128,25 @@ class InstagramController extends xzController
         // 如果存在缓存，则获取缓存值
         if($result !== false)
         {                
-            $this->return_data = $result;
-            $this->return_data['from_cache'] = true;
-            // 返回数据
-            $this->output();
+            echo $result;
             // 结束
             Yii::app()->end();
         }
+    }
+
+    /**
+     * 显示视图
+     * @return [type] [description]
+     */
+    public function show()
+    {
+        $result = $this->renderPartial('load_instagram',array(
+            'instagram' => $this->api_data,
+        ),true);  
+
+        Yii::app()->cache->set($this->cacheName, $result, CACHE_TIME_INSTAGRAM);
+
+        echo $result;
     }
 
 }

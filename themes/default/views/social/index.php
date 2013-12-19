@@ -120,3 +120,79 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
     </div>
 </div>
 
+
+<!-- 如果用户添加过column,输出存在的column -->
+<?php
+if(count($userColumns)>0)
+{
+    $str = '';
+    foreach ($userColumns as $key => $val) 
+    {
+        // Social 类型
+        switch ($val['social_type']) 
+        {
+            // Rss
+            case xzModel::SOCIAL_RSS:
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="rss"/>
+                    <input type="hidden" class="rss_masterid_'.$val['id'].'" value="'.$val['rss_master_id'].'" />
+                    <input type="hidden" class="rss_name_'.$val['id'].'" value="'.$val['rss_name'].'" />';
+            break;
+            
+            // Instagram
+            case xzModel::SOCIAL_INSTAGRAM:
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="instagram"/>
+                        <input type="hidden" class="instagram_id_'.$val['id'].'" value="'.$val['instagram_id'].'" />'; 
+            break;
+
+            // Pinterest
+            case xzModel::SOCIAL_PINTEREST:
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="pinterest"/>
+                        <input type="hidden" class="pinterest_id_'.$val['id'].'" value="'.$val['pinterest_id'].'" /> ';
+            break;
+
+            // Flickr
+            case xzModel::SOCIAL_FLICKR:
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="flickr"/>
+                    <input type="hidden" class="flickr_id_'.$val['id'].'" value="'.$val['flickr_id'].'" />';
+            break;
+
+            // Linkedin
+            case xzModel::SOCIAL_LINKEDIN:
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="linkedin"/>
+                    <input type="hidden" class="linkedin_id_'.$val['id'].'" value="'.$val['linkedin_id'].'" />';
+            break;
+
+            // Reddit
+            case xzModel::SOCIAL_REDDIT:
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="reddit"/>
+                    <input type="hidden" class="reddit_id_'.$val['id'].'" value="'.$val['reddit_id'].'" />';
+            break;
+
+            // 人人网
+            case xzModel::SOCIAL_RENREN:
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="renren"/>
+                    <input type="hidden" class="renren_id_'.$val['id'].'" value="'.$val['renren_id'].'" />';
+            break;
+
+            // 新浪微博
+            case xzModel::SOCIAL_WEIBO:
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="weibo"/>
+                    <input type="hidden" class="weibo_id_'.$val['id'].'" value="'.$val['weibo_id'].'" />';
+            break;
+
+            // 56视频
+            case xzModel::SOCIAL_VIDEO56:
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="video56"/>
+                    <input type="hidden" class="video56_id_'.$val['id'].'" value="'.$val['video56_id'].'" />';
+            break;
+
+            // 优酷视频
+            case xzModel::SOCIAL_YOUKU:
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="youku"/>
+                    <input type="hidden" class="youku_id_'.$val['id'].'" value="'.$val['youku_id'].'" />';
+            break;
+        }
+    }
+    echo $str;
+}
+?>

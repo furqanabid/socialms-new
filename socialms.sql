@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2013 年 12 月 19 日 18:51
+-- 生成日期: 2013 年 12 月 19 日 20:22
 -- 服务器版本: 5.5.32
 -- PHP 版本: 5.4.19
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `xz_social_instagram` (
   `is_deleted` binary(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
 
 --
 -- 转存表中的数据 `xz_social_instagram`
@@ -48,8 +48,13 @@ CREATE TABLE IF NOT EXISTS `xz_social_instagram` (
 
 INSERT INTO `xz_social_instagram` (`id`, `user_id`, `instagram_userid`, `instagram_access_token`, `instagram_username`, `instagram_fullname`, `create_time`, `update_time`, `is_deleted`) VALUES
 (18, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-18 23:29:07', '2013-12-19 18:47:07', '1'),
-(19, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-19 18:47:32', '2013-12-19 18:47:32', '0'),
-(20, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-19 18:49:33', '2013-12-19 18:49:33', '0');
+(19, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-19 18:47:32', '2013-12-19 19:16:25', '1'),
+(20, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-19 18:49:33', '2013-12-19 19:17:13', '1'),
+(21, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-19 19:17:17', '2013-12-19 20:07:30', '1'),
+(22, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-19 20:10:36', '2013-12-19 20:12:26', '1'),
+(23, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-19 20:15:22', '2013-12-19 20:15:40', '1'),
+(24, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-19 20:17:21', '2013-12-19 20:20:19', '1'),
+(25, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-19 20:20:46', '2013-12-19 20:21:05', '1');
 
 -- --------------------------------------------------------
 
@@ -75,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `xz_users` (
 --
 
 INSERT INTO `xz_users` (`id`, `email`, `username`, `password`, `create_time`, `update_time`, `last_login_time`, `is_deleted`) VALUES
-(15, 'zhexiao@163.com', 'andybegin', '31efe5c727df3e9f116cd46fbb5b2626', '2013-12-16 16:57:44', '2013-12-16 16:57:44', '2013-12-19 18:48:46', '0'),
+(15, 'zhexiao@163.com', 'andybegin', '31efe5c727df3e9f116cd46fbb5b2626', '2013-12-16 16:57:44', '2013-12-16 16:57:44', '2013-12-19 19:55:07', '0'),
 (17, 'test@qq.com', 'test', '098f6bcd4621d373cade4e832627b4f6', '2013-12-16 17:03:28', '2013-12-16 17:03:28', '2013-12-16 17:03:28', '0');
 
 -- --------------------------------------------------------
@@ -112,7 +117,17 @@ CREATE TABLE IF NOT EXISTS `xz_user_column` (
   KEY `weibo_id` (`weibo_id`),
   KEY `video56_id` (`video56_id`),
   KEY `youku_id` (`youku_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
+
+--
+-- 转存表中的数据 `xz_user_column`
+--
+
+INSERT INTO `xz_user_column` (`id`, `user_id`, `view_id`, `social_type`, `instagram_id`, `pinterest_id`, `flickr_id`, `linkedin_id`, `reddit_id`, `renren_id`, `weibo_id`, `video56_id`, `youku_id`, `create_time`, `update_time`, `is_deleted`) VALUES
+(43, 15, 2, 2, 24, 0, 0, 0, 0, 0, 0, 0, 0, '2013-12-19 20:17:29', '2013-12-19 20:20:21', '1'),
+(44, 15, 2, 2, 25, 0, 0, 0, 0, 0, 0, 0, 0, '2013-12-19 20:20:52', '2013-12-19 20:21:09', '1'),
+(45, 15, 2, 2, 25, 0, 0, 0, 0, 0, 0, 0, 0, '2013-12-19 20:20:54', '2013-12-19 20:21:08', '1'),
+(46, 15, 2, 2, 25, 0, 0, 0, 0, 0, 0, 0, 0, '2013-12-19 20:20:57', '2013-12-19 20:21:07', '1');
 
 -- --------------------------------------------------------
 
