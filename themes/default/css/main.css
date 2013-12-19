@@ -1,0 +1,316 @@
+@charset "IBM437";
+body {
+  background-color: #f9f9f9; }
+
+/*重写bootstrap css*/
+.form-control, .dropdown-menu, .btn {
+  border-radius: 0 !important; }
+
+/*普通的CSS*/
+section {
+  box-align: stretch;
+  box-direction: reverse;
+  box-orient: vertical;
+  display: inline-block;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  vertical-align: top;
+  white-space: normal;
+  width: 320px; }
+
+::-webkit-scrollbar {
+  width: 10px; }
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+  -ms-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+  -o-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px; }
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #999;
+  -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+  -ms-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+  -o-box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.5); }
+
+.ajax_loader {
+  display: none; }
+
+hr {
+  border-top: 2px solid #ddd; }
+
+.social_action {
+  border: 1px solid #ddd;
+  -webkit-box-shadow: 0px 0px 10px #dddddd;
+  -moz-box-shadow: 0px 0px 10px #dddddd;
+  -ms-box-shadow: 0px 0px 10px #dddddd;
+  -o-box-shadow: 0px 0px 10px #dddddd;
+  box-shadow: 0px 0px 10px #dddddd;
+  padding: 5px 10px; }
+  .social_action a {
+    color: black;
+    padding: 4px; }
+  .social_action a:hover {
+    text-decoration: none; }
+
+/*view tab*/
+#tabview {
+  display: block;
+  padding: 0;
+  position: relative;
+  width: 100%; }
+  #tabview .change_view_button {
+    display: inline-block;
+    padding: 6px 20px;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    color: #333;
+    border-left: none;
+    float: left; }
+  #tabview .view_active {
+    color: #333333;
+    background-color: #ebebeb; }
+  #tabview .view_operate {
+    margin-left: -4px; }
+    #tabview .view_operate .add_view {
+      display: inline-block;
+      padding: 6px 20px;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      color: #333;
+      margin-left: 4px;
+      border-left: none; }
+    #tabview .view_operate .view_container {
+      top: 23px !important;
+      padding: 15px !important;
+      width: 240px; }
+
+/*column内容区域*/
+#scrollable_columns {
+  position: absolute;
+  top: 106px;
+  left: 362px;
+  bottom: 0;
+  right: 0;
+  background-color: #fff;
+  overflow-x: auto;
+  overflow-y: hidden; }
+  #scrollable_columns #page_wrap {
+    box-sizing: border-box;
+    height: 100%;
+    min-width: 1024px;
+    overflow: visible;
+    padding: 0px;
+    white-space: nowrap; }
+    #scrollable_columns #page_wrap #vertical_sidebar {
+      width: 362px;
+      position: fixed;
+      top: 106px;
+      left: 0px;
+      z-index: 2;
+      background-color: #fff; }
+      #scrollable_columns #page_wrap #vertical_sidebar .siderbar_nav {
+        width: 42px;
+        height: 100%;
+        position: absolute;
+        left: 0px; }
+      #scrollable_columns #page_wrap #vertical_sidebar .siderbar_content {
+        width: 320px;
+        height: 100%;
+        position: absolute;
+        right: 0px;
+        border: 1px solid #ddd; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab li {
+        width: 100%;
+        margin-bottom: 0; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab a {
+        border-radius: 0;
+        border: none;
+        border-top: 1px solid #ddd;
+        margin-right: 0;
+        height: 40px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .social_icons {
+        background-image: url("../images/socialsprites.png");
+        background-repeat: no-repeat;
+        transition: all 0.3s ease; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .rss a {
+        background-position: 0 -1200px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .rss a:hover {
+        background-position: 0 -1240px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .rss.active a {
+        background-position: 0 -1240px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .instagram a {
+        background-position: 0 -2240px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .instagram a:hover {
+        background-position: 0 -2280px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .instagram.active a {
+        background-position: 0 -2280px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .pinterest a {
+        background-position: 0 -1040px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .pinterest a:hover {
+        background-position: 0 -1080px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .pinterest.active a {
+        background-position: 0 -1080px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .flickr a {
+        background-position: 0 -240px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .flickr a:hover {
+        background-position: 0 -280px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .flickr.active a {
+        background-position: 0 -280px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .linkedin a {
+        background-position: 0 -720px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .linkedin a:hover {
+        background-position: 0 -760px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .linkedin.active a {
+        background-position: 0 -760px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .reddit a {
+        background-position: 0 -1120px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .reddit a:hover {
+        background-position: 0 -1160px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .reddit.active a {
+        background-position: 0 -1160px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .renren a {
+        background-position: -41px 0; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .renren a:hover {
+        background-position: -41px -41px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .renren.active a {
+        background-position: -41px -41px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .weibo a {
+        background-position: -41px -82px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .weibo a:hover {
+        background-position: -41px -123px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .weibo.active a {
+        background-position: -41px -123px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .video56 a {
+        background-position: -41px -246px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .video56 a:hover {
+        background-position: -41px -287px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .video56.active a {
+        background-position: -41px -287px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .youku a {
+        background-position: -41px -328px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .youku a:hover {
+        background-position: -41px -369px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .youku.active a {
+        background-position: -41px -369px;
+        margin-left: 1px; }
+    #scrollable_columns #page_wrap .insert_columns {
+      display: inline-block;
+      font-size: 13px;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      vertical-align: top;
+      white-space: normal;
+      box-orient: vertical;
+      border: 1px solid #ddd; }
+    #scrollable_columns #page_wrap .column_title {
+      background-color: #5F6865;
+      height: 34px;
+      line-height: 32px;
+      color: #fff;
+      font-weight: 300;
+      border-right: 1px solid #ddd; }
+    #scrollable_columns #page_wrap .column_container_wrap {
+      position: absolute;
+      bottom: 0;
+      top: 35px;
+      left: 0;
+      width: 100%;
+      background-color: #fff; }
+      #scrollable_columns #page_wrap .column_container_wrap .column_container {
+        bottom: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        position: absolute;
+        top: 0px;
+        width: 99%;
+        padding: 10px; }
+
+.button_div {
+  margin-top: 10px; }
+
+/*Instagram CSS*/
+.social_wrap_div {
+  padding: 15px; }
+
+.social_wrap_div .select_div {
+  margin-bottom: 10px; }
+
+.form-control.social_select {
+  display: inline-block; }
+
+.instagram_wrap {
+  padding: 5px;
+  margin: 0 5px 0px; }
+  .instagram_wrap .author {
+    margin-bottom: 2px; }
+  .instagram_wrap .img img, .instagram_wrap .author img {
+    -webkit-box-shadow: 0px 0px 5px black;
+    -moz-box-shadow: 0px 0px 5px black;
+    -ms-box-shadow: 0px 0px 5px black;
+    -o-box-shadow: 0px 0px 5px black;
+    box-shadow: 0px 0px 5px black;
+    border: 1px solid #ddd; }
+  .instagram_wrap .caption, .instagram_wrap .instagram_likes {
+    margin-top: 5px;
+    border-bottom: none;
+    word-break: break-all; }
+    .instagram_wrap .caption time, .instagram_wrap .instagram_likes time {
+      float: right; }
+  .instagram_wrap .instagram_comments {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 10px; }
+    .instagram_wrap .instagram_comments .comment_wrap {
+      border-top: 1px solid #ddd;
+      border-bottom: none;
+      padding: 10px 5px; }
+      .instagram_wrap .instagram_comments .comment_wrap a {
+        text-decoration: none; }
+      .instagram_wrap .instagram_comments .comment_wrap a:hover {
+        text-decoration: none; }
+    .instagram_wrap .instagram_comments .write_instagram_comments {
+      display: none; }
+
+/*END Instagram CSS*/

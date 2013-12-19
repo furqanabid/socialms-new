@@ -1,0 +1,36 @@
+@mixin vendor($property, $value) {
+        -webkit-#{$property}: $value;
+        -moz-#{$property}: $value;
+        -ms-#{$property}: $value;
+        -o-#{$property}: $value;
+        #{$property}: $value;
+}
+
+/*常规css*/
+.row{margin: 0;}
+.introduce{
+    border: 1px solid #ddd;
+    @include vendor(box-shadow,0 0 10px #E4E4E4);
+    @include vendor(border-radius,0 !important);
+}
+
+.login-div{
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    @include vendor(box-shadow,0 0 10px #E4E4E4);
+    margin-bottom: 20px;
+}
+
+
+
+.errorMessage{
+    color: red;
+}
+
+.form-control, .dropdown-menu, .btn {
+    @include vendor(border-radius,0 !important);
+}
+
+.jumbotron{
+    background-color:#f9f9f9;
+}
