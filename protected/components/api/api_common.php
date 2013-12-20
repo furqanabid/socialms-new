@@ -28,7 +28,7 @@ class api_common
 	 * 使用curl的post方法
 	 * @return [type]      [description]
 	 */
-	protected function curl_post($url, $data, $curl_extra = array())
+	public function curl_post($url, $data, $curl_extra = array())
 	{
      	$ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -61,7 +61,7 @@ class api_common
 	 * 使用curl的get方法
 	 * @return [type] [description]
 	 */
-	protected function curl_get($url, $curl_extra = array())
+	public function curl_get($url, $curl_extra = array())
 	{
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);

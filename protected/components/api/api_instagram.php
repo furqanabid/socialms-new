@@ -7,6 +7,18 @@ class api_instagram extends api_common
 	// api url
 	private $api_host = 'https://api.instagram.com/v1';
 
+	// 用户在instagram的id
+	public $instagram_uid;
+
+	// instagram media的id
+	public $media_id;
+
+	// 你追随者的用户id
+	public $follow_uid;
+
+	// 留言的内容
+	public $comment_text;
+
 	/**
 	 * 用户授权
 	 * @param  [type] $code        [description]
@@ -43,11 +55,11 @@ class api_instagram extends api_common
 	 * 获取当前popular的数据
 	 * @return [type] [description]
 	 */
-	public function getPopular($access_token)
+	public function getPopular()
 	{
-		$url = $this->api_host."/media/popular?access_token=".$access_token;
+		$url = $this->api_host."/media/popular?access_token=".$this->api_access_token;
 		$res = $this->curl_get($url);		
-		return  json_decode($res,true);
+		return  json_decode($res);
 	}
 
 	/**
@@ -56,24 +68,24 @@ class api_instagram extends api_common
 	 * @param  [type] $access_token [description]
 	 * @return [type]               [description]
 	 */
-	public function getMypost($userid,$access_token)
+	public function getMypost()
 	{
-		$url = $this->api_host."/users/".$userid."/media/recent/?access_token=".$access_token;
+		$url = $this->api_host."/users/".$this->instagram_uid."/media/recent/?access_token=".$this->api_access_token;;
 		$res = $this->curl_get($url);		
-		return  json_decode($res,true);
+		return  json_decode($res);
 	}
 
 	/**
 	 * 发布一个评论
 	 * @return [type] [description]
 	 */
-	public function postComment($text,$access_token,$media_id)
+	public function comment()
 	{
 		$postData = array(
-			'text' => $text,
-			'access_token' => $access_token
+			'text' => $this->comment_text,
+			'access_token' => $this->api_access_token
 		);
-		$url = $this->api_host."/media/".$media_id."/comments";
+		$url = $this->api_host."/media/".$this->media_id."/comments";
 
 		$res = $this->curl_post($url, $postData);
 		return  json_decode($res);
@@ -84,11 +96,11 @@ class api_instagram extends api_common
 	 * @param  [type] $media_id [description]
 	 * @return [type]           [description]
 	 */
-	public function postLike($media_id,$access_token)
+	public function like()
 	{
-		$url = $this->api_host."/media/".$media_id."/likes";
+		$url = $this->api_host."/media/".$this->media_id."/likes";
 		$postData = array(
-			'access_token' => $access_token
+			'access_token' => $this->api_access_token
 		);
 
 		$res = $this->curl_post($url, $postData);
@@ -99,9 +111,9 @@ class api_instagram extends api_common
 	 * unfollow一个用户
 	 * @return [type] [description]
 	 */
-	public function unfollow($userid,$access_token)
+	public function unfollow()
 	{
-		$url = $this->api_host."/users/".$userid."/relationship?access_token=".$access_token;
+		$url = $this->api_host."/users/".$this->follow_uid."/relationship?access_token=".$this->api_access_token;
 		$postData = array(
 			'action' => 'unfollow'
 		);

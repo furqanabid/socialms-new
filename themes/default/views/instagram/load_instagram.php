@@ -1,6 +1,6 @@
 <?php if(count($instagram->data)>0) {?>
 	<?php foreach ($instagram->data as $key => $instagram_data) { ?>
-		<div class="instagram_wrap clearfix">
+		<div class="social_wrap instagram_wrap clearfix">
 			<div class="author">
 				<img src="<?=$instagram_data->user->profile_picture?>" width=60 height=60>
 				<a class="instagram_username" href="<?=$instagram_data->link?>" target="_blank"><?=$instagram_data->user->username?></a>
@@ -30,8 +30,10 @@
 						</div>
 					<?php }?>
 				<?php }?>
-				<textarea class="form-control write_instagram_comments" rows="3" placeholder='输入你的留言，按Enter键提交'></textarea>
 			</div>
+
+			<textarea class="form-control write_instagram_comments" rows="3" placeholder='输入你的留言，按Enter键提交'></textarea>
+
 			<div class="pull-right social_action instagram_action" data-mediaid=<?=$instagram_data->id?> >
 				<a href="javascript:void(0);" data-type='comment'  title="给图片留言">
 					<span class="glyphicon glyphicon-comment"></span>
@@ -43,7 +45,18 @@
 					<span class="glyphicon glyphicon-eye-close"></span>
 				</a>
 			</div>
+
+			<div class="clearfix"></div>
+           	<div class='pull-right social_action_msg'>操作处理中......</div>
+           	<div class='pull-right action_info'></div>
+           	<div class="clearfix"></div>
 		</div>
 		<hr>
 	<?php }?>
+	<input type='hidden' class="social_account_id" value="<?=$id?>">
+	<?php if( isset($instagram->pagination->next_url) ){?>
+	    <div class="more_data">
+	        <button class="btn btn-default instagram_more" data-next-page="<?=$instagram->pagination->next_url?>" data-next-pageid="<?=$instagram->pagination->next_max_id?>">加载更多内容...</button>
+	    </div>
+    <?php }?>
 <?php }?>

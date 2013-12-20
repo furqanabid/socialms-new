@@ -38,51 +38,37 @@ $(function(){
 		// 高亮tab
 		$(this).siblings().removeClass('currentTabSelected').end().addClass('currentTabSelected ');
 
-		var id = $(this).closest('.insert_columns').find('.instagram_id').val();
-		var a_t =  $(this).closest('.insert_columns').find('.instagram_a_t').val();
-		var data = {
-			id : id,
-			a_t : a_t
-		}
+		var url;
+		var id = $(this).closest('.insert_columns').find('.social_account_id').val();
+		var data = {id : id};
+
 		var that = $(this);
-		that.closest('.insert_columns').find('.holder_content').html("<img class='ajax_loader' src='"+statics_assets+"/images/ajax-loader.gif' />");
+		that.closest('.insert_columns').find('.column_container').html("<img src='"+root_img+"/ajax-loader.gif' />");
 
 		// 获取到的是用户的feed数据
-		if($(this).hasClass('instagram_most_recent'))
+		if($(this).hasClass('recent'))
 		{
-			$.ajax({
-				type: "POST",
-				url: root_url+"/instagram/recent", 
-				dataType : 'html',
-				data: data,
-			}).done(function(result){
-				that.closest('.insert_columns').find('.holder_content').html(result);
-			});	
+			url = root_url+"/instagram/parse/tab/recent";
 		}
 		// 获取到的是用户post的数据
-		else if($(this).hasClass('instagram_my_post'))
+		else if($(this).hasClass('mypost'))
 		{
-			$.ajax({
-				type: "POST",
-				url: root_url+"/instagram/mypost", 
-				dataType : 'html',
-				data: data,
-			}).done(function(result){
-				that.closest('.insert_columns').find('.holder_content').html(result);
-			});	
+			url = root_url+"/instagram/parse/tab/mypost";
 		}
 		// 获取到的是最近流行的一些图片
 		else
 		{
-			$.ajax({
-				type: "POST",
-				url: root_url+"/instagram/popular", 
-				dataType : 'html',
-				data: data,
-			}).done(function(result){
-				that.closest('.insert_columns').find('.holder_content').html(result);
-			});	
+			url = root_url+"/instagram/parse/tab/popular";
 		}
+
+		$.ajax({
+			type: "POST",
+			url: url,
+			dataType : 'html',
+			data: data,
+		}).done(function(result){
+			that.closest('.insert_columns').find('.column_container').html(result);
+		});	
 	})
 
 	// 删除一个instagram账号
@@ -127,36 +113,37 @@ $(function(){
 	$(document).on('click', '.instagram_action a', function(){
 		var type = $(this).attr('data-type');
 		var data = {
+			id : $(this).closest('.insert_columns').find('.social_account_id').val(),
 			type : type,
 			mediaid : $(this).closest('.instagram_action').attr('data-mediaid'),
-			a_t : $(this).closest('.insert_columns').find('.instagram_a_t').val(),
 		}
+
 		var that = $(this);
 		switch(type)
 		{
 			// 如果是comment media
 			case 'comment':
-				that.closest('.instagram_wrap').find('.write_instagram_comments').toggle();
+				that.closest('.social_wrap').find('.write_instagram_comments').toggle();
 			break;
 
 			// 如果是like media
 			case 'like':
-				that.closest('.instagram_wrap').find('.social_action_ajax_loader').show();
+				that.closest('.social_wrap').find('.social_action_msg').show();
 				$.ajax({
 					type : 'POST',
-					url : root_url+'/instagram/mediaOperate',
+					url : root_url+'/instagram/operate/tab/like',
 					data : data,
 					dataType : 'json'
-				}).done(function(result){
-					that.closest('.instagram_wrap').find('.social_action_ajax_loader').hide();
-					if(result.success == true)	
+				}).done(function(res){
+					that.closest('.social_wrap').find('.social_action_msg').hide();
+					if(res.meta.code == 200)	
 					{
 						that.find('.glyphicon').removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
-						that.closest('.instagram_wrap').find('.social_action_msg').slideDown().delay(5000).slideUp();
+						that.closest('.social_wrap').find('.action_info').html('您的操作处理成功!').slideDown().delay(5000).slideUp();
 					}				
 					else
 					{
-						alert('like失败，请联系管理员');
+						that.closest('.social_wrap').find('.action_info').html(res.meta.error_message).slideDown().delay(5000).slideUp();
 					}
 					
 				});
@@ -164,19 +151,24 @@ $(function(){
 
 			// 如果是unfollow
 			case 'unfollow':
-				that.closest('.instagram_wrap').find('.social_action_ajax_loader').show();
+				that.closest('.social_wrap').find('.social_action_msg').show();
 				data['userid'] = that.attr('data-userid');
+
 				$.ajax({
 					type : 'POST',
-					url : root_url+'/instagram/mediaOperate',
+					url : root_url+'/instagram/operate/tab/unfollow',
 					data : data,
 					dataType : 'json'
-				}).done(function(result){
-					that.closest('.instagram_wrap').find('.social_action_ajax_loader').hide();
-					if(result.success == true)	
-						that.closest('.instagram_wrap').find('.social_action_msg').slideDown().delay(5000).slideUp();
+				}).done(function(res){
+					that.closest('.social_wrap').find('.social_action_msg').hide();
+					if(res.meta.code == 200)	
+					{
+						that.closest('.social_wrap').find('.action_info').html('您的操作处理成功!').slideDown().delay(5000).slideUp();
+					}
 					else
-						alert('请求处理失败，请联系管理员');
+					{
+						that.closest('.social_wrap').find('.action_info').html(res.meta.error_message).slideDown().delay(5000).slideUp();
+					}
 				});
 			break;
 
@@ -198,9 +190,9 @@ $(function(){
 
        		$(this).attr('disabled',true);
         	var data = {
+        		id : $(this).closest('.insert_columns').find('.social_account_id').val(),
                 comment : comment,
                 mediaid : $(this).closest('.instagram_wrap').find('.instagram_action').attr('data-mediaid'),
-                a_t : $(this).closest('.insert_columns').find('.instagram_a_t').val(),
                 type : 'comment'
         	}
 
@@ -208,10 +200,18 @@ $(function(){
         	$.ajax({
                 type : 'POST',
                 data : data,
-                url  : root_url+'/instagram/mediaOperate',
+                dataType : 'json',
+                url  : root_url+'/instagram/operate/tab/comment',
        	 	}).done(function(res){
-       	 		that.closest('.instagram_wrap').find('.social_action_msg').slideDown().delay(5000).slideUp();
                 that.attr('disabled',false).val('');
+                if(res.meta.code == 200)	
+                {
+                	that.closest('.social_wrap').find('.action_info').html('您的操作处理成功!').slideDown().delay(5000).slideUp();
+                }
+                else
+                {
+                	that.closest('.social_wrap').find('.action_info').html(res.meta.error_message).slideDown().delay(5000).slideUp();
+                }
         	})
        	} 
 	})
@@ -219,22 +219,21 @@ $(function(){
 	// 获取更多的instagram内容，相当于分页
 	$(document).on('click','.instagram_more',function(){
 		var data = {
-			id : $(this).closest('.insert_columns').find('.instagram_id').val(),
-			a_t : $(this).closest('.insert_columns').find('.instagram_a_t').val(),
-			nexturl : $(this).attr('data-nexturl'),
-			nextid : $(this).attr('data-nextid'),
+			id : $(this).closest('.insert_columns').find('.social_account_id').val(),
+			nexturl : $(this).attr('data-next-page'),
+			nextid : $(this).attr('data-next-pageid'),
 		}
 
 		var that = $(this);
-		that.html("<img class='ajax_loader' src='"+statics_assets+"/images/ajax-loader.gif' />");
+		that.html("<img src='"+root_img+"/ajax-loader.gif' />");
     	$.ajax({
             type : 'POST',
             data : data,
             dataType : 'html',
-            url  : root_url+'/instagram/nextPage',
+            url  : root_url+'/instagram/parse/tab/nextpage',
    	 	}).done(function(result){
    	 		that.hide();
-   	 		that.closest('.holder_content').append(result);
+   	 		that.closest('.column_container').append(result);
     	})
 	})
 	

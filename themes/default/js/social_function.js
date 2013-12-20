@@ -22,9 +22,9 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 		case "instagram":
 			icon = "<img src='"+root_img +"/social-icons/instagram.png' />";
 			socialTab = "<ul  class='social_feeds_tabs clearfix'> \
-							<li class='social_menu_tabs instagramTab currentTabSelected instagram_most_recent'>我的首页</div> \
-							<li class='social_menu_tabs instagramTab instagram_most_popular'>最近流行</div> \
-							<li class='social_menu_tabs instagramTab instagram_my_post'>我的发布</div> \
+							<li class='social_menu_tabs instagramTab currentTabSelected recent'>我的首页</div> \
+							<li class='social_menu_tabs instagramTab popular'>最近流行</div> \
+							<li class='social_menu_tabs instagramTab mypost'>我的发布</div> \
 						</ul>";
 		break;
 

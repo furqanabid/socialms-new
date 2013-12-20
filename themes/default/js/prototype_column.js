@@ -97,7 +97,7 @@ socialColumnAccount.prototype.refresh = function() {
 	var columnId = this.columnId;
 	var url;
 	var socialType = this.socialType;
-	$('.holder_column_'+columnId).html("<img class='ajax_loader' src='"+statics_assets+"/images/ajax-loader.gif' />");
+	$('.holder_column_'+columnId).html("<img src='"+root_img+"/ajax-loader.gif' />");
 	// 默认的post参数
 	var data = {
 		id : this.id,
@@ -119,12 +119,12 @@ socialColumnAccount.prototype.refresh = function() {
 		// 刷新Instagram
 		case 'instagram':
 			// 判断当前是哪个是活动tab
-			if($('.instagramTab.currentTabSelected').hasClass('instagram_most_recent'))	
-				url = root_url+'/instagram/recent';				
-			else if($('.instagramTab.currentTabSelected').hasClass('instagram_most_popular'))
-				url = root_url+'/instagram/popular';
-			else if($('.instagramTab.currentTabSelected').hasClass('instagram_my_post'))
-				url = root_url+'/instagram/mypost';			
+			if($('.instagramTab.currentTabSelected').hasClass('recent'))	
+				url = root_url+'/instagram/parse/tab/recent';				
+			else if($('.instagramTab.currentTabSelected').hasClass('popular'))
+				url = root_url+'/instagram/parse/tab/popular';
+			else if($('.instagramTab.currentTabSelected').hasClass('mypost'))
+				url = root_url+'/instagram/parse/tab/mypost';			
 		break;
 
 		// 刷新Pinterest

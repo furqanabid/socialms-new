@@ -13,6 +13,9 @@ class xzController extends CController
     // 静态image文件
     public $assets_img;
 
+    // 每种社交类型的帐号id
+    public $social_id;
+
     /**
      * controller的初始化
      * @return [type] [description]
