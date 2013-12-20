@@ -33,7 +33,11 @@
         </div>
         <hr>
     <?php }?>
+
     <div class="more_data">
-        <button class="btn btn-default flickr_more" data-page="<?=$flickr->page?>" data-pages="<?=$flickr->pages?>">加载更多内容...</button>
+        <button class="btn btn-default flickr_more" data-page="<?=$page?>" data-pages="<?=$flickr->pages?>">加载更多内容...</button>
     </div>
+    
+<?php }else{?>
+    没有更多可以显示的内容.
 <?php }?>

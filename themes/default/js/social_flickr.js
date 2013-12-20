@@ -203,6 +203,7 @@ $(function(){
 
     // 获取更多的Flickr内容，相当于分页
     $(document).on('click','.flickr_more',function(){
+        var url;
         var data = {
             id : $(this).closest('.insert_columns').attr('data-social-account'),
             page : $(this).attr('data-page'),
@@ -210,45 +211,31 @@ $(function(){
         }
 
         var that = $(this);
-        that.html("<img class='ajax_loader' src='"+statics_assets+"/images/ajax-loader.gif' />");
+        that.html("加载中......");
         // 首页图片分页
-        if(that.closest('.insert_columns').find('.currentTabSelected').hasClass('flickr_most_recent'))
+        if(that.closest('.insert_columns').find('.currentTabSelected').hasClass('recent'))
         {
-            $.ajax({
-                type : 'POST',
-                data : data,
-                dataType : 'html',
-                url  : root_url+'/flickr/recent',
-            }).done(function(result){
-                that.hide();
-                that.closest('.holder_content').append(result);
-            })
+            url = root_url+'/flickr/parse/tab/recent';
         }
         // 发掘图片的分页
-        else if(that.closest('.insert_columns').find('.currentTabSelected').hasClass('flickr_most_interestingness'))
+        else if(that.closest('.insert_columns').find('.currentTabSelected').hasClass('interest'))
         {
-            $.ajax({
-                type : 'POST',
-                data : data,
-                dataType : 'html',
-                url  : root_url+'/flickr/getInterestingness',
-            }).done(function(result){
-                that.hide();
-                that.closest('.holder_content').append(result);
-            })
+            url = root_url+'/flickr/parse/tab/interest';
         }
         else
         {
-            $.ajax({
-                type : 'POST',
-                data : data,
-                dataType : 'html',
-                url  : root_url+'/flickr/getMyPost',
-            }).done(function(result){
-                that.hide();
-                that.closest('.holder_content').append(result);
-            })
+            url = root_url+'/flickr/parse/tab/mypost';
         }
+
+        $.ajax({
+            type : 'POST',
+            data : data,
+            dataType : 'html',
+            url  : url,
+        }).done(function(result){
+            that.hide();
+            that.closest('.column_container').append(result);
+        })
     })
 
 

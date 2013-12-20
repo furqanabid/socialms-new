@@ -14,6 +14,10 @@ class FlickrController extends xzController
     protected $action;
     // type是哪种tab类型
     protected $tab;
+    // 分页总数
+    protected $pages;
+    // 当前页数
+    protected $page;
 
 
     // 初始化加载
@@ -24,8 +28,11 @@ class FlickrController extends xzController
         $this->flickr = new api_flickr(FLICKR_API_KEY, FLICKR_API_SECRET);
         $this->flickr->api_redirect_uri = FLICKR_REDIRECT_URI;
 
+        $this->page = isset($_POST['page']) ? $_POST['page'] : 1;
         $this->action = isset($_POST['action']) ? $_POST['action'] : '';
         $this->tab = isset($_GET['tab']) ? $_GET['tab'] : 'recent';
+
+        $this->flickr->page = $this->page;
     }
 
     /**
@@ -119,15 +126,15 @@ class FlickrController extends xzController
             switch ($this->tab) 
             {
                 case 'recent':
-                    $this->cacheName = 'flickr_recent_data_'.$data->flickr_nsid;
+                    $this->cacheName = 'flickr_recent_data_'.$data->flickr_nsid.'_'.$this->page;
                 break;
 
                 case 'interest':
-                    $this->cacheName = 'flickr_interest_data_'.$data->flickr_nsid;
+                    $this->cacheName = 'flickr_interest_data_'.$data->flickr_nsid.'_'.$this->page;
                 break;
                 
                 case 'mypost':
-                    $this->cacheName = 'flickr_mypost_data_'.$data->flickr_nsid;
+                    $this->cacheName = 'flickr_mypost_data_'.$data->flickr_nsid.'_'.$this->page;
                 break;
             }
 
@@ -216,6 +223,7 @@ class FlickrController extends xzController
     {
         $result = $this->renderPartial('load_flickr',array(
             'flickr' => $this->api_data->photos,
+            'page' => ++$this->page
         ),true);  
 
         Yii::app()->cache->set($this->cacheName, $result, CACHE_TIME_FLICKR);

@@ -53,9 +53,13 @@
 		</div>
 		<hr>
 	<?php }?>
-	<?php if( isset($instagram->pagination->next_url) ){?>
+
+	<?php if( isset($instagram->pagination->next_url) ){ ?>
 	    <div class="more_data">
 	        <button class="btn btn-default instagram_more" data-next-page="<?=$instagram->pagination->next_url?>" data-next-pageid="<?=$instagram->pagination->next_max_id?>">加载更多内容...</button>
 	    </div>
     <?php }?>
+    
+<?php }else{?>
+    没有更多可以显示的内容.
 <?php }?>

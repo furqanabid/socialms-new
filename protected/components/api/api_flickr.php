@@ -15,7 +15,7 @@ class api_flickr extends api_common
     // 用户认证返回的数据
     public $frob;
     // 页数
-    public $page = 1;
+    public $page;
     // 图片的id
     public $flickr_photoid;
     // 留言的内容
