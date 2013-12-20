@@ -1,10 +1,13 @@
-@charset "IBM437";
+@charset "UTF-8";
 body {
   background: #eeeeee url("../images/paper.jpg"); }
 
 /*重写bootstrap css*/
 .form-control, .dropdown-menu, .btn {
   border-radius: 0 !important; }
+
+.navbar-default {
+  background-color: #fff; }
 
 /*普通的CSS*/
 section {
