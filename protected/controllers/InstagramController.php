@@ -216,7 +216,7 @@ class InstagramController extends xzController
             // 如果存在缓存，则获取缓存值
             if($result !== false)
             {                
-                echo $result;
+                echo '<span style="display:none;">cache</span>'.$result;
                 // 结束
                 Yii::app()->end();
             }

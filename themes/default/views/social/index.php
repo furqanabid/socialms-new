@@ -112,6 +112,37 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                         </div>
                     </div>
                 </div>
+                <!-- Pinterest -->
+                <div class="tab-pane" id="pinterest">
+                   <div class="column_title">
+                        <img src="<?=$this->assets_img?>/social-icons/pinterest.png" />
+                           Pinterest
+                   </div>
+                   <div class="social_wrap_div">
+                        <img class='ajax_loader' src='<?=$this->assets_img?>/ajax-loader.gif' />
+                        <div class="select_div">
+                            <select class="form-control social_select" id="pinterest_drop_down">
+                                <option value='-1'>请选择您的Pinterest帐号</option>
+                                <!-- 调用widget显示Pinterest帐号 -->
+                                <?php $this->widget('socialAccount', array(
+                                    'table'=>'xz_social_pinterest',
+                                    'name' => 'name'
+                                ));?>
+                            </select>
+                        </div>
+                        <div class="button_div">
+                            <a type="button" class="btn btn-sm btn-primary pinterest_new_account">新增账号</a>
+                            <a type="button" class="btn btn-sm btn-success pinterest_add_to_column">添加到浏览列</a>
+                            <a type="button" class="btn btn-sm btn-danger pinterest_account_del">删除账号</a>
+                        </div>
+                        <div class="pinterest_account_div" style="display:none;">
+                            <hr>
+                            <h5>添加新Pinterest用户</h5>
+                            <input type="text" class="form-control pinterest_username" placeholder="Pinterest用户名">
+                            <a type="button" class="btn btn-primary pinterest_account_add">提交</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <span id="main_div_for_inserting_columns">

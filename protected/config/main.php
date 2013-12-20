@@ -74,7 +74,9 @@ return array(
         ),	
 
 		//下面是一些自己定义的组建
-
+		'parseRss' => array(
+			'class' => 'ext.parseRss.components.parseRss'
+		),
 	),
 
 	// application-level parameters that can be accessed

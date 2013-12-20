@@ -225,7 +225,7 @@ $(function(){
 		}
 
 		var that = $(this);
-		that.html("<img src='"+root_img+"/ajax-loader.gif' />");
+		that.html("加载中......");
     	$.ajax({
             type : 'POST',
             data : data,

@@ -38,7 +38,7 @@ socialColumnAccount.prototype.display = function() {
 
 		// Pinterest
 		case 'pinterest':
-			url = root_url+'/pinterest/parsePinterest';
+			url = root_url+'/pinterest/parse';
 		break;
 
 		// Flickr
@@ -129,12 +129,8 @@ socialColumnAccount.prototype.refresh = function() {
 
 		// 刷新Pinterest
 		case 'pinterest':
-			var data = {
-				id : this.id,
-				name : this.title,
-				columnId : this.columnId
-			};
-			url = root_url+'/pinterest/refreshColumn';		
+			data['name'] = this.title;
+			url = root_url+'/pinterest/parse';		
 		break;
 
 		// 刷新Flickr

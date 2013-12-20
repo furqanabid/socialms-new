@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2013 年 12 月 19 日 20:22
+-- 生成日期: 2013 年 12 月 20 日 19:10
 -- 服务器版本: 5.5.32
 -- PHP 版本: 5.4.19
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `xz_social_instagram` (
   `is_deleted` binary(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
 
 --
 -- 转存表中的数据 `xz_social_instagram`
@@ -54,7 +54,39 @@ INSERT INTO `xz_social_instagram` (`id`, `user_id`, `instagram_userid`, `instagr
 (22, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-19 20:10:36', '2013-12-19 20:12:26', '1'),
 (23, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-19 20:15:22', '2013-12-19 20:15:40', '1'),
 (24, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-19 20:17:21', '2013-12-19 20:20:19', '1'),
-(25, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-19 20:20:46', '2013-12-19 20:21:05', '1');
+(25, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-19 20:20:46', '2013-12-19 20:21:05', '1'),
+(26, 15, 305096535, '305096535.3bd4a77.7e1ce8cf204446b98d38aa2d7c4cd75f', 'andybegin', 'Andy Xiao', '2013-12-20 17:32:12', '2013-12-20 17:32:12', '0');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `xz_social_pinterest`
+--
+
+CREATE TABLE IF NOT EXISTS `xz_social_pinterest` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `is_deleted` binary(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
+--
+-- 转存表中的数据 `xz_social_pinterest`
+--
+
+INSERT INTO `xz_social_pinterest` (`id`, `user_id`, `name`, `create_time`, `update_time`, `is_deleted`) VALUES
+(1, 15, 'FashionEdible', '2013-11-02 00:17:14', '2013-12-20 19:07:50', '1'),
+(2, 15, 'sarahlynn2254', '2013-11-02 00:18:39', '2013-11-02 00:18:39', '0'),
+(3, 15, 'hehe', '2013-11-10 11:08:21', '2013-11-10 11:08:31', '0'),
+(4, 15, 'asd', '2013-12-20 18:24:22', '2013-12-20 18:24:22', '0'),
+(5, 15, 'asd111', '2013-12-20 18:24:37', '2013-12-20 18:24:37', '0'),
+(6, 15, 'asddasdas', '2013-12-20 18:24:49', '2013-12-20 18:24:49', '0'),
+(7, 15, 'asdasdasdasd', '2013-12-20 18:25:10', '2013-12-20 18:25:10', '0'),
+(8, 15, 'asdasdasdasd111', '2013-12-20 18:25:16', '2013-12-20 18:25:16', '0');
 
 -- --------------------------------------------------------
 
@@ -80,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `xz_users` (
 --
 
 INSERT INTO `xz_users` (`id`, `email`, `username`, `password`, `create_time`, `update_time`, `last_login_time`, `is_deleted`) VALUES
-(15, 'zhexiao@163.com', 'andybegin', '31efe5c727df3e9f116cd46fbb5b2626', '2013-12-16 16:57:44', '2013-12-16 16:57:44', '2013-12-19 19:55:07', '0'),
+(15, 'zhexiao@163.com', 'andybegin', '31efe5c727df3e9f116cd46fbb5b2626', '2013-12-16 16:57:44', '2013-12-16 16:57:44', '2013-12-20 17:31:59', '0'),
 (17, 'test@qq.com', 'test', '098f6bcd4621d373cade4e832627b4f6', '2013-12-16 17:03:28', '2013-12-16 17:03:28', '2013-12-16 17:03:28', '0');
 
 -- --------------------------------------------------------
@@ -117,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `xz_user_column` (
   KEY `weibo_id` (`weibo_id`),
   KEY `video56_id` (`video56_id`),
   KEY `youku_id` (`youku_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
 
 --
 -- 转存表中的数据 `xz_user_column`
@@ -127,7 +159,12 @@ INSERT INTO `xz_user_column` (`id`, `user_id`, `view_id`, `social_type`, `instag
 (43, 15, 2, 2, 24, 0, 0, 0, 0, 0, 0, 0, 0, '2013-12-19 20:17:29', '2013-12-19 20:20:21', '1'),
 (44, 15, 2, 2, 25, 0, 0, 0, 0, 0, 0, 0, 0, '2013-12-19 20:20:52', '2013-12-19 20:21:09', '1'),
 (45, 15, 2, 2, 25, 0, 0, 0, 0, 0, 0, 0, 0, '2013-12-19 20:20:54', '2013-12-19 20:21:08', '1'),
-(46, 15, 2, 2, 25, 0, 0, 0, 0, 0, 0, 0, 0, '2013-12-19 20:20:57', '2013-12-19 20:21:07', '1');
+(46, 15, 2, 2, 25, 0, 0, 0, 0, 0, 0, 0, 0, '2013-12-19 20:20:57', '2013-12-19 20:21:07', '1'),
+(47, 15, 2, 2, 26, 0, 0, 0, 0, 0, 0, 0, 0, '2013-12-20 17:32:18', '2013-12-20 17:32:18', '0'),
+(48, 15, 2, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2013-12-20 18:52:41', '2013-12-20 19:07:53', '1'),
+(49, 15, 2, 3, 0, 2, 0, 0, 0, 0, 0, 0, 0, '2013-12-20 19:04:02', '2013-12-20 19:06:53', '1'),
+(50, 15, 2, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2013-12-20 19:07:08', '2013-12-20 19:07:52', '1'),
+(51, 15, 2, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, '2013-12-20 19:09:01', '2013-12-20 19:09:01', '0');
 
 -- --------------------------------------------------------
 
