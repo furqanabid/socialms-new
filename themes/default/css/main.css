@@ -414,6 +414,7 @@ time {
     box-shadow: 0px 0px 5px black;
     border: 1px solid #ddd; }
   .flickr_wrap .write_flickr_comment {
-    display: none; }
+    display: none;
+    margin: 10px 0; }
 
 /*END Flickr CSS*/

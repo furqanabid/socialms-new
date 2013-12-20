@@ -18,6 +18,8 @@ class api_flickr extends api_common
     public $page = 1;
     // 图片的id
     public $flickr_photoid;
+    // 留言的内容
+    public $flickr_comment;
 
     /**
      * 认证用户
@@ -105,17 +107,22 @@ class api_flickr extends api_common
      * @param  [type] $photoid [图片id]
      * @return [type]          [description]
      */
-    public function postComment($comment,$photoid)
+    public function comment()
     {
-        $api_sig_str = $this->api_secret."api_key".$this->api_key."auth_token".$this->api_access_token."comment_text".$comment."formatjsonmethodflickr.photos.comments.addCommentnojsoncallback1photo_id".$photoid;
-        $api_sig = md5($api_sig_str);
+        $this->flickr_comment = str_replace(' ', '+', $this->flickr_comment);
 
-        // 格式化comment
-        $text = str_replace(' ', '+', $comment);
-        $url = $this->api_host."/?method=flickr.photos.comments.addComment&api_key=".$this->api_key."&photo_id=".$photoid."&comment_text=".$text."&format=json&nojsoncallback=1&auth_token=".$this->api_access_token."&api_sig=".$api_sig;
+        $params = array(
+            'method' => 'flickr.photos.comments.addComment',
+            'api_key' => $this->api_key,
+            'comment_text' => $this->flickr_comment,
+            'photo_id' => $this->flickr_photoid,
+            'format' => 'json',
+            'nojsoncallback' => 1,
+            'auth_token' => $this->api_access_token
+        );  
 
-        $res = $this->curl_get($url);       
-        return json_decode($res);
+        // 返回数据
+        return $this->exec($params);
     }
 
     /**

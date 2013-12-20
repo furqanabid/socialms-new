@@ -127,7 +127,7 @@ $(function(){
 		{
             // 如果是comment
 			case 'comment':
-				that.closest('.flickr_wrap').find('.write_flickr_comment').toggle();
+				that.closest('.social_wrap').find('.write_flickr_comment').toggle();
 			break;
 
             // 如果是like
@@ -185,16 +185,16 @@ $(function(){
                 type : 'POST',
                 data : data,
                 dataType : 'json',
-                url  : root_url+'/flickr/photoOperate',
-       	 	}).done(function(result){
-       	 		if(result.success == true)
+                url  : root_url+'/flickr/operate/tab/comment',
+       	 	}).done(function(res){
+       	 		if(res.stat == 'ok')
        	 		{
-       	 			that.closest('.flickr_wrap').find('.social_action_msg').slideDown().delay(5000).slideUp();
-       	 			that.attr('disabled',false).val('');    	 		
+       	 			that.attr('disabled',false).val('');    
+                    that.closest('.social_wrap').find('.action_info').html('您的操作处理成功!').slideDown().delay(5000).slideUp();	 		
        	 		}
        	 		else 
        	 		{
-       	 			alert(result.msg);
+       	 			that.closest('.social_wrap').find('.action_info').html(res.message).slideDown().delay(5000).slideUp();
        	 		}      	 		
        	 			
         	})

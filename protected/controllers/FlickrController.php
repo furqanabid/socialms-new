@@ -176,14 +176,9 @@ class FlickrController extends xzController
                     $data = $this->flickr->like();
                 break;
 
-                case 'unfollow':
-                    $this->flickr->follow_uid = $_POST['userid'];
-                    $data = $this->flickr->unfollow();
-                break;
-
                 case 'comment':
-                    $this->flickr->media_id = $_POST['mediaid'];
-                    $this->flickr->comment_text = $_POST['comment'];
+                    $this->flickr->flickr_photoid = $_POST['photoid'];
+                    $this->flickr->flickr_comment = $_POST['comment'];
                     $data = $this->flickr->comment();
                 break;
                 
