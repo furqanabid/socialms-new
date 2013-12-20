@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: 127.0.0.1
--- 生成日期: 2013 年 12 月 20 日 19:10
+-- 生成日期: 2013 年 12 月 20 日 22:37
 -- 服务器版本: 5.5.32
 -- PHP 版本: 5.4.19
 
@@ -21,6 +21,37 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `socialms` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `socialms`;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `xz_social_flickr`
+--
+
+CREATE TABLE IF NOT EXISTS `xz_social_flickr` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `flickr_nsid` varchar(20) NOT NULL,
+  `flickr_token` varchar(70) NOT NULL,
+  `flickr_username` varchar(100) NOT NULL,
+  `flickr_fullname` varchar(150) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `is_deleted` binary(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=16 ;
+
+--
+-- 转存表中的数据 `xz_social_flickr`
+--
+
+INSERT INTO `xz_social_flickr` (`id`, `user_id`, `flickr_nsid`, `flickr_token`, `flickr_username`, `flickr_fullname`, `create_time`, `update_time`, `is_deleted`) VALUES
+(11, 15, '97781511@N08', '72157637250848554-5527e62a6883970f', 'andybegin', 'Andy Zhe', '2013-11-19 05:52:40', '2013-12-20 22:23:20', '1'),
+(12, 15, '97781511@N08', '72157638860931844-f7ae86b1561cfdfa', 'andybegin', 'Andy Zhe', '2013-12-20 20:29:11', '2013-12-20 22:23:23', '1'),
+(13, 15, '97781511@N08', '72157638860931844-f7ae86b1561cfdfa', 'andybegin', 'Andy Zhe', '2013-12-20 21:03:13', '2013-12-20 22:23:28', '1'),
+(14, 15, '97781511@N08', '72157638860931844-f7ae86b1561cfdfa', 'andybegin', 'Andy Zhe', '2013-12-20 21:09:29', '2013-12-20 21:09:29', '0'),
+(15, 15, '97781511@N08', '72157638860931844-f7ae86b1561cfdfa', 'andybegin', 'Andy Zhe', '2013-12-20 21:19:36', '2013-12-20 22:23:07', '1');
 
 -- --------------------------------------------------------
 
@@ -112,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `xz_users` (
 --
 
 INSERT INTO `xz_users` (`id`, `email`, `username`, `password`, `create_time`, `update_time`, `last_login_time`, `is_deleted`) VALUES
-(15, 'zhexiao@163.com', 'andybegin', '31efe5c727df3e9f116cd46fbb5b2626', '2013-12-16 16:57:44', '2013-12-16 16:57:44', '2013-12-20 17:31:59', '0'),
+(15, 'zhexiao@163.com', 'andybegin', '31efe5c727df3e9f116cd46fbb5b2626', '2013-12-16 16:57:44', '2013-12-16 16:57:44', '2013-12-20 21:09:17', '0'),
 (17, 'test@qq.com', 'test', '098f6bcd4621d373cade4e832627b4f6', '2013-12-16 17:03:28', '2013-12-16 17:03:28', '2013-12-16 17:03:28', '0');
 
 -- --------------------------------------------------------
@@ -149,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `xz_user_column` (
   KEY `weibo_id` (`weibo_id`),
   KEY `video56_id` (`video56_id`),
   KEY `youku_id` (`youku_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=52 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=55 ;
 
 --
 -- 转存表中的数据 `xz_user_column`
@@ -164,7 +195,10 @@ INSERT INTO `xz_user_column` (`id`, `user_id`, `view_id`, `social_type`, `instag
 (48, 15, 2, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2013-12-20 18:52:41', '2013-12-20 19:07:53', '1'),
 (49, 15, 2, 3, 0, 2, 0, 0, 0, 0, 0, 0, 0, '2013-12-20 19:04:02', '2013-12-20 19:06:53', '1'),
 (50, 15, 2, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, '2013-12-20 19:07:08', '2013-12-20 19:07:52', '1'),
-(51, 15, 2, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, '2013-12-20 19:09:01', '2013-12-20 19:09:01', '0');
+(51, 15, 2, 3, 0, 4, 0, 0, 0, 0, 0, 0, 0, '2013-12-20 19:09:01', '2013-12-20 19:09:01', '0'),
+(52, 15, 2, 4, 0, 0, 11, 0, 0, 0, 0, 0, 0, '2013-12-20 21:14:38', '2013-12-20 21:20:37', '1'),
+(53, 15, 2, 4, 0, 0, 15, 0, 0, 0, 0, 0, 0, '2013-12-20 21:20:40', '2013-12-20 22:23:08', '1'),
+(54, 15, 2, 4, 0, 0, 14, 0, 0, 0, 0, 0, 0, '2013-12-20 22:23:30', '2013-12-20 22:23:30', '0');
 
 -- --------------------------------------------------------
 

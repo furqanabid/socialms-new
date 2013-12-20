@@ -18,5 +18,11 @@ define('INSTAGRAM_API_SECRET','b3589f1b833445ba927058e3de9f8dd8');
 define('INSTAGRAM_REDIRECT_URI','http://'.$_SERVER['SERVER_NAME'].'/index.php/instagram/authorize');
 define('INSTAGRAM_AUTH_URI','https://api.instagram.com/oauth/authorize/?client_id='.INSTAGRAM_API_KEY.'&redirect_uri='.INSTAGRAM_REDIRECT_URI.'&response_type=code&scope=basic+comments+relationships+likes');
 
+// FLICKR API 常量
+define('FLICKR_API_KEY','a51b5e20c6dba771d18c62036f466360');
+define('FLICKR_API_SECRET','dc7f29a36850e797');
+define('FLICKR_REDIRECT_URI','http://'.$_SERVER['SERVER_NAME'].'/index.php/flickr/authorize');
+define('FLICKR_AUTH_URI','http://flickr.com/services/auth/?api_key='.FLICKR_API_KEY.'&perms=delete&api_sig='.md5(FLICKR_API_SECRET.'api_key'.FLICKR_API_KEY.'permsdelete'));
+
 
 ?>

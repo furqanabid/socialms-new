@@ -39,11 +39,11 @@ $(function(){
 		$(this).siblings().removeClass('currentTabSelected').end().addClass('currentTabSelected ');
 
 		var url;
-		var id = $(this).closest('.insert_columns').find('.social_account_id').val();
+		var id = $(this).closest('.insert_columns').attr('data-social-account');
 		var data = {id : id};
 
 		var that = $(this);
-		that.closest('.insert_columns').find('.column_container').html("<img src='"+root_img+"/ajax-loader.gif' />");
+		that.closest('.insert_columns').find('.column_container').html("加载中，请稍后......");
 
 		// 获取到的是用户的feed数据
 		if($(this).hasClass('recent'))
@@ -113,7 +113,7 @@ $(function(){
 	$(document).on('click', '.instagram_action a', function(){
 		var type = $(this).attr('data-type');
 		var data = {
-			id : $(this).closest('.insert_columns').find('.social_account_id').val(),
+			id : $(this).closest('.insert_columns').attr('data-social-account'),
 			type : type,
 			mediaid : $(this).closest('.instagram_action').attr('data-mediaid'),
 		}
@@ -190,7 +190,7 @@ $(function(){
 
        		$(this).attr('disabled',true);
         	var data = {
-        		id : $(this).closest('.insert_columns').find('.social_account_id').val(),
+        		id : $(this).closest('.insert_columns').attr('data-social-account'),
                 comment : comment,
                 mediaid : $(this).closest('.instagram_wrap').find('.instagram_action').attr('data-mediaid'),
                 type : 'comment'
@@ -219,7 +219,7 @@ $(function(){
 	// 获取更多的instagram内容，相当于分页
 	$(document).on('click','.instagram_more',function(){
 		var data = {
-			id : $(this).closest('.insert_columns').find('.social_account_id').val(),
+			id : $(this).closest('.insert_columns').attr('data-social-account'),
 			nexturl : $(this).attr('data-next-page'),
 			nextid : $(this).attr('data-next-pageid'),
 		}

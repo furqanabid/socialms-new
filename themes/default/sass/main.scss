@@ -442,3 +442,23 @@ time{color: rgb(28, 110, 156)}
     }
 }
 /*End Pinterest CSS*/
+
+/*Flickr CSS*/
+.flickr_wrap{
+    padding: 5px;
+    margin: 0 5px 0px;
+
+    .photo_name{
+        margin-top: 5px;
+    }
+
+    .flickr_img{
+        @include vendor(box-shadow,0px 0px 5px black);
+        border: 1px solid #ddd;
+    }
+
+    .write_flickr_comment{
+        display: none;
+    }
+}
+/*END Flickr CSS*/

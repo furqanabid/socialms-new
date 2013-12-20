@@ -2,21 +2,25 @@ $(function(){
 	// 添加一个flickr 帐号到column
 	$('.flickr_add_to_column').click(function(){
 		var id = $("#flickr_drop_down").val();
+        var that = $(this);
 		if(id == -1)
 		{
 			alert("请选择一个Flickr帐号");
 			return;
 		}
-		$('.flickr_ajax_loader').show();
+		that.closest('.tab-pane').find('.ajax_loader').show();
 
+        // SocialType的值具体查看xzModel文件
 		var data = {
-			id:id,
-			flickrName:$.trim($('#flickr_drop_down option:selected').text()),
+			id : id,
+            key : 'flickr_id',
+            social_type : 4,
+			flickrName : $.trim($('#flickr_drop_down option:selected').text()),
 		}
 
 		$.ajax({
 			type: "POST",
-			url: social_module_link+"/flickr/addColumn", 
+			url: root_url+"/userColumn/addColumn",
 			data: data,
 		}).done(function(result){
 			if(parseInt(result))
@@ -24,7 +28,7 @@ $(function(){
 				var columnId = parseInt(result);
 				// 添加列
                 addNewColumnToPage(columnId, 'flickr', data.id, data.flickrName); 
-				$('.flickr_ajax_loader').hide();
+				that.closest('.tab-pane').find('.ajax_loader').hide();
 			}
 		});	
 	})
@@ -35,56 +39,43 @@ $(function(){
 		// 高亮tab
 		$(this).siblings().removeClass('currentTabSelected').end().addClass('currentTabSelected');
 
-		var id = $(this).closest('.insert_columns').find('.flickr_id').val();
-		var access_token = $(this).closest('.insert_columns').find('.flickr_a_t').val();
-		var data = {
-			id : id,
-			a_t : access_token
-		}
-		var that = $(this);
-		that.closest('.insert_columns').find('.holder_content').html("<img class='ajax_loader' src='"+statics_assets+"/images/ajax-loader.gif' />");
+		var url;
+        var id = $(this).closest('.insert_columns').attr('data-social-account');
+        var data = {id : id};
 
-		// 获取到的是用户的feed数据
-		if($(this).hasClass('flickr_most_recent'))
+		var that = $(this);
+		that.closest('.insert_columns').find('.column_container').html("加载中，请稍后......");
+
+		// recent tab
+		if($(this).hasClass('recent'))
 		{
-			$.ajax({
-				type: "POST",
-				url: social_module_link+"/flickr/recent", 
-				dataType : 'html',
-				data: data,
-			}).done(function(result){
-				that.closest('.insert_columns').find('.holder_content').html(result);
-			});	
+            url = root_url+"/flickr/parse/tab/recent";
 		}
 		// 获取到的最近上传到flickr的一些比较有兴趣的图片
-		else if($(this).hasClass('flickr_most_interestingness'))
+		else if($(this).hasClass('interest'))
 		{
-			$.ajax({
-				type: "POST",
-				url: social_module_link+"/flickr/getInterestingness", 
-				dataType : 'html',
-				data: data,
-			}).done(function(result){
-				that.closest('.insert_columns').find('.holder_content').html(result);
-			});	
+			url = root_url+"/flickr/parse/tab/interest";
 		}
 		// 获取到的是自己发布的图片
 		else
 		{
-			$.ajax({
-				type: "POST",
-				url: social_module_link+"/flickr/getMyPost", 
-				dataType : 'html',
-				data: data,
-			}).done(function(result){
-				that.closest('.insert_columns').find('.holder_content').html(result);
-			});	
+			url = root_url+"/flickr/parse/tab/mypost";
 		}
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType : 'html',
+            data: data,
+        }).done(function(result){
+            that.closest('.insert_columns').find('.column_container').html(result);
+        }); 
 	})
 
 	// 删除flickr帐号
 	$('.flickr_account_del').click(function(){
 		var id = $('#flickr_drop_down').val();
+        var that = $(this);
 		if(id == -1)
 		{
 			alert('请选择一个需要删除的Flickr帐号');
@@ -94,23 +85,27 @@ $(function(){
 		if(!confirm('您真的要删除这个flickr帐号吗？'))
 			return;
 
-		$('.flickr_ajax_loader').show();
+		that.closest('.tab-pane').find('.ajax_loader').show();
+
 		$.ajax({
 			type : 'POST',
 			data : {id : id},
-			url : social_module_link+"/flickr/delAccount"
+            dataType : 'json',
+			url : root_url+"/flickr/del"
 		}).done(function(result){
-			if(result == 1)
+			if(result.success === true)
 			{
 				$('#flickr_drop_down option:selected').remove();
-				$('.flickr_ajax_loader').hide();
+				that.closest('.tab-pane').find('.ajax_loader').hide();
 
-                // 删除已经存在的Column
-                var sectionId = $('.flickr_'+id).attr('id') || '';
-                if(sectionId != '')
+                // 如果帐号已经被添加到Column,则删除已经存在的Column
+                if($('.flickr_'+id).length > 0)
                 {
-                    var columnId = sectionId.replace('column_','');
-                    $('.delete_column_'+columnId).trigger('click', [true]);
+                    $('.flickr_'+id).each(function(){
+                        var sectionId = $(this).attr('id');
+                        var columnId = sectionId.replace('column_','');
+                        $('.delete_column_'+columnId).trigger('click', [true]);
+                    });
                 }
 			}	
 			else
@@ -122,8 +117,7 @@ $(function(){
 	$(document).on('click', '.flickr_action a', function(){
 		var type = $(this).attr('data-type');
 		var data = {
-			id : $(this).closest('.insert_columns').find('.flickr_id').val(),
-			a_t : $(this).closest('.insert_columns').find('.flickr_a_t').val(),
+			id : $(this).closest('.insert_columns').attr('data-social-account'),
             photoid : $(this).closest('.flickr_wrap').find('.flickr_action').attr('data-photoid'),
 			type : type
 		}
@@ -138,18 +132,23 @@ $(function(){
 
             // 如果是like
             case 'like':
-                that.closest('.flickr_wrap').find('.social_action_ajax_loader').show();
+                that.closest('.social_wrap').find('.social_action_msg').show();
                 $.ajax({
                     type : 'POST',
                     data : data,
                     dataType : 'json',
-                    url  : social_module_link+'/flickr/photoOperate',
-                }).done(function(result){
-                    that.closest('.flickr_wrap').find('.social_action_ajax_loader').hide();
-                    if(result.success == true)
-                        that.closest('.flickr_wrap').find('.social_action_msg').slideDown().delay(5000).slideUp();
-                    else 
-                        alert(result.msg);             
+                    url  : root_url+'/flickr/operate/tab/like',
+                }).done(function(res){
+                    that.closest('.social_wrap').find('.social_action_msg').hide();
+                    if(res.stat == 'ok')    
+                    {
+                        that.find('.glyphicon').removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
+                        that.closest('.social_wrap').find('.action_info').html('您的操作处理成功!').slideDown().delay(5000).slideUp();
+                    }               
+                    else
+                    {
+                        that.closest('.social_wrap').find('.action_info').html(res.message).slideDown().delay(5000).slideUp();
+                    }           
                 })
             break;
 
@@ -177,7 +176,7 @@ $(function(){
         	var data = {
                 comment : comment,
                 photoid : $(this).closest('.flickr_wrap').find('.flickr_action').attr('data-photoid'),
-                a_t : $(this).closest('.insert_columns').find('.flickr_a_t').val(),
+                id : $(this).closest('.insert_columns').attr('data-social-account'),
                 type : 'comment'
         	}
 
@@ -186,7 +185,7 @@ $(function(){
                 type : 'POST',
                 data : data,
                 dataType : 'json',
-                url  : social_module_link+'/flickr/photoOperate',
+                url  : root_url+'/flickr/photoOperate',
        	 	}).done(function(result){
        	 		if(result.success == true)
        	 		{
@@ -205,8 +204,7 @@ $(function(){
     // 获取更多的Flickr内容，相当于分页
     $(document).on('click','.flickr_more',function(){
         var data = {
-            id : $(this).closest('.insert_columns').find('.flickr_id').val(),
-            a_t : $(this).closest('.insert_columns').find('.flickr_a_t').val(),
+            id : $(this).closest('.insert_columns').attr('data-social-account'),
             page : $(this).attr('data-page'),
             pages : $(this).attr('data-pages'),
         }
@@ -220,7 +218,7 @@ $(function(){
                 type : 'POST',
                 data : data,
                 dataType : 'html',
-                url  : social_module_link+'/flickr/recent',
+                url  : root_url+'/flickr/recent',
             }).done(function(result){
                 that.hide();
                 that.closest('.holder_content').append(result);
@@ -233,7 +231,7 @@ $(function(){
                 type : 'POST',
                 data : data,
                 dataType : 'html',
-                url  : social_module_link+'/flickr/getInterestingness',
+                url  : root_url+'/flickr/getInterestingness',
             }).done(function(result){
                 that.hide();
                 that.closest('.holder_content').append(result);
@@ -245,7 +243,7 @@ $(function(){
                 type : 'POST',
                 data : data,
                 dataType : 'html',
-                url  : social_module_link+'/flickr/getMyPost',
+                url  : root_url+'/flickr/getMyPost',
             }).done(function(result){
                 that.hide();
                 that.closest('.holder_content').append(result);

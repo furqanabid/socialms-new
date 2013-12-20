@@ -53,7 +53,6 @@
 		</div>
 		<hr>
 	<?php }?>
-	<input type='hidden' class="social_account_id" value="<?=$id?>">
 	<?php if( isset($instagram->pagination->next_url) ){?>
 	    <div class="more_data">
 	        <button class="btn btn-default instagram_more" data-next-page="<?=$instagram->pagination->next_url?>" data-next-pageid="<?=$instagram->pagination->next_max_id?>">加载更多内容...</button>

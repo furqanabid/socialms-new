@@ -87,6 +87,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                 </ul>
             </nav>
             <div class="tab-content siderbar_content">
+
                 <!-- Instagram -->
                 <div class="tab-pane active" id="instagram">
                     <div class="column_title">
@@ -112,6 +113,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                         </div>
                     </div>
                 </div>
+
                 <!-- Pinterest -->
                 <div class="tab-pane" id="pinterest">
                    <div class="column_title">
@@ -143,6 +145,33 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                         </div>
                     </div>
                 </div>
+
+                <!-- Flickr -->
+                <div class="tab-pane" id="flickr">
+                   <div class="column_title">
+                        <img src="<?=$this->assets_img?>/social-icons/flickr.png" />
+                           Flickr
+                   </div>
+                   <div class="social_wrap_div">
+                        <img class='ajax_loader' src='<?=$this->assets_img?>/ajax-loader.gif' />
+                        <div class="select_div">
+                            <select class="form-control social_select" id="flickr_drop_down">
+                                <option value='-1'>请选择您的Flickr帐号</option>
+                                <!-- 调用widget显示Flickr帐号 -->
+                                <?php $this->widget('socialAccount', array(
+                                    'table'=>'xz_social_flickr',
+                                    'name' => 'flickr_username'
+                                ));?>
+                            </select>
+                        </div>
+                        <div class="button_div">
+                            <a type="button" class="btn btn-sm btn-primary" href="<?=FLICKR_AUTH_URI?>">新增账号</a>
+                            <a type="button" class="btn btn-sm btn-success flickr_add_to_column">添加到浏览列</a>
+                            <a type="button" class="btn btn-sm btn-danger flickr_account_del">删除账号</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
         <span id="main_div_for_inserting_columns">

@@ -37,9 +37,9 @@ function buildColumn(columnId, socialAccountId, socialType, title)
         case "flickr":
             icon = "<img src='"+root_img +"/social-icons/Flickr.png' />";
             socialTab = "<ul  class='social_feeds_tabs clearfix'> \
-                            <li class='social_menu_tabs flickrTab currentTabSelected flickr_most_recent'>首页图片</div> \
-                            <li class='social_menu_tabs flickrTab flickr_most_interestingness'>发掘图片</div> \
-                            <li class='social_menu_tabs flickrTab flickr_my_post'>我的图片</div> \
+                            <li class='social_menu_tabs flickrTab currentTabSelected recent'>首页图片</div> \
+                            <li class='social_menu_tabs flickrTab interest'>发掘图片</div> \
+                            <li class='social_menu_tabs flickrTab mypost'>我的图片</div> \
                         </ul>";
         break;
 
@@ -103,7 +103,7 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 	if(socialTab != '')
 		holderTop = 'holdertop';
 
-	var columnHtml = "<section class='insert_columns "+socialType+"_"+socialAccountId+"' id='column_"+columnId+"'>"+
+	var columnHtml = "<section class='insert_columns "+socialType+"_"+socialAccountId+"' id='column_"+columnId+"' data-social-account='"+socialAccountId+"'>"+
 						"<div class='column_title'>"+
 							"<span class='column_title_tab_name'>"+icon+" "+title+"</span>"+
 							"<div class='dropdown pull-right column_configuration_dropdown'>"+
@@ -123,7 +123,7 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 						socialTab + 
 						"<div class='column_container_wrap "+holderTop+"'>"+	 
 							"<div class='column_container holder_column_"+columnId+"'>"+							
-								"<img src='"+root_img +"/ajax-loader.gif' />"+						
+								"加载中，请稍后......"+						
 							"</div>"+
 					    "</div>"+
 					"</section>";

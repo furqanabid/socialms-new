@@ -43,32 +43,32 @@ socialColumnAccount.prototype.display = function() {
 
 		// Flickr
 		case 'flickr':
-			url = root_url+'/flickr/recent';
+			url = root_url+'/flickr/parse';
 		break;
 
 		// Linkedin
 		case 'linkedin':
-			url = root_url+'/linkedin/parseLinkedin';
+			url = root_url+'/linkedin/parse';
 		break;
 
 		// Reddit
 		case 'reddit':
-			url = root_url+'/reddit/parseNew';
+			url = root_url+'/reddit/parse';
 		break;
 
 		// 人人网
 		case 'renren':
-			url = root_url+'/renren/home';
+			url = root_url+'/renren/parse';
 		break;
 
 		// 新浪微博
 		case 'weibo':
-			url = root_url+'/weibo/home';
+			url = root_url+'/weibo/parse';
 		break;
 
 		// 56视频
 		case 'video56':
-			url = root_url+'/video56/video';
+			url = root_url+'/video56/parse';
 		break;
 
 		// 优酷视频
@@ -97,7 +97,7 @@ socialColumnAccount.prototype.refresh = function() {
 	var columnId = this.columnId;
 	var url;
 	var socialType = this.socialType;
-	$('.holder_column_'+columnId).html("<img src='"+root_img+"/ajax-loader.gif' />");
+	$('.holder_column_'+columnId).html("加载中，请稍后......");
 	// 默认的post参数
 	var data = {
 		id : this.id,
@@ -136,12 +136,12 @@ socialColumnAccount.prototype.refresh = function() {
 		// 刷新Flickr
 		case 'flickr':
 			// 判断当前是哪个是活动tab
-			if($('.flickrTab.currentTabSelected').hasClass('flickr_most_recent'))	
-				url = root_url+'/flickr/recent';
-			else if($('.flickrTab.currentTabSelected').hasClass('flickr_most_interestingness'))
-				url = root_url+'/flickr/getInterestingness';
-			else if($('.flickrTab.currentTabSelected').hasClass('flickr_my_post'))
-				url = root_url+'/flickr/getMyPost';
+			if($('.flickrTab.currentTabSelected').hasClass('recent'))	
+				url = root_url+'/flickr/parse/tab/recent';
+			else if($('.flickrTab.currentTabSelected').hasClass('interest'))
+				url = root_url+'/flickr/parse/tab/interest';
+			else if($('.flickrTab.currentTabSelected').hasClass('mypost'))
+				url = root_url+'/flickr/parse/tab/mypost';
 		break;
 
 		// 刷新Linkedin

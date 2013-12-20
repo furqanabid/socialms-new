@@ -400,3 +400,20 @@ time {
     border: 1px solid #ddd; }
 
 /*End Pinterest CSS*/
+/*Flickr CSS*/
+.flickr_wrap {
+  padding: 5px;
+  margin: 0 5px 0px; }
+  .flickr_wrap .photo_name {
+    margin-top: 5px; }
+  .flickr_wrap .flickr_img {
+    -webkit-box-shadow: 0px 0px 5px black;
+    -moz-box-shadow: 0px 0px 5px black;
+    -ms-box-shadow: 0px 0px 5px black;
+    -o-box-shadow: 0px 0px 5px black;
+    box-shadow: 0px 0px 5px black;
+    border: 1px solid #ddd; }
+  .flickr_wrap .write_flickr_comment {
+    display: none; }
+
+/*END Flickr CSS*/

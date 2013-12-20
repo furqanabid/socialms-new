@@ -1,11 +1,11 @@
 <?php
 /**
- * Instagram 控制器
+ * Flickr 控制器
  */
-class InstagramController extends xzController
+class FlickrController extends xzController
 {
     // 实例化的对象
-    protected $instagram;
+    protected $flickr;
     // api返回的数据
     protected $api_data;
     // 缓存名
@@ -21,8 +21,8 @@ class InstagramController extends xzController
     {
         parent::init();
 
-        $this->instagram = new api_instagram(INSTAGRAM_API_KEY, INSTAGRAM_API_SECRET);
-        $this->instagram->api_redirect_uri = INSTAGRAM_REDIRECT_URI;
+        $this->flickr = new api_flickr(FLICKR_API_KEY, FLICKR_API_SECRET);
+        $this->flickr->api_redirect_uri = FLICKR_REDIRECT_URI;
 
         $this->action = isset($_POST['action']) ? $_POST['action'] : '';
         $this->tab = isset($_GET['tab']) ? $_GET['tab'] : 'recent';
@@ -60,7 +60,7 @@ class InstagramController extends xzController
     }
 
     /**
-     * 获取instagram帐号
+     * 删除帐号
      * @return [type] [description]
      */
     public function actionDel()
@@ -68,7 +68,7 @@ class InstagramController extends xzController
         if(isset($_POST['id']))
         {
             $id = $_POST['id'];
-            $flag = SocialInstagram::model()->findByPk($id)->deleteData();
+            $flag = SocialFlickr::model()->findByPk($id)->deleteData();
             xz::outputJson(array('success'=>$flag));
         }
     }
@@ -79,21 +79,21 @@ class InstagramController extends xzController
      */
     public function actionAuthorize()
     {
-        if(isset($_GET['code']))
+        if(isset($_GET['frob']))
         {
-            $this->instagram->code = $_GET['code'];
-            $data = $this->instagram->authorize();
+            $this->flickr->frob = $_GET['frob'];
+            $data = $this->flickr->authorize();
 
             // 插入的数据
             $inputArray = array(
                 'user_id' => Yii::app()->user->id,
-                'instagram_userid' => $data->user->id,
-                'instagram_access_token' => $data->access_token,
-                'instagram_username' => $data->user->username,
-                'instagram_fullname' => $data->user->full_name
+                'flickr_token' => $data->auth->token->_content,
+                'flickr_nsid' => $data->auth->user->nsid,
+                'flickr_username' => $data->auth->user->username,
+                'flickr_fullname' => $data->auth->user->fullname,
             );
            
-            $model = new SocialInstagram;
+            $model = new SocialFlickr;
             $model->attributes = $inputArray;
             if( $model->save() )
                 $this->redirect($this->createUrl('/social'));
@@ -110,28 +110,24 @@ class InstagramController extends xzController
     {
         if(isset($_POST['id']))
         {
-            $data = SocialInstagram::model()->findByPk($_POST['id']);
+            $data = SocialFlickr::model()->findByPk($_POST['id']);
             // 赋值
             $this->social_id = $_POST['id'];
-            $this->instagram->api_access_token = $data->instagram_access_token;
+            $this->flickr->api_access_token = $data->flickr_token;
 
             // 根据tab决定缓存名
             switch ($this->tab) 
             {
                 case 'recent':
-                    $this->cacheName = 'instagram_recent_data_'.$data->instagram_userid;
+                    $this->cacheName = 'flickr_recent_data_'.$data->flickr_nsid;
                 break;
 
-                case 'popular':
-                    $this->cacheName = 'instagram_popular_data_'.$data->instagram_userid;
+                case 'interest':
+                    $this->cacheName = 'flickr_interest_data_'.$data->flickr_nsid;
                 break;
                 
                 case 'mypost':
-                    $this->cacheName = 'instagram_mypost_data_'.$data->instagram_userid;
-                break;
-
-                case 'nextpage':
-                    $this->cacheName = 'instagram_next_data_'.$_POST['nextid'];
+                    $this->cacheName = 'flickr_mypost_data_'.$data->flickr_nsid;
                 break;
             }
 
@@ -142,22 +138,16 @@ class InstagramController extends xzController
             switch ($this->tab) 
             {
                 case 'recent':
-                    $this->api_data = $this->instagram->getRecent();
+                    $this->api_data = $this->flickr->getRecent();
                 break;
 
-                case 'popular':
-                    $this->api_data = $this->instagram->getPopular();
+                case 'interest':
+                    $this->api_data = $this->flickr->getInterest();
                 break;
                 
                 case 'mypost':
-                    $this->instagram->instagram_uid = $data->instagram_userid;
-                    $this->api_data = $this->instagram->getMypost();
-                break;
-
-                case 'nextpage':
-                    $nexturl = $_POST['nexturl'];
-                    $data = $this->instagram->curl_get($nexturl);
-                    $this->api_data = json_decode($data);
+                    $this->flickr->flickr_uid = $data->flickr_nsid;
+                    $this->api_data = $this->flickr->getMypost();
                 break;
             }
             
@@ -174,27 +164,27 @@ class InstagramController extends xzController
     {
         if(isset($_POST['id']))
         {
-            $data = SocialInstagram::model()->findByPk($_POST['id']);
+            $data = SocialFlickr::model()->findByPk($_POST['id']);
             // 赋值
-            $this->instagram->api_access_token = $data->instagram_access_token;
+            $this->flickr->api_access_token = $data->flickr_token;
 
             // 根据tab决定执行的操作
             switch ($this->tab) 
             {
                 case 'like':
-                    $this->instagram->media_id = $_POST['mediaid'];
-                    $data = $this->instagram->like();
+                    $this->flickr->flickr_photoid = $_POST['photoid'];
+                    $data = $this->flickr->like();
                 break;
 
                 case 'unfollow':
-                    $this->instagram->follow_uid = $_POST['userid'];
-                    $data = $this->instagram->unfollow();
+                    $this->flickr->follow_uid = $_POST['userid'];
+                    $data = $this->flickr->unfollow();
                 break;
 
                 case 'comment':
-                    $this->instagram->media_id = $_POST['mediaid'];
-                    $this->instagram->comment_text = $_POST['comment'];
-                    $data = $this->instagram->comment();
+                    $this->flickr->media_id = $_POST['mediaid'];
+                    $this->flickr->comment_text = $_POST['comment'];
+                    $data = $this->flickr->comment();
                 break;
                 
             }
@@ -229,11 +219,11 @@ class InstagramController extends xzController
      */
     public function show()
     {
-        $result = $this->renderPartial('load_instagram',array(
-            'instagram' => $this->api_data,
+        $result = $this->renderPartial('load_flickr',array(
+            'flickr' => $this->api_data->photos,
         ),true);  
 
-        Yii::app()->cache->set($this->cacheName, $result, CACHE_TIME_INSTAGRAM);
+        Yii::app()->cache->set($this->cacheName, $result, CACHE_TIME_FLICKR);
 
         echo $result;
     }
