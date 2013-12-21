@@ -155,42 +155,6 @@ class LinkedinController extends xzController
         }
     }
 
-    /**
-     * 一些操作比如留言，喜欢，赞等
-     * @return [type] [description]
-     */
-    public function actionOperate()
-    {
-        if(isset($_POST['id']))
-        {
-            $data = Sociallinkedin::model()->findByPk($_POST['id']);
-            // 赋值
-            $this->linkedin->api_access_token = $data->linkedin_access_token;
-
-            // 根据tab决定执行的操作
-            switch ($this->tab) 
-            {
-                case 'like':
-                    $this->linkedin->media_id = $_POST['mediaid'];
-                    $data = $this->linkedin->like();
-                break;
-
-                case 'unfollow':
-                    $this->linkedin->follow_uid = $_POST['userid'];
-                    $data = $this->linkedin->unfollow();
-                break;
-
-                case 'comment':
-                    $this->linkedin->media_id = $_POST['mediaid'];
-                    $this->linkedin->comment_text = $_POST['comment'];
-                    $data = $this->linkedin->comment();
-                break;
-                
-            }
-
-            xz::outputJson($data);
-        }
-    }
 
     /**
      * 检查是否需要重新缓存
