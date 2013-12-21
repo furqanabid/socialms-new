@@ -2,21 +2,25 @@ $(function(){
     // 添加一个linkedin帐号到column
     $('.linkedin_add_to_column').click(function(){
         var id = $("#linkedin_drop_down").val();
+        var that = $(this);
         if(id == -1)
         {
             alert("请选择一个Linkedin帐号");
             return;
         }
-        $('.linkedin_ajax_loader').show();
+        that.closest('.tab-pane').find('.ajax_loader').show();
 
+        // SocialType的值具体查看xzModel文件
         var data = {
             id : id,
+            key : 'linkedin_id',
+            social_type : 5,
             Name : $.trim($('#linkedin_drop_down option:selected').text()),
         }
 
         $.ajax({
             type: "POST",
-            url: social_module_link+"/linkedin/addColumn", 
+            url: root_url+"/userColumn/addColumn", 
             data: data,
         }).done(function(result){
             if(parseInt(result))
@@ -24,7 +28,7 @@ $(function(){
                 var columnId = parseInt(result);
                 // 添加列
                 addNewColumnToPage(columnId, 'linkedin', data.id, data.Name);
-                $('.linkedin_ajax_loader').hide();
+                that.closest('.tab-pane').find('.ajax_loader').hide();
             }
         }); 
     })
@@ -32,6 +36,7 @@ $(function(){
     // 删除一个linkedin帐号
     $('.linkedin_account_del').click(function(){
         var id = $('#linkedin_drop_down').val();
+        var that = $(this);
         if(id == -1)
         {
             alert('请选择一个需要删除的Linkedin帐号');
@@ -41,23 +46,26 @@ $(function(){
         if(!confirm('您真的要删除这个Linkedin帐号吗？'))
             return;
 
-        $('.linkedin_ajax_loader').show();
+        that.closest('.tab-pane').find('.ajax_loader').show();
         $.ajax({
             type : 'POST',
             data : {id : id},
-            url : social_module_link+"/linkedin/delAccount"
+            dataType : 'json',
+            url : root_url+"/linkedin/del"
         }).done(function(result){
-            if(result == 1)
+            if(result.success === true)
             {
                 $('#linkedin_drop_down option:selected').remove();
-                $('.linkedin_ajax_loader').hide();
+                that.closest('.tab-pane').find('.ajax_loader').hide();
 
-                 // 删除已经存在的Column
-                var sectionId = $('.linkedin_'+id).attr('id') || '';
-                if(sectionId != '')
+                // 如果帐号已经被添加到Column,则删除已经存在的Column
+                if($('.linkedin_'+id).length > 0)
                 {
-                    var columnId = sectionId.replace('column_','');
-                    $('.delete_column_'+columnId).trigger('click', [true]);
+                    $('.linkedin_'+id).each(function(){
+                        var sectionId = $(this).attr('id');
+                        var columnId = sectionId.replace('column_','');
+                        $('.delete_column_'+columnId).trigger('click', [true]);
+                    });
                 }
             }   
             else
@@ -70,77 +78,64 @@ $(function(){
         // 高亮tab
         $(this).siblings().removeClass('currentTabSelected').end().addClass('currentTabSelected');
 
-        var id = $(this).closest('.insert_columns').find('.linkedin_id').val();
-        var access_token = $(this).closest('.insert_columns').find('.linkedin_a_t').val();
-        var data = {
-            id : id,
-            a_t : access_token
-        }
+        var url;
+        var id = $(this).closest('.insert_columns').attr('data-social-account');
+        var data = {id : id};
+
         var that = $(this);
-        that.closest('.insert_columns').find('.holder_content').html("<img class='ajax_loader' src='"+statics_assets+"/images/ajax-loader.gif' />");
+        that.closest('.insert_columns').find('.column_container').html("加载中，请稍后......");
 
         // 获取到的是linkedin关注的公司动态
-        if($(this).hasClass('linkedin_company_update'))
+        if($(this).hasClass('company'))
         {
-            $.ajax({
-                type: "POST",
-                url: social_module_link+"/linkedin/parseLinkedin", 
-                dataType : 'html',
-                data: data,
-            }).done(function(result){
-                that.closest('.insert_columns').find('.holder_content').html(result);
-            }); 
+            url = root_url+'/linkedin/parse/tab/company';
         }
         // 获取到的是我的linkedin帐号的最近动态
-        else if($(this).hasClass('linkedin_my_update'))
+        else if($(this).hasClass('myupdate'))
         {
-            $.ajax({
-                type: "POST",
-                url: social_module_link+"/linkedin/myUpdates", 
-                dataType : 'html',
-                data: data,
-            }).done(function(result){
-                that.closest('.insert_columns').find('.holder_content').html(result);
-            }); 
+            url = root_url+'/linkedin/parse/tab/myupdate';
         }
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataType : 'html',
+            data: data,
+        }).done(function(result){
+            that.closest('.insert_columns').find('.column_container').html(result);
+        }); 
     })
 
     // 获取更多的Flickr内容，相当于分页
     $(document).on('click','.linkedin_more',function(){
+        var url;
         var data = {
-            id : $(this).closest('.insert_columns').find('.linkedin_id').val(),
-            a_t : $(this).closest('.insert_columns').find('.linkedin_a_t').val(),
+            id : $(this).closest('.insert_columns').attr('data-social-account'),
             page : $(this).attr('data-page'),
-            total : $(this).attr('data-total'),
         }
 
         var that = $(this);
-        that.html("<img class='ajax_loader' src='"+statics_assets+"/images/ajax-loader.gif' />");
+        that.html("加载中......");
+
         // 公司动态
-        if(that.closest('.insert_columns').find('.currentTabSelected').hasClass('linkedin_company_update'))
+        if(that.closest('.insert_columns').find('.currentTabSelected').hasClass('company'))
         {
-            $.ajax({
-                type : 'POST',
-                data : data,
-                dataType : 'html',
-                url  : social_module_link+'/linkedin/parseLinkedin',
-            }).done(function(result){
-                that.hide();
-                that.closest('.holder_content').append(result);
-            })
+            url = root_url+'/linkedin/parse/tab/company';
         }
         else
         {
-            $.ajax({
-                type : 'POST',
-                data : data,
-                dataType : 'html',
-                url  : social_module_link+'/linkedin/myUpdates',
-            }).done(function(result){
-                that.hide();
-                that.closest('.holder_content').append(result);
-            })
+            url = root_url+'/linkedin/parse/tab/myupdate';
         }
+
+        $.ajax({
+            type : 'POST',
+            data : data,
+            dataType : 'html',
+            url  : url,
+        }).done(function(result){
+            that.hide();
+            that.closest('.column_container').append(result);
+        })
     })
 
 })

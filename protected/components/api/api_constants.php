@@ -24,5 +24,10 @@ define('FLICKR_API_SECRET','dc7f29a36850e797');
 define('FLICKR_REDIRECT_URI','http://'.$_SERVER['SERVER_NAME'].'/index.php/flickr/authorize');
 define('FLICKR_AUTH_URI','http://flickr.com/services/auth/?api_key='.FLICKR_API_KEY.'&perms=delete&api_sig='.md5(FLICKR_API_SECRET.'api_key'.FLICKR_API_KEY.'permsdelete'));
 
+// LINKEDIN API 常量
+define('LINKEDIN_API_KEY','77q9yllqqv8l1q');
+define('LINKEDIN_API_SECRET','HCAsVHqZ826jngX8');
+define('LINKEDIN_REDIRECT_URI','http://'.$_SERVER['SERVER_NAME'].'/index.php/linkedin/authorize');
+define('LINKEDIN_AUTH_URI','https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id='.LINKEDIN_API_KEY.'&state='.uniqid().'&redirect_uri='.LINKEDIN_REDIRECT_URI);
 
 ?>

@@ -147,10 +147,10 @@ socialColumnAccount.prototype.refresh = function() {
 		// 刷新Linkedin
 		case 'linkedin':
 			// 判断当前是哪个是活动tab
-			if($('.linkedinTab.currentTabSelected').hasClass('linkedin_company_update'))	
-				url = root_url+'/linkedin/parseLinkedin';
-			else if($('.linkedinTab.currentTabSelected').hasClass('linkedin_my_update'))
-				url = root_url+'/linkedin/myUpdates';
+			if($('.linkedinTab.currentTabSelected').hasClass('company'))	
+				url = root_url+'/linkedin/parse/tab/company';
+			else if($('.linkedinTab.currentTabSelected').hasClass('myupdate'))
+				url = root_url+'/linkedin/parse/tab/myupdate';
 		break;
 
 		// 刷新Reddit

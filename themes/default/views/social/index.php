@@ -172,6 +172,32 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                     </div>
                 </div>
 
+                <!-- Linkedin -->
+                <div class="tab-pane" id="linkedin">
+                   <div class="column_title">
+                        <img src="<?=$this->assets_img?>/social-icons/linkedin.png" />
+                           Linkedin
+                   </div>
+                   <div class="social_wrap_div">
+                        <img class='ajax_loader' src='<?=$this->assets_img?>/ajax-loader.gif' />
+                        <div class="select_div">
+                            <select class="form-control social_select" id="linkedin_drop_down">
+                                <option value='-1'>请选择您的Linkedin帐号</option>
+                                <!-- 调用widget显示帐号 -->
+                                <?php $this->widget('socialAccount', array(
+                                    'table'=>'xz_social_linkedin',
+                                    'name' => 'linkedin_username'
+                                ));?>
+                            </select>
+                        </div>
+                        <div class="button_div">
+                            <a type="button" class="btn btn-sm btn-primary" href="<?=LINKEDIN_AUTH_URI?>">新增账号</a>
+                            <a type="button" class="btn btn-sm btn-success linkedin_add_to_column">添加到浏览列</a>
+                            <a type="button" class="btn btn-sm btn-danger linkedin_account_del">删除账号</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
         <span id="main_div_for_inserting_columns">

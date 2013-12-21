@@ -47,8 +47,8 @@ function buildColumn(columnId, socialAccountId, socialType, title)
         case "linkedin":
             icon = "<img src='"+root_img +"/social-icons/LinkedIn.png' />";
             socialTab = "<ul  class='social_feeds_tabs clearfix'> \
-                            <li class='social_menu_tabs linkedinTab currentTabSelected linkedin_company_update'>公司动态</div> \
-                            <li class='social_menu_tabs linkedinTab linkedin_my_update'>我的动态</div> \
+                            <li class='social_menu_tabs linkedinTab currentTabSelected company'>公司动态</div> \
+                            <li class='social_menu_tabs linkedinTab myupdate'>我的动态</div> \
                         </ul>";
         break;
 
