@@ -30,12 +30,12 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 
         // Pinterest
         case "pinterest":
-            icon = "<img src='"+root_img +"/social-icons/Pinterest.png' />";
+            icon = "<img src='"+root_img +"/social-icons/pinterest.png' />";
         break;
 
         // Flickr
         case "flickr":
-            icon = "<img src='"+root_img +"/social-icons/Flickr.png' />";
+            icon = "<img src='"+root_img +"/social-icons/flickr.png' />";
             socialTab = "<ul  class='social_feeds_tabs clearfix'> \
                             <li class='social_menu_tabs flickrTab currentTabSelected recent'>首页图片</div> \
                             <li class='social_menu_tabs flickrTab interest'>发掘图片</div> \
@@ -45,7 +45,7 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 
         // Linkedin
         case "linkedin":
-            icon = "<img src='"+root_img +"/social-icons/LinkedIn.png' />";
+            icon = "<img src='"+root_img +"/social-icons/linkedIn.png' />";
             socialTab = "<ul  class='social_feeds_tabs clearfix'> \
                             <li class='social_menu_tabs linkedinTab currentTabSelected company'>公司动态</div> \
                             <li class='social_menu_tabs linkedinTab myupdate'>我的动态</div> \
@@ -54,12 +54,12 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 
          // Reddit
         case "reddit":
-            icon = "<img src='"+root_img +"/social-icons/Reddit.png' />";
+            icon = "<img src='"+root_img +"/social-icons/reddit.png' />";
             socialTab = "<ul  class='social_feeds_tabs clearfix'> \
-                            <li class='social_menu_tabs redditTab currentTabSelected reddit_new'>最新新闻</div> \
-                            <li class='social_menu_tabs redditTab reddit_hot'>热门新闻</div> \
-                            <li class='social_menu_tabs redditTab reddit_controversial'>热议新闻</div> \
-                            <li class='social_menu_tabs redditTab reddit_saved'>已保存</div> \
+                            <li class='social_menu_tabs redditTab currentTabSelected new'>最新新闻</div> \
+                            <li class='social_menu_tabs redditTab hot'>热门新闻</div> \
+                            <li class='social_menu_tabs redditTab controversial'>热议新闻</div> \
+                            <li class='social_menu_tabs redditTab saved'>已保存</div> \
                         </ul>";
         break;
 

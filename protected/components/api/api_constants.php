@@ -30,4 +30,13 @@ define('LINKEDIN_API_SECRET','HCAsVHqZ826jngX8');
 define('LINKEDIN_REDIRECT_URI','http://'.$_SERVER['SERVER_NAME'].'/index.php/linkedin/authorize');
 define('LINKEDIN_AUTH_URI','https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id='.LINKEDIN_API_KEY.'&state='.uniqid().'&redirect_uri='.LINKEDIN_REDIRECT_URI);
 
+// REDDIT API 常量
+define('REDDIT_API_KEY','ZER_QVDnsUFplQ');
+define('REDDIT_API_SECRET','VQ6fZMFHr6ec1TYOOAZb15gcSrw');
+define('REDDIT_REDIRECT_URI','http://'.$_SERVER['SERVER_NAME'].'/index.php/reddit/authorize');
+define('REDDIT_AUTH_URI','https://ssl.reddit.com/api/v1/authorize?response_type=code&client_id='.REDDIT_API_KEY.'&redirect_uri='.REDDIT_REDIRECT_URI.'&scope=identity,save,submit,vote,history,read&state='.uniqid().'&duration=permanent');
+
+
+
+
 ?>

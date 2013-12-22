@@ -91,7 +91,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                 <!-- Instagram -->
                 <div class="tab-pane active" id="instagram">
                     <div class="column_title">
-                        <img src="<?=$this->assets_img?>/social-icons/Instagram.png" />
+                        <img src="<?=$this->assets_img?>/social-icons/instagram.png" />
                         Instagram
                     </div>
                     <div class="social_wrap_div">
@@ -194,6 +194,32 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                             <a type="button" class="btn btn-sm btn-primary" href="<?=LINKEDIN_AUTH_URI?>">新增账号</a>
                             <a type="button" class="btn btn-sm btn-success linkedin_add_to_column">添加到浏览列</a>
                             <a type="button" class="btn btn-sm btn-danger linkedin_account_del">删除账号</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reddit -->
+                <div class="tab-pane" id="reddit">
+                   <div class="column_title">
+                        <img src="<?=$this->assets_img?>/social-icons/reddit.png" />
+                           Reddit
+                   </div>
+                   <div class="social_wrap_div">
+                        <img class='ajax_loader' src='<?=$this->assets_img?>/ajax-loader.gif' />
+                        <div class="select_div">
+                            <select class="form-control social_select" id="reddit_drop_down">
+                                <option value='-1'>请选择您的Reddit帐号</option>
+                                <!-- 调用widget显示帐号 -->
+                                <?php $this->widget('socialAccount', array(
+                                    'table'=>'xz_social_reddit',
+                                    'name' => 'reddit_name'
+                                ));?>
+                            </select>
+                        </div>
+                        <div class="button_div">
+                            <a type="button" class="btn btn-sm btn-primary" href="<?=REDDIT_AUTH_URI?>">新增账号</a>
+                            <a type="button" class="btn btn-sm btn-success reddit_add_to_column">添加到浏览列</a>
+                            <a type="button" class="btn btn-sm btn-danger reddit_account_del">删除账号</a>
                         </div>
                     </div>
                 </div>

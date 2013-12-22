@@ -437,3 +437,31 @@ time {
     margin: 5px 0; }
 
 /*END Linkedin CSS*/
+/*Reddit CSS*/
+.reddit_wrap {
+  padding: 5px;
+  margin: 0 5px 0px;
+  word-break: break-all; }
+  .reddit_wrap .content a {
+    font-size: 13px;
+    margin-top: 0; }
+  .reddit_wrap .content .reddit_domain a {
+    color: #999;
+    font-size: 12px; }
+  .reddit_wrap .write_reddit_comments {
+    margin-bottom: 10px; }
+  .reddit_wrap time {
+    margin: 10px 0; }
+  .reddit_wrap .img {
+    float: left;
+    margin-right: 5px; }
+    .reddit_wrap .img img {
+      -webkit-box-shadow: 0px 0px 5px black;
+      -moz-box-shadow: 0px 0px 5px black;
+      -ms-box-shadow: 0px 0px 5px black;
+      -o-box-shadow: 0px 0px 5px black;
+      box-shadow: 0px 0px 5px black;
+      border: 1px solid #ddd;
+      margin: 5px 0px; }
+
+/*END Reddit CSS*/

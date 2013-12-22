@@ -156,14 +156,14 @@ socialColumnAccount.prototype.refresh = function() {
 		// 刷新Reddit
 		case 'reddit':			
 			// 判断当前是哪个是活动tab
-			if($('.redditTab.currentTabSelected').hasClass('reddit_new'))	
-				url = root_url+'/reddit/parseNew';
-			else if($('.redditTab.currentTabSelected').hasClass('reddit_hot'))
-				url = root_url+'/reddit/parseHot';
-			else if($('.redditTab.currentTabSelected').hasClass('reddit_controversial'))
-				url = root_url+'/reddit/parseControversial';
-			else if($('.redditTab.currentTabSelected').hasClass('reddit_saved'))
-				url = root_url+'/reddit/parseSaved';			
+			if($('.redditTab.currentTabSelected').hasClass('new'))	
+				url = root_url+'/reddit/parse/tab/new';
+			else if($('.redditTab.currentTabSelected').hasClass('hot'))
+				url = root_url+'/reddit/parse/tab/hot';
+			else if($('.redditTab.currentTabSelected').hasClass('controversial'))
+				url = root_url+'/reddit/parse/tab/controversial';
+			else if($('.redditTab.currentTabSelected').hasClass('saved'))
+				url = root_url+'/reddit/parse/tab/saved';			
 		break;
 
 		// 刷新人人网数据
