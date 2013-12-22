@@ -18,7 +18,7 @@
                     <span class="glyphicon glyphicon-comment"></span>
                 </a>
                 <a href="javascript:void(0);" data-type='like' title="喜欢">
-                    <span class="glyphicon glyphicon-heart-empty"></span>
+                    <span class="glyphicon glyphicon-star-empty"></span>
                 </a>
                 <a href="javascript:void(0);" data-type='unfollow' title="取消关注">
                     <span class="glyphicon glyphicon-eye-close"></span>

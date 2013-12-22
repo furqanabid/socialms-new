@@ -142,7 +142,7 @@ $(function(){
                     that.closest('.social_wrap').find('.social_action_msg').hide();
                     if(res.stat == 'ok')    
                     {
-                        that.find('.glyphicon').removeClass('glyphicon-heart-empty').addClass('glyphicon-heart');
+                        that.find('.glyphicon').removeClass('glyphicon-star-empty').addClass('glyphicon-star');
                         that.closest('.social_wrap').find('.action_info').html('您的操作处理成功!').slideDown().delay(5000).slideUp();
                     }               
                     else
