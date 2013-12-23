@@ -169,12 +169,12 @@ socialColumnAccount.prototype.refresh = function() {
 		// 刷新人人网数据
 		case 'renren':
 			// 判断当前是哪个是活动tab
-			if($('.renrenTab.currentTabSelected').hasClass('renren_home'))	
-				url = root_url+'/renren/home';
-			else if($('.renrenTab.currentTabSelected').hasClass('renren_status'))
-				url = root_url+'/renren/status';
-			else if($('.renrenTab.currentTabSelected').hasClass('renren_share'))
-				url = root_url+'/renren/share';
+			if($('.renrenTab.currentTabSelected').hasClass('recent'))	
+				url = root_url+'/renren/parse/tab/recent';
+			else if($('.renrenTab.currentTabSelected').hasClass('status'))
+				url = root_url+'/renren/parse/tab/status';
+			else if($('.renrenTab.currentTabSelected').hasClass('share'))
+				url = root_url+'/renren/parse/tab/share';
 		break;
 
 		// 刷新新浪微博

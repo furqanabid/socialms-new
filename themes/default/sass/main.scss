@@ -521,3 +521,40 @@ time{color: rgb(28, 110, 156)}
    }
 }
 /*END Reddit CSS*/
+
+/*RENREN CSS*/
+.renren_wrap{
+    time{
+        margin: 10px 0px;
+    }
+
+    img{
+        @include vendor(box-shadow,0px 0px 5px black);
+        border: 1px solid #ddd;
+    }
+
+    .comment_wrap_div{
+        margin-bottom: 20px;
+        border-top: 1px solid #ddd;
+
+        .comment_wrap{
+            border-bottom: 1px solid #ddd;
+            padding:10px 0;
+
+            time{
+                float: right;
+                margin: 0px;
+            }
+
+            img{
+                width: 40px;
+                height: 40px;
+            }
+        }
+    }
+
+    .write_renren_comment{
+        margin-bottom: 10px;
+    }
+}
+/*END　RENREN CSS*/

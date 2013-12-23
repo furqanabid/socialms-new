@@ -67,9 +67,9 @@ function buildColumn(columnId, socialAccountId, socialType, title)
         case "renren":
             icon = "<img src='"+root_img +"/social-icons/renren.png' />";
             socialTab = "<ul  class='social_feeds_tabs clearfix'> \
-                            <li class='social_menu_tabs renrenTab currentTabSelected renren_home'>首页动态</div> \
-                            <li class='social_menu_tabs renrenTab renren_status'>我的状态</div> \
-                            <li class='social_menu_tabs renrenTab renren_share'>我的分享</div> \
+                            <li class='social_menu_tabs renrenTab currentTabSelected recent'>首页动态</div> \
+                            <li class='social_menu_tabs renrenTab status'>我的状态</div> \
+                            <li class='social_menu_tabs renrenTab share'>我的分享</div> \
                         </ul>";
         break;
 

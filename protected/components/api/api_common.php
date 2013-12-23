@@ -52,6 +52,7 @@ class api_common
         if( ! $result  = curl_exec($ch) )
         {
             echo curl_error($ch);
+            exit();
         }
         curl_close($ch);
         return $result;

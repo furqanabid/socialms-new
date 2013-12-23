@@ -465,3 +465,29 @@ time {
       margin: 5px 0px; }
 
 /*END Reddit CSS*/
+/*RENREN CSS*/
+.renren_wrap time {
+  margin: 10px 0px; }
+.renren_wrap img {
+  -webkit-box-shadow: 0px 0px 5px black;
+  -moz-box-shadow: 0px 0px 5px black;
+  -ms-box-shadow: 0px 0px 5px black;
+  -o-box-shadow: 0px 0px 5px black;
+  box-shadow: 0px 0px 5px black;
+  border: 1px solid #ddd; }
+.renren_wrap .comment_wrap_div {
+  margin-bottom: 20px;
+  border-top: 1px solid #ddd; }
+  .renren_wrap .comment_wrap_div .comment_wrap {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0; }
+    .renren_wrap .comment_wrap_div .comment_wrap time {
+      float: right;
+      margin: 0px; }
+    .renren_wrap .comment_wrap_div .comment_wrap img {
+      width: 40px;
+      height: 40px; }
+.renren_wrap .write_renren_comment {
+  margin-bottom: 10px; }
+
+/*END　RENREN CSS*/

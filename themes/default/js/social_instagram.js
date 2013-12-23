@@ -145,7 +145,6 @@ $(function(){
 					{
 						that.closest('.social_wrap').find('.action_info').html(res.meta.error_message).slideDown().delay(5000).slideUp();
 					}
-					
 				});
 			break;
 

@@ -224,6 +224,32 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                     </div>
                 </div>
 
+                <!-- renren -->
+                <div class="tab-pane" id="renren">
+                   <div class="column_title">
+                        <img src="<?=$this->assets_img?>/social-icons/renren.png" />
+                           人人网
+                   </div>
+                   <div class="social_wrap_div">
+                        <img class='ajax_loader' src='<?=$this->assets_img?>/ajax-loader.gif' />
+                        <div class="select_div">
+                            <select class="form-control social_select" id="renren_drop_down">
+                                <option value='-1'>请选择您的renren帐号</option>
+                                <!-- 调用widget显示帐号 -->
+                                <?php $this->widget('socialAccount', array(
+                                    'table'=>'xz_social_renren',
+                                    'name' => 'renren_username'
+                                ));?>
+                            </select>
+                        </div>
+                        <div class="button_div">
+                            <a type="button" class="btn btn-sm btn-primary" href="<?=RENREN_AUTH_URI?>">新增账号</a>
+                            <a type="button" class="btn btn-sm btn-success renren_add_to_column">添加到浏览列</a>
+                            <a type="button" class="btn btn-sm btn-danger renren_account_del">删除账号</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
         <span id="main_div_for_inserting_columns">

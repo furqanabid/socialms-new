@@ -1,16 +1,16 @@
 <?php
 // 定义Social Type的Cache时间
-define('CACHE_TIME_RSS',7200);
-define('CACHE_TIME_INSTAGRAM',7200);
-define('CACHE_TIME_PINTEREST',7200);
-define('CACHE_TIME_FLICKR',7200);
-define('CACHE_TIME_LINKEDIN',7200);
-define('CACHE_TIME_REDDIT',7200);
-define('CACHE_TIME_RENREN',7200);
+define('CACHE_TIME_RSS',3600);
+define('CACHE_TIME_INSTAGRAM',3600);
+define('CACHE_TIME_PINTEREST',3600);
+define('CACHE_TIME_FLICKR',3600);
+define('CACHE_TIME_LINKEDIN',3600);
+define('CACHE_TIME_REDDIT',3600);
+define('CACHE_TIME_RENREN',3600);
 define('CACHE_TIME_WEIBO',2400);
 define('CACHE_TIME_QQ',1200);
-define('CACHE_TIME_VIDEO56',7200);
-define('CACHE_TIME_YOUKU',7200);
+define('CACHE_TIME_VIDEO56',3600);
+define('CACHE_TIME_YOUKU',3600);
 
 // Instagram API 常量
 define('INSTAGRAM_API_KEY','3bd4a779086f467da618c95fe4e54cb7');
@@ -36,6 +36,12 @@ define('REDDIT_API_SECRET','VQ6fZMFHr6ec1TYOOAZb15gcSrw');
 define('REDDIT_REDIRECT_URI','http://'.$_SERVER['SERVER_NAME'].'/index.php/reddit/authorize');
 define('REDDIT_AUTH_URI','https://ssl.reddit.com/api/v1/authorize?response_type=code&client_id='.REDDIT_API_KEY.'&redirect_uri='.REDDIT_REDIRECT_URI.'&scope=identity,save,submit,vote,history,read&state='.uniqid().'&duration=permanent');
 
+
+// 人人网 API 常量
+define('RENREN_API_KEY','868d086072784f259a63c68f0e6feeb2');
+define('RENREN_API_SECRET','dfae8da2263643dfa81c1efc70126105');
+define('RENREN_REDIRECT_URI','http://'.$_SERVER['SERVER_NAME'].'/index.php/renren/authorize');
+define('RENREN_AUTH_URI','https://graph.renren.com/oauth/authorize?client_id='.RENREN_API_KEY.'&redirect_uri='.RENREN_REDIRECT_URI.'&response_type=code&scope=read_user_feed,publish_comment,operate_like,publish_share,read_user_share');
 
 
 
