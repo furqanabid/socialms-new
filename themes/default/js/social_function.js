@@ -77,9 +77,9 @@ function buildColumn(columnId, socialAccountId, socialType, title)
         case "weibo":
             icon = "<img src='"+root_img +"/social-icons/weibo.png' />";
             socialTab = "<ul  class='social_feeds_tabs clearfix'> \
-                            <li class='social_menu_tabs weiboTab currentTabSelected weibo_home_timeline'>首页动态</div> \
-                            <li class='social_menu_tabs weiboTab weibo_user_timeline'>个人主页</div> \
-                            <li class='social_menu_tabs weiboTab weibo_favorites'>我的收藏</div> \
+                            <li class='social_menu_tabs weiboTab currentTabSelected home'>首页动态</div> \
+                            <li class='social_menu_tabs weiboTab user'>个人主页</div> \
+                            <li class='social_menu_tabs weiboTab favorite'>我的收藏</div> \
                         </ul>";
         break;
 

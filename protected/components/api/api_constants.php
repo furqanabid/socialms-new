@@ -43,6 +43,12 @@ define('RENREN_API_SECRET','dfae8da2263643dfa81c1efc70126105');
 define('RENREN_REDIRECT_URI','http://'.$_SERVER['SERVER_NAME'].'/index.php/renren/authorize');
 define('RENREN_AUTH_URI','https://graph.renren.com/oauth/authorize?client_id='.RENREN_API_KEY.'&redirect_uri='.RENREN_REDIRECT_URI.'&response_type=code&scope=read_user_feed,publish_comment,operate_like,publish_share,read_user_share');
 
+// 新浪微博 API 常量
+define('WEIBO_API_KEY','1542776171');
+define('WEIBO_API_SECRET','4cdc5143a153750b582c7d2146c80f41');
+define('WEIBO_REDIRECT_URI','http://'.$_SERVER['SERVER_NAME'].'/index.php/weibo/authorize');
+define('WEIBO_AUTH_URI','https://api.weibo.com/oauth2/authorize?client_id='.WEIBO_API_KEY.'&response_type=code&redirect_uri='.WEIBO_REDIRECT_URI);
+
 
 
 ?>

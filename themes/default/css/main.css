@@ -491,3 +491,29 @@ time {
   margin-bottom: 10px; }
 
 /*END　RENREN CSS*/
+/*Weibo CSS*/
+.weibo_wrap img {
+  -webkit-box-shadow: 0px 0px 5px black;
+  -moz-box-shadow: 0px 0px 5px black;
+  -ms-box-shadow: 0px 0px 5px black;
+  -o-box-shadow: 0px 0px 5px black;
+  box-shadow: 0px 0px 5px black;
+  border: 1px solid #ddd;
+  margin: 5px 0px; }
+.weibo_wrap time {
+  margin: 10px 0; }
+.weibo_wrap .retweeted_wrap {
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 5px 5px;
+  font-size: 13px;
+  margin-bottom: 10px; }
+.weibo_wrap .write_weibo_comment {
+  margin-bottom: 10px; }
+
+/*END Weibo CSS*/

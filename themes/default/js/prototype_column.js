@@ -180,12 +180,12 @@ socialColumnAccount.prototype.refresh = function() {
 		// 刷新新浪微博
 		case 'weibo':
 			// 判断当前是哪个是活动tab
-			if($('.weiboTab.currentTabSelected').hasClass('weibo_home_timeline'))	
-				url = root_url+'/weibo/home';
-			else if($('.weiboTab.currentTabSelected').hasClass('weibo_user_timeline'))
-				url = root_url+'/weibo/user';
-			else if($('.weiboTab.currentTabSelected').hasClass('weibo_favorites'))
-				url = root_url+'/weibo/favorites';
+			if($('.weiboTab.currentTabSelected').hasClass('home'))	
+				url = root_url+'/weibo/parse/tab/home';
+			else if($('.weiboTab.currentTabSelected').hasClass('user'))
+				url = root_url+'/weibo/parse/tab/user';
+			else if($('.weiboTab.currentTabSelected').hasClass('favorite'))
+				url = root_url+'/weibo/parse/tab/favorite';
 		break;
 
 		// 刷新56视频

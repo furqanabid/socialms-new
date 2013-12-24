@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta property="wb:webmaster" content="63f717dc2ac00594" />
 
     <?php 
         /*注册Js和Css*/

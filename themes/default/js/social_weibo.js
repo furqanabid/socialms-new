@@ -2,6 +2,7 @@ $(function(){
     // 添加帐号到column
     $('.weibo_add_to_column').click(function(){
         var id = $("#weibo_drop_down").val();
+        var that = $(this);
         if(id == -1)
         {
             alert("请选择一个需要添加的新浪微博帐号");
@@ -9,14 +10,17 @@ $(function(){
         }
         $('.weibo_ajax_loader').show();
 
+        // SocialType的值具体查看xzModel文件
         var data = {
             id : id,
-            name : $.trim($('#weibo_drop_down option:selected').html()),
+            key : 'weibo_id',
+            social_type : 8,
+            name:$.trim($('#weibo_drop_down option:selected').html()),
         }
 
         $.ajax({
             type: "POST",
-            url: social_module_link+"/weibo/addColumn", 
+            url: root_url+"/userColumn/addColumn", 
             data: data,
         }).done(function(result){
             if(parseInt(result))
@@ -24,7 +28,7 @@ $(function(){
                 var columnId = parseInt(result);
                 // 添加列
                 addNewColumnToPage(columnId, 'weibo', data.id, data.name);
-                $('.weibo_ajax_loader').hide();
+                that.closest('.tab-pane').find('.ajax_loader').hide();
             }
         }); 
     })
@@ -32,6 +36,7 @@ $(function(){
     // 删除用户
     $('.weibo_account_del').click(function(){
         var id = $('#weibo_drop_down').val();
+        var that = $(this);
         if(id == -1)
         {
             alert('请选择一个需要删除的帐号!!');
@@ -41,24 +46,27 @@ $(function(){
         if(!confirm('您真的要删除这个帐号吗？'))
             return;
 
-        $('.weibo_ajax_loader').show();
+        that.closest('.tab-pane').find('.ajax_loader').show();
 
         $.ajax({
             type : 'post',
             data : {id : id},
-            url : social_module_link+'/weibo/delAccount'
+            dataType : 'json',
+            url : root_url+'/weibo/del'
         }).done(function(result){
-            if(result == 1)
+            if(result.success === true)
             {
                 $("#weibo_drop_down option:selected").remove();
-                $('.weibo_ajax_loader').hide();
+                that.closest('.tab-pane').find('.ajax_loader').hide();
 
-                // 删除已经存在的Column
-                var sectionId = $('.weibo_'+id).attr('id') || '';
-                if(sectionId != '')
+                // 如果帐号已经被添加到Column,则删除已经存在的Column
+                if($('.weibo_'+id).length > 0)
                 {
-                    var columnId = sectionId.replace('column_','');
-                    $('.delete_column_'+columnId).trigger('click', [true]);
+                    $('.weibo_'+id).each(function(){
+                        var sectionId = $(this).attr('id');
+                        var columnId = sectionId.replace('column_','');
+                        $('.delete_column_'+columnId).trigger('click', [true]);
+                    });
                 }
             }
             else
@@ -69,32 +77,30 @@ $(function(){
     // Tab切换
     $(document).on('click','.weiboTab',function(){
         var url;
-        var data = {
-            id : $(this).closest('.insert_columns').find('.weibo_id').val(),
-            a_t : $(this).closest('.insert_columns').find('.weibo_a_t').val()
-        }
+        var id = $(this).closest('.insert_columns').attr('data-social-account');
+        var data = {id : id};
 
         // 高亮tab
         $(this).siblings().removeClass('currentTabSelected').end().addClass('currentTabSelected');
-      
-        // 首页动态
-        if($(this).hasClass('weibo_home_timeline'))
-            url = social_module_link+'/weibo/home';
-        else if($(this).hasClass('weibo_user_timeline'))
-            url = social_module_link+'/weibo/user';
-        else if($(this).hasClass('weibo_favorites'))
-            url = social_module_link+'/weibo/favorites';
 
         var that = $(this);
-        that.closest('.insert_columns').find('.holder_content').html("<img class='ajax_loader' src='"+statics_assets+"/images/ajax-loader.gif' />");
-        // 发送数据
+        that.closest('.insert_columns').find('.column_container').html("加载中，请稍后......");
+        
+        // 首页动态
+        if($(this).hasClass('home'))
+            url = root_url+'/weibo/parse/tab/home';
+        else if($(this).hasClass('user'))
+            url = root_url+'/weibo/parse/tab/user';
+        else if($(this).hasClass('favorite'))
+            url = root_url+'/weibo/parse/tab/favorite';
+       
         $.ajax({
             type: "POST",
-            url: url, 
+            url: url,
             dataType : 'html',
             data: data,
         }).done(function(result){
-            that.closest('.insert_columns').find('.holder_content').html(result);
+            that.closest('.insert_columns').find('.column_container').html(result);
         }); 
     })
 
@@ -102,19 +108,19 @@ $(function(){
     $(document).on('click','.weibo_more',function(){
         var url;
         var data = {
-            id : $(this).closest('.insert_columns').find('.weibo_id').val(),
+            id :  $(this).closest('.insert_columns').attr('data-social-account'),
             page : $(this).attr('data-page')
         }
 
         var that = $(this);
-        that.html("<img class='ajax_loader' src='"+statics_assets+"/images/ajax-loader.gif' />");
+        that.html("加载中......");
     
-        if(that.closest('.insert_columns').find('.currentTabSelected').hasClass('weibo_home_timeline'))
-            url  = social_module_link+'/weibo/home';   
-        else if(that.closest('.insert_columns').find('.currentTabSelected').hasClass('weibo_user_timeline')) 
-            url  = social_module_link+'/weibo/user'; 
-        else if(that.closest('.insert_columns').find('.currentTabSelected').hasClass('weibo_favorites')) 
-            url  = social_module_link+'/weibo/favorites'; 
+        if(that.closest('.insert_columns').find('.currentTabSelected').hasClass('home'))
+            url  = root_url+'/weibo/parse/tab/home';   
+        else if(that.closest('.insert_columns').find('.currentTabSelected').hasClass('user')) 
+            url  = root_url+'/weibo/parse/tab/user'; 
+        else if(that.closest('.insert_columns').find('.currentTabSelected').hasClass('favorite')) 
+            url  = root_url+'/weibo/parse/tab/favorite'; 
 
         // 发送数据
         $.ajax({
@@ -124,7 +130,7 @@ $(function(){
             url  : url,
         }).done(function(result){
             that.hide();
-            that.closest('.holder_content').append(result);
+            that.closest('.column_container').append(result);
         })
     })
 
@@ -132,11 +138,9 @@ $(function(){
     $(document).on('click', '.weibo_action a', function(){
         var type = $(this).attr('data-type');
         var data = {
-            id : $(this).closest('.insert_columns').find('.weibo_id').val(),
-            a_t : $(this).closest('.insert_columns').find('.weibo_a_t').val(),
-            idstr : $(this).closest('.social_action').attr('data-idstr'),
-            uidstr : $(this).closest('.social_action').attr('data-uidstr'),
-            type : type,
+            id : $(this).closest('.insert_columns').attr('data-social-account'),
+            weibo_idstr : $(this).closest('.weibo_wrap').find('.social_action').attr('data-idstr'),
+            weibo_uidstr : $(this).closest('.weibo_wrap').find('.social_action').attr('data-uidstr'),
         }
         var that = $(this);
 
@@ -152,18 +156,22 @@ $(function(){
             case 'unfavorite':
             case 'unfollow':
             case 'top':
-                that.closest('.weibo_wrap').find('.social_action_ajax_loader').show();
+                that.closest('.social_wrap').find('.social_action_msg').show();
                 $.ajax({
                     type : 'POST',
                     data : data,
                     dataType : 'json',
-                    url  : social_module_link+'/weibo/operate',
-                }).done(function(result){
-                    that.closest('.weibo_wrap').find('.social_action_ajax_loader').hide();
-                    if(result.success == true)
-                        that.closest('.weibo_wrap').find('.social_action_msg').slideDown().delay(5000).slideUp();
-                    else 
-                        alert(result.msg);             
+                    url  : root_url+'/weibo/operate/tab/'+type,
+                }).done(function(res){
+                    that.closest('.social_wrap').find('.social_action_msg').hide();
+                    if(!res.error)    
+                    {
+                        that.closest('.social_wrap').find('.action_info').html('您的操作处理成功!').slideDown().delay(5000).slideUp();
+                    }               
+                    else
+                    {
+                        that.closest('.social_wrap').find('.action_info').html(res.error).slideDown().delay(5000).slideUp();
+                    }            
                 })
             break;
         }
@@ -185,9 +193,9 @@ $(function(){
             $(this).attr('disabled',true);
             var data = {
                 content : comment,         
-                a_t : $(this).closest('.insert_columns').find('.weibo_a_t').val(),
-                idstr : $(this).closest('.weibo_wrap').find('.social_action').attr('data-idstr'),
-                type : 'comment'
+                id : $(this).closest('.insert_columns').attr('data-social-account'),
+                weibo_idstr : $(this).closest('.weibo_wrap').find('.social_action').attr('data-idstr'),
+                weibo_uidstr : $(this).closest('.weibo_wrap').find('.social_action').attr('data-uidstr'),
             }
 
             var that = $(this);
@@ -195,17 +203,17 @@ $(function(){
                 type : 'POST',
                 data : data,
                 dataType : 'json',
-                url  : social_module_link+'/weibo/operate',
-            }).done(function(result){
-                if(result.success == true)
+                url  : root_url+'/weibo/operate/tab/comment',
+            }).done(function(res){
+                that.attr('disabled',false).val('');
+                if(!res.error) 
                 {
-                    that.closest('.weibo_wrap').find('.social_action_msg').slideDown().delay(5000).slideUp();
-                    that.attr('disabled',false).val('');                
+                    that.closest('.social_wrap').find('.action_info').html('您的操作处理成功!').slideDown().delay(5000).slideUp();
                 }
-                else 
+                else
                 {
-                    alert(result.msg);
-                }               
+                    that.closest('.social_wrap').find('.action_info').html(res.error).slideDown().delay(5000).slideUp();
+                }         
             })
         } 
     })
