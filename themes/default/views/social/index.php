@@ -319,7 +319,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
 
                         <!-- 56搜索 -->
                         <div class="video56_wrap">
-                            <h4>搜索56视频</h4>
+                            <h5>搜索56视频</h5>
                             <select class="form-control social_input social_select video56_drop_down video56_search_drop_down">
                                    <option value="-1">我最近的搜索历史</option>
                                    <!-- 调用widget显示存在的视频类型 -->
