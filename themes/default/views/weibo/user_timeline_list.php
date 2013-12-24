@@ -26,8 +26,8 @@
                     <div class="clearfix"></div>
                     <?php if(isset($weibo->retweeted_status->id)){ ?>
                         <div class="retweeted_wrap">
-                            <a href="http://www.weibo.com/<?=$weibo->retweeted_status->user->profile_url?>" target="_blank">
-                                @<?=$weibo->retweeted_status->user->screen_name?>
+                            <a href="http://www.weibo.com/<?=@$weibo->retweeted_status->user->profile_url?>" target="_blank">
+                                @<?=@$weibo->retweeted_status->user->screen_name?>
                             </a>
                             <div class="retweeted_text">
                                 <?=preg_replace("/(http:\/\/t\.cn\/.{7})/i", "<a href='$1' target='_blank'>$1</a>", $weibo->retweeted_status->text)?>

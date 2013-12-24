@@ -3,6 +3,7 @@ $(function(){
 	// 得到页面存在的column信息,并且生成column
 	$('.loaded_column').each(function(){
 		var socialType = $(this).attr('data-type');
+		var width_size = $(this).attr('data-width-size');
 		var columnId = $(this).val();
 
 		switch(socialType)
@@ -69,7 +70,7 @@ $(function(){
 		}
 
 		// 调用函数添加列到页面
-		addNewColumnToPage(columnId, socialType, socialAccountId, title);
+		addNewColumnToPage(columnId, socialType, socialAccountId, title, width_size);
 	});
 
 

@@ -15,10 +15,11 @@
         </div>
         <hr>
     <?php }?>
+    
     <div class="more_data">
         <button class="btn btn-default video56_more" data-page="<?=$page?>">加载更多内容...</button>
     </div>
-    <input type="hidden" value="<?=$id?>" class='video56_id' />
+   
 <?php }else{ ?>
 没有更多可以显示的数据.
 <?php }?>

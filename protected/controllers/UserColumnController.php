@@ -26,7 +26,7 @@ class UserColumnController extends xzController
     {
         return array(
             array('allow', 
-                'actions'=>array('addColumn','del'),
+                'actions'=>array('addColumn','del','updWidth'),
                 'users'=>array('@'),
             ),
             array('deny',  
@@ -67,6 +67,21 @@ class UserColumnController extends xzController
             else
                 xz::dump($model->getErrors());
 
+        }
+    }
+
+    /**
+     * 更新列的宽度
+     * @return [type] [description]
+     */
+    public function actionUpdWidth()
+    {
+        if(isset($_POST['columnId']))
+        {
+            $model = UserColumn::model()->findByPk($_POST['columnId']);
+            $model->column_width_size = $_POST['column_width_size'];
+            if( !$model->save() )
+                xz::dump($model->getErrors());
         }
     }
 

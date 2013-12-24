@@ -1,16 +1,15 @@
 <?php 
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/prototype_column.js', CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_function.js', CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social.js', CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_rss.js', CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_instagram.js', CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_pinterest.js', CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_flickr.js', CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_linkedin.js', CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_reddit.js', CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_renren.js', CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_weibo.js', CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_video56.js', CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/prototype_column.js',  CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_function.js',   CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social.js',            CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_instagram.js',  CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_pinterest.js',  CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_flickr.js',     CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_linkedin.js',   CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_reddit.js',     CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_renren.js',     CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_weibo.js',      CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_video56.js',    CClientScript::POS_END);
 ?>
 
 
@@ -353,67 +352,54 @@ if(count($userColumns)>0)
     {
         // Social 类型
         switch ($val['social_type']) 
-        {
-            // Rss
-            case xzModel::SOCIAL_RSS:
-                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="rss"/>
-                    <input type="hidden" class="rss_masterid_'.$val['id'].'" value="'.$val['rss_master_id'].'" />
-                    <input type="hidden" class="rss_name_'.$val['id'].'" value="'.$val['rss_name'].'" />';
-            break;
-            
+        {         
             // Instagram
             case xzModel::SOCIAL_INSTAGRAM:
-                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="instagram"/>
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="instagram" data-width-size="'.$val['column_width_size'].'" />
                         <input type="hidden" class="instagram_id_'.$val['id'].'" value="'.$val['instagram_id'].'" />'; 
             break;
 
             // Pinterest
             case xzModel::SOCIAL_PINTEREST:
-                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="pinterest"/>
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="pinterest" data-width-size="'.$val['column_width_size'].'" />
                         <input type="hidden" class="pinterest_id_'.$val['id'].'" value="'.$val['pinterest_id'].'" /> ';
             break;
 
             // Flickr
             case xzModel::SOCIAL_FLICKR:
-                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="flickr"/>
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="flickr" data-width-size="'.$val['column_width_size'].'" />
                     <input type="hidden" class="flickr_id_'.$val['id'].'" value="'.$val['flickr_id'].'" />';
             break;
 
             // Linkedin
             case xzModel::SOCIAL_LINKEDIN:
-                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="linkedin"/>
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="linkedin" data-width-size="'.$val['column_width_size'].'" />
                     <input type="hidden" class="linkedin_id_'.$val['id'].'" value="'.$val['linkedin_id'].'" />';
             break;
 
             // Reddit
             case xzModel::SOCIAL_REDDIT:
-                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="reddit"/>
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="reddit" data-width-size="'.$val['column_width_size'].'" />
                     <input type="hidden" class="reddit_id_'.$val['id'].'" value="'.$val['reddit_id'].'" />';
             break;
 
             // 人人网
             case xzModel::SOCIAL_RENREN:
-                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="renren"/>
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="renren" data-width-size="'.$val['column_width_size'].'" />
                     <input type="hidden" class="renren_id_'.$val['id'].'" value="'.$val['renren_id'].'" />';
             break;
 
             // 新浪微博
             case xzModel::SOCIAL_WEIBO:
-                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="weibo"/>
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="weibo" data-width-size="'.$val['column_width_size'].'" />
                     <input type="hidden" class="weibo_id_'.$val['id'].'" value="'.$val['weibo_id'].'" />';
             break;
 
             // 56视频
             case xzModel::SOCIAL_VIDEO56:
-                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="video56"/>
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="video56" data-width-size="'.$val['column_width_size'].'" />
                     <input type="hidden" class="video56_id_'.$val['id'].'" value="'.$val['video56_id'].'" />';
-            break;
-
-            // 优酷视频
-            case xzModel::SOCIAL_YOUKU:
-                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="youku"/>
-                    <input type="hidden" class="youku_id_'.$val['id'].'" value="'.$val['youku_id'].'" />';
-            break;
+            break;          
         }
     }
     echo $str;

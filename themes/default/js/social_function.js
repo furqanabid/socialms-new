@@ -114,6 +114,12 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 							      	"<li class='refresh_column_"+columnId+"'>"+ 
 							      		"<a href='javascript:void(0)'><span class='glyphicon glyphicon-refresh'></span> 刷新</a>"+
 							      	"</li>"+
+                                    "<li class='expand_column_"+columnId+"'>"+ 
+                                        "<a href='javascript:void(0)'><span class='glyphicon glyphicon-arrow-right'></span> 扩大</a>"+
+                                    "</li>"+
+                                    "<li class='reduce_column_"+columnId+"'>"+ 
+                                        "<a href='javascript:void(0)'><span class='glyphicon glyphicon-arrow-left'></span> 缩小</a>"+
+                                    "</li>"+
 							      	"<li class='delete_column_"+columnId+"'>"+ 
 							      		"<a href='javascript:void(0)'><span class='glyphicon glyphicon-remove'></span> 删除</a>"+
 							      	"</li>"+
@@ -138,7 +144,7 @@ function buildColumn(columnId, socialAccountId, socialType, title)
  * @param {[type]} socialAccountId [description]
  * @param {[type]} title           [description]
  */
-function addNewColumnToPage(columnId, socialType, socialAccountId, title)
+function addNewColumnToPage(columnId, socialType, socialAccountId, title, widthSize)
 {
     if(columnId == undefined || columnId == "")
     {
@@ -155,16 +161,30 @@ function addNewColumnToPage(columnId, socialType, socialAccountId, title)
     var bulidHtml = buildColumn(columnId, socialAccountId, socialType, title);
     $('#main_div_for_inserting_columns').prepend(bulidHtml);
 
+    // 更新column的宽度
+    var widthSize = widthSize || 1;
+    $('#column_'+columnId).css({width : 320*widthSize});
+
     // 获取column的内容
     var columnObj = new socialColumnAccount(columnId, socialType, title);
     columnObj.id = socialAccountId;
     columnObj.display();  
 
-    // 绑定refresh和delete
+
+    // 绑定刷新事件
     $('.refresh_column_'+columnId).on('click',function(){
         columnObj.refresh();
     });
+    // 绑定删除事件
     $('.delete_column_'+columnId).on('click',function(event, noComfirm){
         columnObj.delete(noComfirm);
+    });
+    // 绑定column的扩大事件
+    $('.expand_column_'+columnId).on('click',function(){
+        columnObj.expand();
+    });  
+    // 绑定column的缩小事件
+    $('.reduce_column_'+columnId).on('click',function(){
+        columnObj.reduce();
     });
 }

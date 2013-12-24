@@ -216,7 +216,6 @@ socialColumnAccount.prototype.refresh = function() {
 	})	
 };
 
-
 /**
  * 删除一个column
  * @return {[type]} [description]
@@ -246,5 +245,73 @@ socialColumnAccount.prototype.delete = function(noComfirm) {
 	  	type : 'POST',
 	  	data : data,
 	  	url : root_url+'/userColumn/del'
+	});
+};
+
+/**
+ * 扩大一个列
+ * @return {[type]} [description]
+ */
+socialColumnAccount.prototype.expand = function(){
+	var default_width = 320;
+	var new_expand_width = default_width*0.5;
+	var that = this;
+
+	// 判断当前宽度是否为默认宽度的2倍
+	if(parseInt( $('#column_'+this.columnId).css('width') ) ==  default_width*2)
+	{
+		alert('列的宽度不能大于默认宽度的两倍');
+		return;
+	}
+
+	$('#column_'+this.columnId).animate({
+		width : '+='+new_expand_width
+	}, 1000, function(){
+		// 保存新的宽度到数据库，数据库保存的是 总宽度/默认宽度 .
+		var size = parseInt( $('#column_'+that.columnId).css('width') )/default_width ;
+		that.saveWidth(size);
+	});
+};
+
+/**
+ * 缩小一个列
+ * @return {[type]} [description]
+ */
+socialColumnAccount.prototype.reduce = function(){
+	var default_width = 320;
+	var new_reduce_width = default_width*0.5;
+	var that = this;
+
+	// 判断当前宽度是否为默认宽度
+	if(parseInt( $('#column_'+this.columnId).css('width') ) ==  default_width)
+	{
+		alert('列的宽度不能小于默认宽度');
+		return;
+	}
+
+	$('#column_'+this.columnId).animate({
+		width : '-='+new_reduce_width
+	}, 1000, function(){
+		// 保存新的宽度到数据库，数据库保存的是 总宽度/默认宽度 .
+		var size = parseInt( $('#column_'+that.columnId).css('width') )/default_width ;
+		that.saveWidth(size);
+	});
+};
+
+/**
+ * 保存列的width
+ * @param  {[type]} size [description]
+ * @return {[type]}      [description]
+ */
+socialColumnAccount.prototype.saveWidth = function(size){
+	var data = {
+		columnId : this.columnId,
+		column_width_size : size
+	};
+
+	$.ajax({
+	  	type : 'POST',
+	  	data : data,
+	  	url : root_url+'/userColumn/updWidth'
 	});
 }
