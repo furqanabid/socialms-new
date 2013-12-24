@@ -80,9 +80,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                     <li class="video56">
                         <a href="#video56" class="social_icons" data-toggle="tab"></a>
                     </li>
-                    <li class="youku">
-                        <a href="#youku" class="social_icons" data-toggle="tab"></a>
-                    </li>
                 </ul>
             </nav>
             <div class="tab-content siderbar_content">
