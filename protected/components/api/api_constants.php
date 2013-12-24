@@ -49,6 +49,9 @@ define('WEIBO_API_SECRET','4cdc5143a153750b582c7d2146c80f41');
 define('WEIBO_REDIRECT_URI','http://'.$_SERVER['SERVER_NAME'].'/index.php/weibo/authorize');
 define('WEIBO_AUTH_URI','https://api.weibo.com/oauth2/authorize?client_id='.WEIBO_API_KEY.'&response_type=code&redirect_uri='.WEIBO_REDIRECT_URI);
 
-
+// 56视频 API 常量
+define('VIDEO56_API_KEY','3000003388');
+define('VIDEO56_API_SECRET','15cc456f2174008a');
+define('VIDEO56_REDIRECT_URI','http://'.$_SERVER['SERVER_NAME'].'/index.php/video56/authorize');
 
 ?>

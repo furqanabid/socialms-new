@@ -11,7 +11,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_renren.js', CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_weibo.js', CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_video56.js', CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_youku.js', CClientScript::POS_END);
 ?>
 
 
@@ -276,6 +275,69 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                     </div>
                 </div>
 
+                <!-- 56音乐下午茶 -->
+                <div class="tab-pane" id="video56">
+                    <div class="column_title">
+                        <img src="<?=$this->assets_img?>/social-icons/video56.png" />
+                            56音乐下午茶
+                    </div>
+                    <div class="social_wrap_div">
+                        <img class='ajax_loader' src='<?=$this->assets_img?>/ajax-loader.gif' />
+                        <!-- 56音乐热门分类 -->
+                        <div class="video56_wrap">
+                            <h5>56热门视频</h5>
+                            <div class="select_div">
+                                <select class="form-control social_select video56_drop_down">
+                                    <option value="-1">请选择热门视频</option>
+                                    <!-- 调用widget显示存在的视频类型 -->
+                                    <?php $this->widget('displayVideo56', array(
+                                        'type'=>'hot',
+                                        'name' => 'video56_title'
+                                    ));?>
+                                </select>
+                            </div>
+                            <div class="button_div">
+                                <a type="button" class="btn btn-sm btn-success video56_add_to_column">添加到浏览列</a>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <!-- 56自制剧集 -->
+                        <!-- <div class="video56_wrap">
+                            <h5>56自制剧集</h5>
+                            <div class="select_div">
+                                <select class="form-control social_select video56_drop_down">
+                                    <option value="-1">请选择剧集</option>
+                                    
+                                </select>
+                            </div>
+                            <div class="button_div">
+                                <a type="button" class="btn btn-sm btn-success video56_add_to_column">添加到浏览列</a>
+                            </div>
+                        </div>
+                        <hr> -->
+
+                        <!-- 56搜索 -->
+                        <div class="video56_wrap">
+                            <h4>搜索56视频</h4>
+                            <select class="form-control social_input social_select video56_drop_down video56_search_drop_down">
+                                   <option value="-1">我最近的搜索历史</option>
+                                   <!-- 调用widget显示存在的视频类型 -->
+                                   <?php $this->widget('displayVideo56', array(
+                                        'type'=>'search',
+                                        'name' => 'video56_search_keywords'
+                                   ));?>
+                            </select>
+                            <div class="button_div">
+                                <input type="text" class="form-control social_input search_video56" placeholder="搜索视频">
+                            </div>
+                            <div class="button_div">
+                                <a type="button" class="btn btn-sm btn-success video56_add_to_column" data-type='search'>添加到浏览列</a>
+                                <a type="button" class="btn btn-sm btn-danger video56_search_del">删除历史</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <span id="main_div_for_inserting_columns">

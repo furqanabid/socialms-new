@@ -190,7 +190,7 @@ socialColumnAccount.prototype.refresh = function() {
 
 		// 刷新56视频
 		case 'video56':
-			url = root_url+'/video56/video';
+			url = root_url+'/video56/parse';
 		break;
 
 		// 刷新优酷视频
