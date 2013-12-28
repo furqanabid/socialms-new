@@ -154,8 +154,7 @@ function addNewColumnToPage(columnId, socialType, socialAccountId, title, widthS
 
     if(title ==  undefined || title == "")
     {
-        alert("Column的名字不存在");
-        return;
+       title = '已被删除帐号的列';
     }
 
     var bulidHtml = buildColumn(columnId, socialAccountId, socialType, title);

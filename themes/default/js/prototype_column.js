@@ -5,9 +5,9 @@
  * 
  */
 var socialColumnAccount = function(columnId,socialType,title){
-	 this.columnId = columnId;
-	 this.socialType = socialType;
-	 this.title = title;
+	this.columnId = columnId;
+	this.socialType = socialType;
+	this.title = title;
 }
 
 /**
@@ -22,6 +22,12 @@ socialColumnAccount.prototype.display = function() {
 		name : this.title,
 	};
 	var url;
+
+	if(data.name == '已被删除帐号的列')
+	{
+		$('.holder_column_'+data.columnId).html('已被删除帐号的列，请删除！');
+		return;
+	}	
 
 	switch(socialType)
 	{
