@@ -1,0 +1,32 @@
+/*自定义bootstrap*/
+.navbar,.panel,.panel-heading{border-radius: 0px;}
+
+/*Dashboard*/
+.quick-icon {
+  text-align: center;
+  float: left;
+  margin: 0 15px 10px 0;
+  padding: 10px; }
+
+.quick-icon a {
+  background-color: #fff;
+  display: block;
+  float: left;
+  height: 97px;
+  width: 108px;
+  color: #565656;
+  border: 1px solid #ddd;
+  border-radius: 3px; }
+
+.quick-icon a:hover {
+  text-decoration: none;
+  transition-duration: 0.8s;
+  box-shadow: 1px 10px 15px rgba(0, 0, 0, 0.25); }
+
+.quick-icon img {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 0px; }
+
+.quick-icon span {
+  font-size: 80%; }
