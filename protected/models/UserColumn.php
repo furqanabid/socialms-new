@@ -41,7 +41,8 @@ class UserColumn extends xzModel
 		return array(
 			array('user_id, view_id, social_type, create_time, update_time', 'required'),
 			array('social_type', 'numerical', 'integerOnly'=>true),
-			array('user_id, view_id, instagram_id, pinterest_id, flickr_id, linkedin_id, reddit_id, renren_id, weibo_id, video56_id, youku_id', 'length', 'max'=>10),
+			array('user_id, view_id, rss_master_id, instagram_id, pinterest_id, flickr_id, linkedin_id, reddit_id, renren_id, weibo_id, video56_id, youku_id', 'length', 'max'=>10),
+			array('rss_name', 'length', 'max'=>40),
 			array('is_deleted', 'length', 'max'=>1),
 			array('column_width_size', 'length', 'max'=>3),
 			// The following rule is used by search().

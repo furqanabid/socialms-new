@@ -39,7 +39,7 @@
                     'htmlOptions'=>array('class'=>'nav navbar-nav'),
                     'encodeLabel' => false,
                     'items'=>array(
-                        array('label'=>'首页', 'url'=>array('/admin/default/dashboard'), 'active'=>$this->uniqueID=='admin/default' ? true : false ),
+                        array('label'=>'首页', 'url'=>array('/social') ),
                         array('label'=>'Rss管理', 'url'=>array('/admin/rss'), 'active'=>$this->uniqueID=='admin/rss' ? true : false ),
                     ),
                 )); ?>    

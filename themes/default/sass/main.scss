@@ -367,6 +367,28 @@ time{color: rgb(28, 110, 156)}
     margin-top: 10px;
 }
 
+/*Rss CSS*/
+.rss_feed_name,.rss_feed_url{
+    margin-bottom: 10px;
+}
+.rss_content{
+    margin-bottom: 10px;
+}
+
+.rss_recommend_wrap{
+  h4{
+    font-size: 16px;
+  }
+  .rss_add_to_column{
+    font-size: 12px;margin-bottom: 3px;
+  }
+  .rss_recommend_content {
+    height: 400px;
+    overflow-y: auto;
+  }
+}
+/*END Rss CSS*/
+
 /*Instagram CSS*/
 .social_wrap_div{padding: 15px;}
 .social_wrap_div .select_div{margin-bottom: 10px;}

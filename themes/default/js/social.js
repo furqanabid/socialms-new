@@ -10,7 +10,7 @@ $(function(){
 		{
 			// 如果页面存在rss
 			case 'rss':		
-				var socialAccountId = $('.rss_masterid_'+columnId).val();	
+				var socialAccountId = $('.rss_master_id_'+columnId).val();	
 				var title = $('.rss_name_'+columnId).val();
 			break;
 

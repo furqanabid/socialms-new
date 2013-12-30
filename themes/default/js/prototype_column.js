@@ -33,8 +33,7 @@ socialColumnAccount.prototype.display = function() {
 	{
 		// Rss
 		case 'rss':
-			data['rss_master_id'] = this.id;
-			url = root_url+'/rss/parseRss';
+			url = root_url+'/rss/parse';
 		break;
 
 		// Instagram
@@ -114,12 +113,7 @@ socialColumnAccount.prototype.refresh = function() {
 	{
 		// 刷新Rss
 		case 'rss':
-			var data = {
-				rss_url : this.rss_url,
-				rss_master_id : this.rss_master_id,
-				columnId : this.columnId
-			};
-			url = root_url+'/rss/refreshColumn';			
+			url = root_url+'/rss/parse';			
 		break;
 
 		// 刷新Instagram

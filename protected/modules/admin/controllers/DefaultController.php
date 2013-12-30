@@ -25,7 +25,7 @@ class DefaultController extends xz1Controller
 	    return array(
 	        array('allow', 
 	            'actions'=>array('dashboard','logout'),
-	            'users'=>array('@'),
+	            'expression'=>"Yii::app()->user->getState('is_admin')==1",
 	        ),
 	        array('deny',  
 	            'users'=>array('*'),

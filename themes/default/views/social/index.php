@@ -2,6 +2,7 @@
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/prototype_column.js',  CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_function.js',   CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social.js',            CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_rss.js',  CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_instagram.js',  CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_pinterest.js',  CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_flickr.js',     CClientScript::POS_END);
@@ -52,10 +53,10 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
             <!-- Social Icon Navigation -->
             <nav class="siderbar_nav">
                 <ul class="nav nav-tabs" id="navigation_tab">
-                   <!--  <li class="active rss">
+                    <li class="active rss">
                         <a href="#rss" class="social_icons" data-toggle="tab"></a>
-                    </li> -->
-                    <li class="instagram active">
+                    </li>
+                    <li class="instagram">
                         <a href="#instagram" class="social_icons" data-toggle="tab"></a>
                     </li>
                     <li class="pinterest">
@@ -83,8 +84,57 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
             </nav>
             <div class="tab-content siderbar_content">
 
+                <!-- Rss -->
+                <div class="tab-pane active" id="rss">
+                    <div class="column_title">
+                        <img src="<?=$this->assets_img?>/social-icons/rss.png" />
+                        Rss
+                    </div>
+                    <div class="social_wrap_div">
+                        <img class='ajax_loader' src='<?=$this->assets_img?>/ajax-loader.gif' />
+                        <div class="select_div">
+                            <select class="form-control social_select" id="rss_category_drop_down">
+                                <option value="-1">请选择Rss分类</option>
+                                <!-- 调用widget显示rss category -->
+                                <?php $this->widget('displayRss', array(
+                                    'tableName'=>'xz_social_rss_category',
+                                ));?>
+                            </select>
+                        </div>
+
+                        <div class="select_div rss_feeds_drop_down_div">
+                            <select class="form-control social_select" id="rss_feeds_drop_down">
+                                <option value="-1">请选择一个Rss</option>
+                            </select>
+                        </div>
+
+                        <div class="button_div">
+                            <a type="button" class="btn btn-sm btn-primary rss_feed_new">新增Rss</a>
+                            <a type="button" class="btn btn-sm btn-success rss_add_to_column" data-type='from_select'>添加到浏览列</a>
+                            <a type="button" class="btn btn-sm btn-danger rss_feed_del">删除Rss</a>
+                        </div>
+
+                        <!-- 用户新增加rss的区域 -->
+                        <div class="rss_user_add_div" style="display:none;">  
+                            <hr>
+                            <h5>添加新的RSS</h5>
+                            <input type="text" class="form-control rss_feed_name" placeholder="Rss名称">
+                            <input type="text" class="form-control rss_feed_url" placeholder="Rss地址">
+                            <a type="button" class="btn btn-primary rss_feed_submit">提交</a>
+                        </div>
+
+                        <!-- 推荐的rss列表 -->
+                        <div class="rss_recommend_wrap" style="display:none;">
+                            <hr>
+                            <h5>推荐的Rss列表:</h5>
+                            <div class="rss_recommend_content"></div>
+                        </div>
+
+                    </div>
+                </div>
+
                 <!-- Instagram -->
-                <div class="tab-pane active" id="instagram">
+                <div class="tab-pane" id="instagram">
                     <div class="column_title">
                         <img src="<?=$this->assets_img?>/social-icons/instagram.png" />
                         Instagram
@@ -352,7 +402,14 @@ if(count($userColumns)>0)
     {
         // Social 类型
         switch ($val['social_type']) 
-        {         
+        {      
+            // Rss
+            case xzModel::SOCIAL_RSS:
+                $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="rss" data-width-size="'.$val['column_width_size'].'" />
+                        <input type="hidden" class="rss_master_id_'.$val['id'].'" value="'.$val['rss_master_id'].'" />
+                        <input type="hidden" class="rss_name_'.$val['id'].'" value="'.$val['rss_name'].'" />'; 
+            break;
+
             // Instagram
             case xzModel::SOCIAL_INSTAGRAM:
                 $str .= '<input type="hidden" class="loaded_column" value="'.$val['id'].'" data-type="instagram" data-width-size="'.$val['column_width_size'].'" />

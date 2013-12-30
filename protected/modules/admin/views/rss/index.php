@@ -30,6 +30,7 @@
                         </div>
                         <button type="button" class="btn btn-success check_rss">检查Rss</button>
                         <img class='ajax_loader' src='<?=$this->admin_assets?>/images/ajax-loader.gif' />
+                        <span class="text-info rss-msg"></span>
                     </div>
 
                     <div class="form-group">

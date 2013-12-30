@@ -34,7 +34,7 @@ class SocialRss extends xzModel
 			// 当scenario是create的时候，调用此方法。
             array('url', 'checkExist', 'on'=>'create'),
 			array('user_id, rss_master_id, url, name, create_time, update_time', 'required'),
-			array('user_id, rss_master_id', 'length', 'max'=>10),
+			array('user_id, rss_master_id, rss_category_id', 'length', 'max'=>10),
 			array('url', 'length', 'max'=>255),
 			array('name', 'length', 'max'=>40),
 			array('is_deleted', 'length', 'max'=>1),

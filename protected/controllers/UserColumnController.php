@@ -59,6 +59,11 @@ class UserColumnController extends xzController
                 $_POST['key'] => $_POST['id'],
                 'social_type' => $_POST['social_type'],
             );
+
+            if(isset($_POST['rss_name']))
+            {
+                $inputArray['rss_name'] = $_POST['rss_name'];
+            }
             
             $model = new UserColumn;
             $model->attributes = $inputArray;

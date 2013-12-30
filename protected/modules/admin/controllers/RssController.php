@@ -24,7 +24,7 @@ class RssController extends xz1Controller
 	    return array(
 	        array('allow', 
 	            'actions'=>array('index','check'),
-	            'users'=>array('@'),
+	            'expression'=>"Yii::app()->user->getState('is_admin')==1",
 	        ),
 	        array('deny',  
 	            'users'=>array('*'),

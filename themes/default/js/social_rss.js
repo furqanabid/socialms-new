@@ -7,23 +7,24 @@ $(function(){
 			alert('请选择一个Rss分类');
 			return;
 		}
-		$('.rss_ajax_loader').show();
+
 		var that = $(this);
+		that.closest('.tab-pane').find('.ajax_loader').show();
 
 		$.when(
 			// 获取此分类下面用户添加的rss
 			$.ajax({
 				type : 'POST',
-				data : {id : id},
+				data : {category_id : id},
 				dataType : 'html',
-				url :  social_module_link+'/rss/getUserRssFeeds'
+				url :  root_url+'/rss/userRss'
 			}),
 			// 获取推荐的rss
 			$.ajax({
 				type : 'POST',
-				data : {id : id},
+				data : {category_id : id},
 				dataType : 'html',
-				url :  social_module_link+'/rss/getRssFeeds'
+				url :  root_url+'/rss/recommendRss'
 			})
 		).done(function(a1,a2){
 			// 分类下面用户返回数据处理
@@ -33,7 +34,7 @@ $(function(){
 			$('.rss_recommend_wrap').show();
 			$('.rss_recommend_content').html(a2[0]);
 			
-			$('.rss_ajax_loader').hide();
+			that.closest('.tab-pane').find('.ajax_loader').hide();
 		});
 	});
 
@@ -44,32 +45,37 @@ $(function(){
 		{
 			var rssId = $('#rss_feeds_drop_down').val();
 			var data = {
-				rss_master_id : $('.rss_master_id_'+rssId).val(),
-				rss_name : $('#rss_feeds_drop_down option:selected').text(),
+				id : $('.rss_master_id_'+rssId).val(),
+				rss_name : $.trim( $('#rss_feeds_drop_down option:selected').text() ),
+				key : 'rss_master_id',
+				social_type : 1,
 			};
 		}
 		else
 		{
 			var data = {
-				rss_master_id : $(this).closest('.rss_feed_wrap').find('.feed_rss_masterid').val(),
-				rss_name : $(this).text(),
+				id : $(this).closest('.rss_feed_wrap').find('.rss_master_id').val(),
+				rss_name : $.trim( $(this).text() ),
+				key : 'rss_master_id',
+				social_type : 1,
 			};
 		}
 		
+		var that = $(this);
+		that.closest('.tab-pane').find('.ajax_loader').show();
 
-		$('.rss_ajax_loader').show();
 		$.ajax({
 			type : 'POST',
 			data : data,
 			async : 'false',
-			url :  social_module_link+'/rss/addColumn',
+			url :  root_url+'/userColumn/addColumn',
 		}).done(function(result){
+			that.closest('.tab-pane').find('.ajax_loader').hide();
 			if(parseInt(result))
 			{
 				var columnId = parseInt(result);
 				// 添加列
-				addNewColumnToPage(columnId, 'rss', data.rss_master_id, data.rss_name);
-				$('.rss_ajax_loader').hide();
+				addNewColumnToPage(columnId, 'rss', data.id, data.rss_name);
 			}
 		});	
 	});
@@ -96,19 +102,23 @@ $(function(){
 			alert('请输入正确的rss地址和名字！');
 			return;
 		}
+
 		var data = {
 			categoryId : categoryId,
 			rssName : rssName,
 			rssUrl : rssUrl
 		}
 
-		$('.rss_ajax_loader').show();
+		var that = $(this);
+		that.closest('.tab-pane').find('.ajax_loader').show();
+
 		$.ajax({
 			type : 'post',
 			data : data,
 			dataType : 'json',
-			url : social_module_link+'/rss/addNewRss'
+			url : root_url+'/rss/newRss'
 		}).done(function(result){
+			that.closest('.tab-pane').find('.ajax_loader').hide();
 			if(result.success == true)
 			{
 				var str = "<option selected='selected' value='"+result.data.id+"'>"+result.data.name+"</option>";
@@ -117,8 +127,6 @@ $(function(){
 				$('#rss_feeds_drop_down').append(str);
 				$('.rss_feeds_drop_down_div').append(hiddenString);
 				$('.rss_user_add_div').hide();
-				$('.rss_ajax_loader').hide();
-
 			}
 			else
 				alert(result.msg);
@@ -138,24 +146,29 @@ $(function(){
 		if(!confirm('您真的要删除这个Rss吗？'))
 		    return;
 
-		$('.rss_ajax_loader').show();
+		var that = $(this);
+		that.closest('.tab-pane').find('.ajax_loader').show();
 		$.ajax({
 			type : 'post',
 			data : {id : rssId},
-			url : social_module_link+'/rss/delRss'
+			dataType : 'json',
+			url : root_url+'/rss/del'
 		}).done(function(result){
-			if(result == 1)
+			that.closest('.tab-pane').find('.ajax_loader').hide();
+			if(result.success === true)
 			{	
 				$('#rss_feeds_drop_down option:selected').remove();
-				$('.rss_ajax_loader').hide();
 
 				// 删除已经存在的Column
 				var rss_master_id = $('.rss_master_id_'+rssId).val();
-				var sectionId = $('.rss_'+rss_master_id).attr('id') || '';
-				if(sectionId != '')
+				// 如果帐号已经被添加到Column,则删除已经存在的Column
+				if($('.rss_'+rss_master_id).length > 0)
 				{
-					var columnId = sectionId.replace('column_','');
-					$('.delete_column_'+columnId).trigger('click', [true]);
+					$('.rss_'+rss_master_id).each(function(){
+						var sectionId = $(this).attr('id');
+						var columnId = sectionId.replace('column_','');
+						$('.delete_column_'+columnId).trigger('click', [true]);
+					});
 				}
 			}
 		});
