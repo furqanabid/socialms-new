@@ -44,7 +44,8 @@
                     'htmlOptions'=>array('class'=>'nav navbar-nav navbar-right'),
                     'encodeLabel' => false,
                     'items'=>array(
-                        array('label'=>'注册', 'url'=>array('/site/register'), 'visible'=>Yii::app()->user->isGuest),     
+                        array('label'=>'注册', 'url'=>array('/site/register'), 'visible'=>Yii::app()->user->isGuest),   
+                        array('label'=>'管理员', 'url'=>array('/admin/default/dashboard'), 'visible'=>Yii::app()->user->getState('is_admin')==1),  
                         array('label'=>'登出'.' ('.Yii::app()->user->getState('username').')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
                     ),
                 )); ?>    

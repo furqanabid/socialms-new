@@ -8,7 +8,13 @@
 	    Yii::app()->clientScript->registerCssFile($this->admin_assets."/css/bootstrap.min.css")
                                 ->registerCssFile($this->admin_assets."/css/admin.css")
 	                            ->registerCoreScript('jquery')
-	                            ->registerScriptFile($this->admin_assets."/js/libs/bootstrap.min.js", CClientScript::POS_END);
+	                            ->registerScriptFile($this->admin_assets."/js/libs/bootstrap.min.js", CClientScript::POS_END)
+                                ->registerScriptFile($this->admin_assets."/js/admin.js", CClientScript::POS_END);
+
+         // JS变量
+        Yii::app()->clientScript->registerScript('js_variables','
+                var admin_root = "'.$this->createUrl("/admin").'";
+        ',CClientScript::POS_HEAD);
 	?>
 </head>
 
@@ -24,7 +30,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?=$this->createUrl('social')?>">后台管理</a>
+                <a class="navbar-brand" href="<?=$this->createUrl('/admin/default/dashboard')?>">后台管理</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->            
@@ -33,7 +39,8 @@
                     'htmlOptions'=>array('class'=>'nav navbar-nav'),
                     'encodeLabel' => false,
                     'items'=>array(
-                        array('label'=>'Rss管理', 'url'=>array('/admin/rss') ),
+                        array('label'=>'首页', 'url'=>array('/admin/default/dashboard'), 'active'=>$this->uniqueID=='admin/default' ? true : false ),
+                        array('label'=>'Rss管理', 'url'=>array('/admin/rss'), 'active'=>$this->uniqueID=='admin/rss' ? true : false ),
                     ),
                 )); ?>    
 
@@ -41,7 +48,7 @@
                     'htmlOptions'=>array('class'=>'nav navbar-nav navbar-right'),
                     'encodeLabel' => false,
                     'items'=>array(
-                        array('label'=>'登出'.' ('.Yii::app()->user->getState('admin_username').')', 'url'=>array('logout'), 'visible'=>!Yii::app()->user->isGuest)
+                        array('label'=>'登出'.' ('.Yii::app()->user->getState('username').')', 'url'=>array('logout'), 'visible'=>!Yii::app()->user->isGuest)
                     ),
                 )); ?>    
             </div>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 12 月 29 日 18:49
+-- 生成日期: 2013 年 12 月 30 日 01:25
 -- 服务器版本: 5.1.44
 -- PHP 版本: 5.3.1
 
@@ -18,33 +18,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- 数据库: `socialms`
 --
-
--- --------------------------------------------------------
-
---
--- 表的结构 `xz_administrator`
---
-
-CREATE TABLE IF NOT EXISTS `xz_administrator` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `email` varchar(50) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` char(32) NOT NULL,
-  `create_time` datetime NOT NULL,
-  `update_time` datetime NOT NULL,
-  `last_login_time` datetime NOT NULL,
-  `is_deleted` binary(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=18 ;
-
---
--- 转存表中的数据 `xz_administrator`
---
-
-INSERT INTO `xz_administrator` (`id`, `email`, `username`, `password`, `create_time`, `update_time`, `last_login_time`, `is_deleted`) VALUES
-(15, 'admin@qq.com', 'andybegin_admin', '21232f297a57a5a743894a0e4a801fc3', '2013-12-16 16:57:44', '2013-12-16 16:57:44', '2013-12-29 18:30:49', '0'),
-(17, 'test@qq.com', 'test', '098f6bcd4621d373cade4e832627b4f6', '2013-12-16 17:03:28', '2013-12-16 17:03:28', '2013-12-16 17:03:28', '0');
 
 -- --------------------------------------------------------
 
@@ -233,6 +206,111 @@ INSERT INTO `xz_social_renren` (`id`, `user_id`, `renren_uid`, `renren_access_to
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `xz_social_rss`
+--
+
+CREATE TABLE IF NOT EXISTS `xz_social_rss` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `rss_master_id` int(10) unsigned NOT NULL,
+  `url` varchar(255) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `is_deleted` binary(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`,`rss_master_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
+
+--
+-- 转存表中的数据 `xz_social_rss`
+--
+
+INSERT INTO `xz_social_rss` (`id`, `user_id`, `rss_master_id`, `url`, `name`, `create_time`, `update_time`, `is_deleted`) VALUES
+(1, 15, 1, 'http://sports.yahoo.com/nba/teams/lac/rss.xml', 'NBA - Los Angeles Clipper', '2013-12-30 01:08:09', '2013-12-30 01:08:09', '0'),
+(2, 15, 1, 'http://sports.yahoo.com/nba/teams/lac/rss.xml', 'NBA - Los Angeles Clipper', '2013-12-30 01:09:00', '2013-12-30 01:09:00', '0'),
+(3, 15, 1, 'http://sports.yahoo.com/nba/teams/lac/rss.xml', 'NBA - Los Angeles Clipper', '2013-12-30 01:19:59', '2013-12-30 01:19:59', '0'),
+(4, 15, 1, 'http://sports.yahoo.com/nba/teams/lac/rss.xml', 'NBA - Los Angeles Clipper', '2013-12-30 01:23:50', '2013-12-30 01:23:50', '0'),
+(5, 15, 1, 'http://sports.yahoo.com/nba/teams/lac/rss.xml', 'NBA - Los Angeles Clipper', '2013-12-30 01:24:11', '2013-12-30 01:24:11', '0'),
+(6, 15, 1, 'http://sports.yahoo.com/nba/teams/lac/rss.xml', 'NBA - Los Angeles Clipper', '2013-12-30 01:24:30', '2013-12-30 01:24:30', '0');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `xz_social_rss_category`
+--
+
+CREATE TABLE IF NOT EXISTS `xz_social_rss_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `is_deleted` binary(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
+
+--
+-- 转存表中的数据 `xz_social_rss_category`
+--
+
+INSERT INTO `xz_social_rss_category` (`id`, `user_id`, `name`, `create_time`, `update_time`, `is_deleted`) VALUES
+(1, 0, '新闻', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0'),
+(2, 0, '财经', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0'),
+(3, 0, '科技', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0'),
+(4, 0, '体育', '2013-10-14 23:49:13', '2013-10-14 23:49:16', '0');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `xz_social_rss_master`
+--
+
+CREATE TABLE IF NOT EXISTS `xz_social_rss_master` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `url` varchar(255) NOT NULL,
+  `name` varchar(40) NOT NULL,
+  `add_count` mediumint(5) NOT NULL,
+  `create_time` datetime NOT NULL,
+  `update_time` datetime NOT NULL,
+  `is_deleted` binary(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `xz_social_rss_master`
+--
+
+INSERT INTO `xz_social_rss_master` (`id`, `url`, `name`, `add_count`, `create_time`, `update_time`, `is_deleted`) VALUES
+(1, 'http://sports.yahoo.com/nba/teams/lac/rss.xml', 'NBA - Los Angeles Clipper', 6, '2013-12-30 01:08:09', '2013-12-30 01:08:09', '0');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `xz_social_rss_xref_category`
+--
+
+CREATE TABLE IF NOT EXISTS `xz_social_rss_xref_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `rss_master_id` int(10) unsigned NOT NULL,
+  `rss_category_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `rss_master_id` (`rss_master_id`,`rss_category_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- 转存表中的数据 `xz_social_rss_xref_category`
+--
+
+INSERT INTO `xz_social_rss_xref_category` (`id`, `rss_master_id`, `rss_category_id`) VALUES
+(3, 1, 1),
+(4, 1, 2),
+(5, 1, 3);
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `xz_social_video56`
 --
 
@@ -318,6 +396,7 @@ CREATE TABLE IF NOT EXISTS `xz_users` (
   `create_time` datetime NOT NULL,
   `update_time` datetime NOT NULL,
   `last_login_time` datetime NOT NULL,
+  `is_admin` binary(1) NOT NULL DEFAULT '0',
   `is_deleted` binary(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
@@ -327,9 +406,9 @@ CREATE TABLE IF NOT EXISTS `xz_users` (
 -- 转存表中的数据 `xz_users`
 --
 
-INSERT INTO `xz_users` (`id`, `email`, `username`, `password`, `create_time`, `update_time`, `last_login_time`, `is_deleted`) VALUES
-(15, 'zhexiao@163.com', 'andybegin', '31efe5c727df3e9f116cd46fbb5b2626', '2013-12-16 16:57:44', '2013-12-16 16:57:44', '2013-12-29 18:31:17', '0'),
-(17, 'test@qq.com', 'test', '098f6bcd4621d373cade4e832627b4f6', '2013-12-16 17:03:28', '2013-12-16 17:03:28', '2013-12-16 17:03:28', '0');
+INSERT INTO `xz_users` (`id`, `email`, `username`, `password`, `create_time`, `update_time`, `last_login_time`, `is_admin`, `is_deleted`) VALUES
+(15, 'zhexiao@163.com', 'andybegin', '31efe5c727df3e9f116cd46fbb5b2626', '2013-12-16 16:57:44', '2013-12-16 16:57:44', '2013-12-30 01:05:01', '1', '0'),
+(17, 'test@qq.com', 'test', '098f6bcd4621d373cade4e832627b4f6', '2013-12-16 17:03:28', '2013-12-16 17:03:28', '2013-12-30 01:03:18', '0', '0');
 
 -- --------------------------------------------------------
 

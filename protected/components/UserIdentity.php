@@ -38,6 +38,7 @@ class UserIdentity extends CUserIdentity
 
 				$this->setState('email', $this->email);
 				$this->setState('username', $users->username);
+				$this->setState('is_admin', $users->is_admin);
 
 				$this->errorCode = self::ERROR_NONE; //值是0
 

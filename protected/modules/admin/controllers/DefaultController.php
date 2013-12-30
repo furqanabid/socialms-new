@@ -23,10 +23,6 @@ class DefaultController extends xz1Controller
 	public function accessRules()
 	{
 	    return array(
-	    	array('allow', 
-	    	    'actions'=>array('index'),
-	    	    'users'=>array('*'),
-	    	),
 	        array('allow', 
 	            'actions'=>array('dashboard','logout'),
 	            'users'=>array('@'),
@@ -35,28 +31,6 @@ class DefaultController extends xz1Controller
 	            'users'=>array('*'),
 	        ),
 	    );
-	}
-
-	// 管理员登录
-	public function actionIndex()
-	{
-		$model=new AdminLoginForm;
-
-		// collect user input data
-		if(isset($_POST['AdminLoginForm']))
-		{
-			$model->attributes=$_POST['AdminLoginForm'];
-			// validate user input and redirect to the previous page if valid
-			if($model->validate() && $model->login())
-            {
-				$this->redirect($this->createUrl('dashboard'));
-            }
-		}
-
-		// display the login form
-		$this->renderPartial('index',array(
-			'model'=>$model
-		));
 	}
 
 	// 显示dashboard
@@ -73,6 +47,6 @@ class DefaultController extends xz1Controller
 	public function actionLogout()
 	{
 		Yii::app()->user->logout();
-		$this->redirect(Yii::app()->createUrl('/admin'));
+		$this->redirect(Yii::app()->homeUrl);
 	}
 }

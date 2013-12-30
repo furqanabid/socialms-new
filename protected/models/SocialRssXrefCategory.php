@@ -1,26 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "xz_administrator".
+ * This is the model class for table "xz_social_rss_xref_category".
  *
- * The followings are the available columns in table 'xz_administrator':
+ * The followings are the available columns in table 'xz_social_rss_xref_category':
  * @property string $id
- * @property string $email
- * @property string $username
- * @property string $password
- * @property string $create_time
- * @property string $update_time
- * @property string $last_login_time
- * @property string $is_deleted
+ * @property string $rss_master_id
+ * @property string $rss_category_id
  */
-class Administrator extends xzModel
+class SocialRssXrefCategory extends xzModel
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'xz_administrator';
+		return 'xz_social_rss_xref_category';
 	}
 
 	/**
@@ -31,13 +26,11 @@ class Administrator extends xzModel
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, username, password, create_time, update_time, last_login_time', 'required'),
-			array('email, username', 'length', 'max'=>50),
-			array('password', 'length', 'max'=>32),
-			array('is_deleted', 'length', 'max'=>1),
+			array('rss_master_id, rss_category_id', 'required'),
+			array('rss_master_id, rss_category_id', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, email, username, password, create_time, update_time, last_login_time, is_deleted', 'safe', 'on'=>'search'),
+			array('id, rss_master_id, rss_category_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -59,13 +52,8 @@ class Administrator extends xzModel
 	{
 		return array(
 			'id' => 'ID',
-			'email' => 'Email',
-			'username' => 'Username',
-			'password' => 'Password',
-			'create_time' => 'Create Time',
-			'update_time' => 'Update Time',
-			'last_login_time' => 'Last Login Time',
-			'is_deleted' => 'Is Deleted',
+			'rss_master_id' => 'Rss Master',
+			'rss_category_id' => 'Rss Category',
 		);
 	}
 
@@ -88,13 +76,8 @@ class Administrator extends xzModel
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id,true);
-		$criteria->compare('email',$this->email,true);
-		$criteria->compare('username',$this->username,true);
-		$criteria->compare('password',$this->password,true);
-		$criteria->compare('create_time',$this->create_time,true);
-		$criteria->compare('update_time',$this->update_time,true);
-		$criteria->compare('last_login_time',$this->last_login_time,true);
-		$criteria->compare('is_deleted',$this->is_deleted,true);
+		$criteria->compare('rss_master_id',$this->rss_master_id,true);
+		$criteria->compare('rss_category_id',$this->rss_category_id,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -105,10 +88,39 @@ class Administrator extends xzModel
 	 * Returns the static model of the specified AR class.
 	 * Please note that you should have this exact method in all your CActiveRecord descendants!
 	 * @param string $className active record class name.
-	 * @return Administrator the static model class
+	 * @return SocialRssXrefCategory the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
 	}
+
+	/**
+     * 因为可以多选category，所以我们选择使用一次性插入
+     * @return [type] [description]
+     */
+    public static function insertMultipleRows($inputArray)
+    {
+        // 检查表里是否已经存在此rss_master_id的记录，存在就删掉
+        $xref_id = self::model()->getColumn('id', 'rss_master_id='.$inputArray['rss_master_id']);
+        if(count($xref_id)>0)
+        {
+            self::model()->deleteAll('rss_master_id='.$inputArray['rss_master_id']);
+        }
+
+        // 如果存在数据
+        if(!empty($inputArray['category_id']))
+        {
+            // 将数据插入，使用一次性的插入
+            $sql="INSERT INTO xz_social_rss_xref_category(rss_master_id, rss_category_id) VALUES";
+            foreach ($inputArray['category_id'] as $key => $val) 
+            {
+                $sql .= " (".$inputArray['rss_master_id'].", ".$val."),";
+            }
+
+            $sql = rtrim($sql, ',');
+            
+            return Yii::app()->db->createCommand($sql)->execute();
+        }
+    }
 }
