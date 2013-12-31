@@ -333,7 +333,8 @@ time {
         position: absolute;
         top: 0px;
         width: 99%;
-        padding: 10px; }
+        padding: 10px;
+        word-break: break-all; }
 
 .button_div {
   margin-top: 10px; }
