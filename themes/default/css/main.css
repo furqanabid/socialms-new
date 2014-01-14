@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@charset "IBM437";
 body {
   background: #eeeeee url("../images/paper.jpg"); }
 
@@ -215,6 +215,14 @@ time {
         background-image: url("../images/socialsprites.png");
         background-repeat: no-repeat;
         transition: all 0.3s ease; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .post a {
+        background-position: -41px -410px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .post a:hover {
+        background-position: -41px -451px;
+        margin-left: 1px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .post.active a {
+        background-position: -41px -451px;
+        margin-left: 1px; }
       #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .rss a {
         background-position: 0 -1200px; }
       #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .rss a:hover {

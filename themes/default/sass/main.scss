@@ -232,6 +232,14 @@ time{color: rgb(28, 110, 156)}
                     transition: all 0.3s ease;
                 }
 
+                .post{
+                    a{background-position: -41px -410px;}
+                    a:hover{background-position: -41px -451px;margin-left: 1px;}
+                }
+                .post.active{
+                    a{background-position: -41px -451px;margin-left: 1px;}
+                }
+
                 .rss{
                     a{background-position: 0 -1200px;}
                     a:hover{background-position: 0 -1240px;margin-left: 1px;}

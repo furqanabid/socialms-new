@@ -2,7 +2,7 @@
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/prototype_column.js',  CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_function.js',   CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social.js',            CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_rss.js',  CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_rss.js',        CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_instagram.js',  CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_pinterest.js',  CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_flickr.js',     CClientScript::POS_END);
@@ -53,7 +53,10 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
             <!-- Social Icon Navigation -->
             <nav class="siderbar_nav">
                 <ul class="nav nav-tabs" id="navigation_tab">
-                    <li class="active rss">
+                    <li class="active post">
+                        <a href="#post" class="social_icons" data-toggle="tab"></a>
+                    </li>
+                    <li class="rss">
                         <a href="#rss" class="social_icons" data-toggle="tab"></a>
                     </li>
                     <li class="instagram">
@@ -84,8 +87,18 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
             </nav>
             <div class="tab-content siderbar_content">
 
+                <!-- Post -->
+                <div class="tab-pane active" id="post">
+                    <div class="column_title">
+                        Post
+                    </div>
+                    <div class="social_wrap_div">
+                        <img class='ajax_loader' src='<?=$this->assets_img?>/ajax-loader.gif' />
+                    </div>
+                </div>
+
                 <!-- Rss -->
-                <div class="tab-pane active" id="rss">
+                <div class="tab-pane" id="rss">
                     <div class="column_title">
                         <img src="<?=$this->assets_img?>/social-icons/rss.png" />
                         Rss
