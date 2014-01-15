@@ -90,10 +90,13 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                 <!-- Post -->
                 <div class="tab-pane active" id="post">
                     <div class="column_title">
-                        Post
+                        <img src="<?=$this->assets_img?>/social-icons/write.png" />
+                        发布内容
+                        <button type="button" class="btn btn-success pull-right">发布</button>
                     </div>
                     <div class="social_wrap_div">
                         <img class='ajax_loader' src='<?=$this->assets_img?>/ajax-loader.gif' />
+                        <textarea class="form-control" rows="3" placeholder="您要发布的人人网状态..."></textarea>
                     </div>
                 </div>
 
