@@ -95,32 +95,52 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                         发布内容
                         <button type="button" class="btn btn-success pull-right">发布</button>
                     </div>
-                    <div class="social_wrap_div">
-                        <img class='ajax_loader' src='<?=$this->assets_img?>/ajax-loader.gif' />
-                        <!-- 选择需要发布信息的帐号 -->
-                        <div class="post-type">
-                            <div class='btn-group post-type-renren'>
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                   人人帐号 <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <?php foreach ($renrenAccount as $key => $val) { ?>
-                                        <li class="post-renren" data-id="<?=$val['id']?>">
-                                            <a href="#"><?=$val['renren_username']?></a>
-                                        </li>
-                                    <?php } ?>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- 选择需要发布的内容 -->
-                        <div class="post-body">
-                            <!-- 显示人人网的信息框 -->
-                            <?php foreach ($renrenAccount as $key => $val) { ?>
-                                <div style="display:none;" class="post-wrap post-renren-<?=$val['id']?>">
-                                    <h5><?=$val['renren_username']?></h5>
-                                    <textarea class="form-control" rows="3" placeholder="您要发布的人人网状态..."></textarea>
+                    <div class="column_container_wrap social_wrap_div">
+                        <div class="column_container">
+                            <img class='ajax_loader' src='<?=$this->assets_img?>/ajax-loader.gif' />
+
+                            <!-- 选择需要发布信息的帐号 -->
+                            <div class="post-type">
+                                <div class='btn-group post-type-renren'>
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                       人人帐号 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <?php foreach ($renrenAccount as $key => $val) { ?>
+                                            <li class="post-renren" data-id="<?=$val['id']?>">
+                                                <a href="#"><?=$val['renren_username']?></a>
+                                            </li>
+                                        <?php } ?>
+                                    </ul>
                                 </div>
-                            <?php }?>
+                            </div>
+
+                            <!-- 选择需要发布的内容 -->
+                            <div class="post-body">
+                                <!-- 显示人人网的信息框 -->
+                                <?php foreach ($renrenAccount as $key => $val) { ?>
+                                    <div style="display:none;" class="post-wrap post-renren-<?=$val['id']?>">
+                                        <h5>
+                                            <img src="<?=$this->assets_img?>/social-icons/renren.png" />
+                                            <?=$val['renren_username']?>
+                                        </h5>
+                                        <textarea class="form-control" rows="3" placeholder="您要发布的人人网状态..."></textarea>
+                                        <div id="post-renren-feed-<?=$val['id']?>"  class="media">
+                                            <a class="pull-left" href="#">
+                                                <img class="media-object" src="<?=$this->assets_img?>/image-holder.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <h5 class="media-heading">
+                                                    <a href="#">新鲜事标题</a>
+                                                </h5>
+                                                <div class="media-content">
+                                                    新鲜事内容
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php }?>
+                            </div>
                         </div>
                     </div>
                 </div>
