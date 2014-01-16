@@ -623,3 +623,23 @@ time{color: rgb(28, 110, 156)}
     .tag{margin-top: 10px;}
 }
 /*END Video56 CSS*/
+
+.post-type{
+    border-bottom: 3px solid #47a447;
+    padding-bottom: 10px; 
+
+    a:hover,a:focus{ background-color:transparent!important; };
+   
+    .post-type-clicked{
+        background-image: url('../images/checked.png');
+        background-repeat: no-repeat;
+        background-position: 95%;
+    }
+}
+
+.post-body{
+    .post-wrap{
+        padding: 10px 0;
+        border-bottom: 3px solid #47a447;
+    }
+}

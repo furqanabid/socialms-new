@@ -2,6 +2,7 @@
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/prototype_column.js',  CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_function.js',   CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social.js',            CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_post.js',            CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_rss.js',        CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_instagram.js',  CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_pinterest.js',  CClientScript::POS_END);
@@ -96,7 +97,31 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                     </div>
                     <div class="social_wrap_div">
                         <img class='ajax_loader' src='<?=$this->assets_img?>/ajax-loader.gif' />
-                        <textarea class="form-control" rows="3" placeholder="您要发布的人人网状态..."></textarea>
+                        <!-- 选择需要发布信息的帐号 -->
+                        <div class="post-type">
+                            <div class='btn-group post-type-renren'>
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                   人人帐号 <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <?php foreach ($renrenAccount as $key => $val) { ?>
+                                        <li class="post-renren" data-id="<?=$val['id']?>">
+                                            <a href="#"><?=$val['renren_username']?></a>
+                                        </li>
+                                    <?php } ?>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- 选择需要发布的内容 -->
+                        <div class="post-body">
+                            <!-- 显示人人网的信息框 -->
+                            <?php foreach ($renrenAccount as $key => $val) { ?>
+                                <div style="display:none;" class="post-wrap post-renren-<?=$val['id']?>">
+                                    <h5><?=$val['renren_username']?></h5>
+                                    <textarea class="form-control" rows="3" placeholder="您要发布的人人网状态..."></textarea>
+                                </div>
+                            <?php }?>
+                        </div>
                     </div>
                 </div>
 

@@ -115,4 +115,14 @@ class SocialRenren extends xzModel
 	{
 		return parent::model($className);
 	}
+
+	public static function getAccount()
+	{
+		$user_id = Yii::app()->user->id;
+		return Yii::app()->db->createCommand()
+                                ->select('*')
+                                ->from('xz_social_renren')
+                                ->where('is_deleted=0 AND user_id='.$user_id)
+                                ->queryAll();  
+	}
 }

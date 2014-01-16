@@ -1,4 +1,4 @@
-@charset "IBM437";
+@charset "UTF-8";
 body {
   background: #eeeeee url("../images/paper.jpg"); }
 
@@ -550,3 +550,16 @@ time {
   margin-top: 10px; }
 
 /*END Video56 CSS*/
+.post-type {
+  border-bottom: 3px solid #47a447;
+  padding-bottom: 10px; }
+  .post-type a:hover, .post-type a:focus {
+    background-color: transparent !important; }
+  .post-type .post-type-clicked {
+    background-image: url("../images/checked.png");
+    background-repeat: no-repeat;
+    background-position: 95%; }
+
+.post-body .post-wrap {
+  padding: 10px 0;
+  border-bottom: 3px solid #47a447; }

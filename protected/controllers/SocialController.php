@@ -44,11 +44,12 @@ class SocialController extends xzController
 
 		$UserViews = UserView::getUserView();
 		$userColumns = UserColumn::getColumns();
-
+		$renrenAccount = SocialRenren::getAccount();
 
 		$this->render('index', array(
 			'userViews' => $UserViews,
-			'userColumns' => $userColumns
+			'userColumns' => $userColumns,
+			'renrenAccount' => $renrenAccount
 		));
 	}
 }
