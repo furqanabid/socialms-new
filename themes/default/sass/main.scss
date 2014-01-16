@@ -176,7 +176,7 @@ time{color: rgb(28, 110, 156)}
 #scrollable_columns{
     position: absolute;
     top: 106px;
-    left: 362px;
+    left: 462px;
     bottom: 0;
     right: 0;
     overflow-x: auto;
@@ -191,7 +191,7 @@ time{color: rgb(28, 110, 156)}
         white-space: nowrap;
 
         #vertical_sidebar{
-            width: 362px;
+            width: 462px;
             position: fixed;
             top: 106px;
             left: 0px;
@@ -205,7 +205,7 @@ time{color: rgb(28, 110, 156)}
             }
 
             .siderbar_content {
-                width: 320px;
+                width: 420px;
                 height: 100%;
                 position: absolute;
                 right: 0px;
@@ -653,7 +653,7 @@ time{color: rgb(28, 110, 156)}
 
     .post-body{
         .post-wrap{
-            padding: 10px 5px;
+            padding: 10px 5px 20px;
             border-bottom: 3px solid #47a447;
         }
 
@@ -669,11 +669,13 @@ time{color: rgb(28, 110, 156)}
             margin: 10px 1px 0;
             @include vendor(box-shadow,0px 0px 5px #ccc);
 
-            .media-heading,.media-content{
+            .media-heading{
                 font-size: 12px;
+                margin-top: 5px;
             }
 
             .media-content{
+                font-size: 12px;
                 margin-top: 10px;
             }
         }   
