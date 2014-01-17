@@ -1,4 +1,4 @@
-@charset "IBM437";
+@charset "UTF-8";
 body {
   background: #eeeeee url("../images/paper.jpg"); }
 
@@ -591,3 +591,14 @@ time {
   #post .post-body .media .media-content {
     font-size: 12px;
     margin-top: 10px; }
+  #post .post-body .media .media-object {
+    border: 1px solid #dfdfdf;
+    width: 88px;
+    height: 58px; }
+
+.post-column {
+  margin-top: 10px;
+  cursor: pointer; }
+
+.post-column:hover {
+  background-color: #999; }

@@ -1,23 +1,23 @@
 <?php if(count($data->statuses)>0){?>
     <?php foreach ($data->statuses as $key => $weibo) {?>
-        <div class="social_wrap weibo_wrap clearfix">
+        <div class="post-column-info social_wrap weibo_wrap clearfix">
             <div class="media">
                 <a class="pull-left" href="#">
                     <img class="media-object" src="<?=$weibo->user->profile_image_url?>" alt="">
                 </a>
                 <div class="media-body">
                     <span class="media-heading">
-                        <a href="http://www.weibo.com/<?=$weibo->user->profile_url?>" target="_blank">
+                        <a href="http://www.weibo.com/<?=$weibo->user->profile_url?>" target="_blank" class="post-column-title">
                             <?=$weibo->user->screen_name?>
                         </a>
                     </span>
-                    <div class="text">
+                    <div class="text post-column-description">
                         <?=preg_replace("/(http:\/\/t\.cn\/.{7})/i", "<a href='$1' target='_blank'>$1</a>", $weibo->text)?>
                     </div>
                     <?php if(isset($weibo->original_pic)){?>
-                    <a href="<?=$weibo->original_pic?>" target="_blank">
-                        <img src="<?=$weibo->thumbnail_pic?>" />
-                    </a>
+                        <a href="<?=$weibo->original_pic?>" target="_blank" >
+                            <img src="<?=$weibo->thumbnail_pic?>" class="post-column-image"/>
+                        </a>
                     <?php }?>
                     <div class="clearfix"></div>
                     <time class="pull-right">
@@ -34,7 +34,7 @@
                             </div>
                             <?php if(isset($weibo->retweeted_status->original_pic)){?>
                             <a href="<?=$weibo->retweeted_status->original_pic?>" target="_blank">
-                                <img src="<?=$weibo->retweeted_status->thumbnail_pic?>" />
+                                <img src="<?=$weibo->retweeted_status->thumbnail_pic?>" class="post-column-image"/>
                             </a>
                             <?php }?>
                             <div class="clearfix"></div>
@@ -65,6 +65,10 @@
                 <div class='pull-right social_action_msg'>操作处理中......</div>
                 <div class='pull-right action_info'></div>
                 <div class="clearfix"></div>
+
+                <span class="label label-success pull-right post-column" data-type='weibo'>
+                    <span class="glyphicon glyphicon-arrow-left"></span> 发布
+                </span>
             </div>           
        </div>
        <hr>

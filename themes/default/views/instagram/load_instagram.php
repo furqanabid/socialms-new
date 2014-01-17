@@ -1,15 +1,17 @@
 <?php if(count($instagram->data)>0) {?>
 	<?php foreach ($instagram->data as $key => $instagram_data) { ?>
-		<div class="social_wrap instagram_wrap clearfix">
+		<div class="post-column-info social_wrap instagram_wrap clearfix">
 			<div class="author">
 				<img src="<?=$instagram_data->user->profile_picture?>" width=60 height=60>
-				<a class="instagram_username" href="<?=$instagram_data->link?>" target="_blank"><?=$instagram_data->user->username?></a>
+				<a class="post-column-title instagram_username" href="<?=$instagram_data->link?>" target="_blank">
+					<?=$instagram_data->user->username?>
+				</a>
 			</div>
 			<div class="img">
-				<img src="<?=$instagram_data->images->low_resolution->url?>" class='img-responsive instagram_img' />
+				<img src="<?=$instagram_data->images->low_resolution->url?>" class='post-column-image img-responsive instagram_img' />
 			</div>
 			<div class="caption">
-				<div class="instagram_caption">
+				<div class="post-column-description instagram_caption">
 					<?=@$instagram_data->caption->text?>
 				</div>
 				<time><?=date('Y-m-d H:i:s',$instagram_data->created_time)?></time>
@@ -50,6 +52,10 @@
            	<div class='pull-right social_action_msg'>操作处理中......</div>
            	<div class='pull-right action_info'></div>
            	<div class="clearfix"></div>
+
+           	<span class="label label-success pull-right post-column" data-type='instagram'>
+           	    <span class="glyphicon glyphicon-arrow-left"></span> 发布
+           	</span>
 		</div>
 		<hr>
 	<?php }?>

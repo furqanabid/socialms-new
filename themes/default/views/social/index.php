@@ -127,13 +127,13 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                                         <textarea class="form-control" rows="3" placeholder="您要发布的人人网状态..."></textarea>
                                         <div id="post-renren-feed-<?=$val['id']?>"  class="media">
                                             <a class="pull-left" href="#">
-                                                <img class="media-object" src="<?=$this->assets_img?>/image-holder.png">
+                                                <img class="media-object renren-post-image" src="<?=$this->assets_img?>/image-holder.png">
                                             </a>
                                             <div class="media-body">
                                                 <h5 class="media-heading">
-                                                    <a href="#">新鲜事标题</a>
+                                                    <a href="#" target="_blank" class="renren-post-title">新鲜事标题</a>
                                                 </h5>
-                                                <div class="media-content">
+                                                <div class="media-content renren-post-description">
                                                     新鲜事内容
                                                 </div>
                                             </div>

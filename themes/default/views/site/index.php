@@ -18,7 +18,7 @@
         <div class="jumbotron introduce">
           	<h1>社交管理系统</h1>
           	<p>对您的社交应用app信息进行系统化的管理，方便您的社交内容读取与发送。</p>
-          	<strong>现在支持的社交APP：instagram, reddit, linkked。</strong>
+          	<strong>现在支持的社交APP：新浪微博, 人人网, 56网, instagram, pinterest, flickr, reddit, linkedin.</strong>
           	<p>
                 <a href="https://github.com/AndyBeginIt" target="_blank" class="btn btn-primary btn-lg" role="button">Learn more</a>
           	</p>

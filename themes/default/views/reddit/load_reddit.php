@@ -1,19 +1,20 @@
 <?php if(count($reddit->data->children)>0){?>
 	<?php foreach ($reddit->data->children as $key => $reddit_data) {?>
-		<div class="social_wrap reddit_wrap clearfix">
+		<div class="post-column-info social_wrap reddit_wrap clearfix">
 			<?php if(!empty($reddit_data->data->thumbnail) && $reddit_data->data->thumbnail!='self' && $reddit_data->data->thumbnail !='default'){?>
 			<div class="img">
 				<img src="<?=$reddit_data->data->thumbnail?>" />
 			</div>
 			<?php }?>
 			<span class='content clearfix'>
-				<a href="<?=$reddit_data->data->url?>" target="_blank">
+				<a href="<?=$reddit_data->data->url?>" target="_blank" class="post-column-title post-column-description">
 					<?=$reddit_data->data->title?>
 				</a>
 				<span class='reddit_domain'>
 					<a href="http://<?=$reddit_data->data->domain?>" target="_blank">( <?=$reddit_data->data->domain?> )</a>
 				</span>
 			</span>
+
 			<time class="pull-right"><?=date('Y-m-d H:i:s', $reddit_data->data->created)?></time>
 			<div class="clearfix"></div>
 
@@ -37,6 +38,9 @@
            	<div class='pull-right action_info'></div>
            	<div class="clearfix"></div>
 
+           	<span class="label label-success pull-right post-column" data-type='reddit'>
+           	    <span class="glyphicon glyphicon-arrow-left"></span> 发布
+           	</span>
 		</div>
 		<hr>
 	<?php } ?>
