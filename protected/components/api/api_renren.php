@@ -194,7 +194,18 @@ class api_renren extends api_common
         return $this->exec($url, $params);      
     }
 
-    
+    /**
+     * 发送自定义新鲜事。新鲜事会发布用户的个人动态信息到用户人人网主页，
+     * 同时会出现在好友的新鲜事中。
+     * @return [type] [description]
+     */ 
+    public function feed_put($inputArray)
+    {
+        $url = $this->api_host.'/feed/put';
+        $inputArray['access_token'] = $this->api_access_token;   
+
+        return $this->exec($url, $inputArray);
+    }
 
     /**
      * 执行api

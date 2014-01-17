@@ -41,7 +41,7 @@ define('REDDIT_AUTH_URI','https://ssl.reddit.com/api/v1/authorize?response_type=
 define('RENREN_API_KEY','868d086072784f259a63c68f0e6feeb2');
 define('RENREN_API_SECRET','dfae8da2263643dfa81c1efc70126105');
 define('RENREN_REDIRECT_URI','http://'.$_SERVER['SERVER_NAME'].'/index.php/renren/authorize');
-define('RENREN_AUTH_URI','https://graph.renren.com/oauth/authorize?client_id='.RENREN_API_KEY.'&redirect_uri='.RENREN_REDIRECT_URI.'&response_type=code&scope=read_user_feed,publish_comment,operate_like,publish_share,read_user_share');
+define('RENREN_AUTH_URI','https://graph.renren.com/oauth/authorize?client_id='.RENREN_API_KEY.'&redirect_uri='.RENREN_REDIRECT_URI.'&response_type=code&scope=read_user_feed,publish_comment,operate_like,publish_share,read_user_share,publish_feed,status_update');
 
 // 新浪微博 API 常量
 define('WEIBO_API_KEY','1542776171');

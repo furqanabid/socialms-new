@@ -93,7 +93,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                     <div class="column_title">
                         <img src="<?=$this->assets_img?>/social-icons/write.png" />
                         发布内容
-                        <button type="button" class="btn btn-success pull-right">发布</button>
+                        <button type="button" class="btn btn-success pull-right publish-post">发布</button>
                     </div>
                     <div class="column_container_wrap social_wrap_div">
                         <div class="column_container">
@@ -107,7 +107,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <?php foreach ($renrenAccount as $key => $val) { ?>
-                                            <li class="post-renren" data-id="<?=$val['id']?>">
+                                            <li class="post-renren" data-id="<?=$val['id']?>" data-type="<?=xzModel::SOCIAL_RENREN?>">
                                                 <a href="#"><?=$val['renren_username']?></a>
                                             </li>
                                         <?php } ?>
@@ -124,16 +124,16 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                                             <img src="<?=$this->assets_img?>/social-icons/renren.png" />
                                             <?=$val['renren_username']?>
                                         </h5>
-                                        <textarea class="form-control" rows="3" placeholder="您要发布的人人网状态..."></textarea>
+                                        <textarea class="form-control post-renren-text" rows="3" placeholder="您要发布的人人网状态..."></textarea>
                                         <div id="post-renren-feed-<?=$val['id']?>"  class="media">
                                             <a class="pull-left" href="#">
-                                                <img class="media-object renren-post-image" src="<?=$this->assets_img?>/image-holder.png">
+                                                <img class="media-object post-renren-image" src="<?=$this->assets_img?>/image-holder.png">
                                             </a>
                                             <div class="media-body">
                                                 <h5 class="media-heading">
-                                                    <a href="#" target="_blank" class="renren-post-title">新鲜事标题</a>
+                                                    <a href="#" target="_blank" class="post-renren-title">新鲜事标题</a>
                                                 </h5>
-                                                <div class="media-content renren-post-description">
+                                                <div class="media-content post-renren-description">
                                                     新鲜事内容
                                                 </div>
                                             </div>
