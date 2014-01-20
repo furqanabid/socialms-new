@@ -647,6 +647,11 @@ time{color: rgb(28, 110, 156)}
         }
     }
 
+    .remove-post-feed{
+        cursor: pointer;
+    }
+
+
     .post-type{
         padding: 0 5px 10px;
     }
@@ -655,6 +660,10 @@ time{color: rgb(28, 110, 156)}
         .post-wrap{
             padding: 10px 5px 20px;
             border-bottom: 3px solid #47a447;
+        }
+
+        .removed-post-feed{
+            display: none!important;
         }
 
         .media{

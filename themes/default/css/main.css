@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@charset "IBM437";
 body {
   background: #eeeeee url("../images/paper.jpg"); }
 
@@ -565,11 +565,15 @@ time {
   padding: 0 !important; }
   #post .column_container_wrap .column_container {
     padding: 10px 0 120px 0 !important; }
+#post .remove-post-feed {
+  cursor: pointer; }
 #post .post-type {
   padding: 0 5px 10px; }
 #post .post-body .post-wrap {
   padding: 10px 5px 20px;
   border-bottom: 3px solid #47a447; }
+#post .post-body .removed-post-feed {
+  display: none !important; }
 #post .post-body .media {
   background: white;
   display: block;

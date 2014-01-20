@@ -19,6 +19,9 @@ $(function(){
 		var type = $(this).attr('data-type');
 		var $parent = $(this).closest('.post-column-info');
 
+		// 点击column里面的发布，我们就让所有的feed显示出来
+		$('.post-body').find('.post-feed').removeClass('removed-post-feed');
+
 		var title = $parent.find('.post-column-title').text().substr(0,29) || type;
 		var link = $parent.find('.post-column-title').attr('href');
 		var description = $parent.find('.post-column-description').text().substr(0,199);
@@ -47,42 +50,66 @@ $(function(){
 	// 发布
 	$('.publish-post').click(function(){
 		var data = {};
-		// 得到被选定的类型
-		$('.post-type-clicked').each(function(i){
-			var type = $(this).attr('data-type');
-			var id = $(this).attr('data-id');
+		var error = '';
 
-			data["socialPost["+i+"][type]"] = type;
-			data["socialPost["+i+"][id]"] = id;
+		if($('.post-type-clicked').length > 0)
+		{
+			$(this).closest('#post').find('.ajax_loader').show();
+			// 得到被选定的类型
+			$('.post-type-clicked').each(function(i){
+				var type = $(this).attr('data-type');
+				var id = $(this).attr('data-id');
 
-			// 根据不同的类型获得需要发布的数据
-			switch(type)
+				data["socialPost["+i+"][type]"] = type;
+				data["socialPost["+i+"][id]"] = id;
+
+				// 根据不同的类型获得需要发布的数据
+				switch(type)
+				{
+					// 人人网的数据
+					case '7':
+						data["socialPost["+i+"][text]"] = $.trim( $('.post-renren-'+id).find('.post-renren-text').val() );
+						// 如果没有删除新鲜事表单
+						if( !$('.post-renren-'+id).find('.post-feed').hasClass('removed-post-feed') )
+						{
+							data["socialPost["+i+"][title]"] = $.trim( $('.post-renren-'+id).find('.post-renren-title').text() );
+							data["socialPost["+i+"][link]"] = $('.post-renren-'+id).find('.post-renren-title').attr('href');
+							data["socialPost["+i+"][description]"] = $.trim( $('.post-renren-'+id).find('.post-renren-description').text() );
+							data["socialPost["+i+"][image]"] = $('.post-renren-'+id).find('.post-renren-image').attr('src');
+						}
+						
+
+						if(data["socialPost["+i+"][text]"] == '')
+						{
+							error = '请输入需要发送的人人状态...';
+						}
+					break;
+				}
+			});
+
+			// 如果存在error,则执行error
+			if(error)
 			{
-				// 人人网的数据
-				case '7':
-					data["socialPost["+i+"][text]"] = $.trim( $('.post-renren-'+id).find('.post-renren-text').val() );
-					data["socialPost["+i+"][title]"] = $.trim( $('.post-renren-'+id).find('.post-renren-title').text() );
-					data["socialPost["+i+"][link]"] = $('.post-renren-'+id).find('.post-renren-title').attr('href');
-					data["socialPost["+i+"][description]"] = $.trim( $('.post-renren-'+id).find('.post-renren-description').text() );
-					data["socialPost["+i+"][image]"] = $('.post-renren-'+id).find('.post-renren-image').attr('src');
-
-					if(data["socialPost["+i+"][text]"] == '')
-					{
-						alert('请输入需要发送的人人状态...');
-						return false;
-					}
-				break;
+				alert(error);
+				$(this).closest('#post').find('.ajax_loader').hide();
+				return false;
 			}
-		})
 
-		// 发送数据
-		$.ajax({
-			type : 'POST',
-			url: root_url+"/social/publish", 
-			dataType: "json",
-			data: data,
-		}).done(function(res){
+			var that = $(this);
+			// 发送数据
+			$.ajax({
+				type : 'POST',
+				url: root_url+"/social/publish", 
+				dataType: "json",
+				data: data,
+			}).done(function(res){
+				that.closest('#post').find('.ajax_loader').hide();
+			})
+		}
+	})
 
-		})
+	// 移除post-feed
+	$('.remove-post-feed').click(function(){
+		$(this).closest('.post-feed').addClass('removed-post-feed');
 	})
 })

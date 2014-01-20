@@ -208,6 +208,18 @@ class api_renren extends api_common
     }
 
     /**
+     * 更新用户状态
+     * @return [type] [description]
+     */ 
+    public function status_put($inputArray)
+    {
+        $url = $this->api_host.'/status/put';
+        $inputArray['access_token'] = $this->api_access_token;   
+
+        return $this->exec($url, $inputArray);
+    }
+
+    /**
      * 执行api
      * @return [type] [description]
      */ 

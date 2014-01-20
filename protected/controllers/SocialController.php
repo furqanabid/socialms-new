@@ -60,6 +60,8 @@ class SocialController extends xzController
 	public function actionPublish()
 	{
 		$data = $_POST['socialPost'];
+		// API返回的数据保存到此数组中，然后以json形式返回
+		$res_code = array();
 
 		// 循环数据并发送
 		foreach ($data as $key => $val) 
@@ -70,6 +72,7 @@ class SocialController extends xzController
 			{
 				// 如果是人人网的数据
 				case xzModel::SOCIAL_RENREN :
+					// 实例化API
 					$renrenAccount = SocialRenren::model()->findByPk($val['id']);
 					$api_renren = new api_renren(RENREN_API_KEY, RENREN_API_SECRET);
 					$api_renren->api_access_token = $renrenAccount->renren_access_token;
@@ -80,20 +83,28 @@ class SocialController extends xzController
 					// 如果不存在新鲜事title,则说明是直接更新人人状态
 					if(empty($inputArray['title']))
 					{
-
+						$inputArray['content'] = $inputArray['message'];
+						// 发送数据
+						$res_code[] = $api_renren->status_put($inputArray);
 					}
 					// 发布人人网新鲜事
 					else
 					{
 						$inputArray['targetUrl'] = $val['link'];
 						$inputArray['description'] = $val['description'];
-						$inputArray['imageUrl'] = $val['image'];
+						// 判断是否存在图片,如果不存在本地的holder图片，才给此参数
+						if( !strstr($val['image'], 'image-holder') )
+						{
+							$inputArray['imageUrl'] = $val['image'];
+						}
+						
 						// 发送数据
-						$res = $api_renren->feed_put($inputArray);
-						xz::dump($res);
+						$res_code[] = $api_renren->feed_put($inputArray);
 					}
 				break;			
 			}	
 		}
+
+		xz::outputJson($res_code);
 	}
 }

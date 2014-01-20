@@ -97,7 +97,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                     </div>
                     <div class="column_container_wrap social_wrap_div">
                         <div class="column_container">
-                            <img class='ajax_loader' src='<?=$this->assets_img?>/ajax-loader.gif' />
+                            <img class='ajax_loader pull-right' style='margin:10px 5px' src='<?=$this->assets_img?>/ajax-loader.gif' />
 
                             <!-- 选择需要发布信息的帐号 -->
                             <div class="post-type">
@@ -124,8 +124,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                                             <img src="<?=$this->assets_img?>/social-icons/renren.png" />
                                             <?=$val['renren_username']?>
                                         </h5>
-                                        <textarea class="form-control post-renren-text" rows="3" placeholder="您要发布的人人网状态..."></textarea>
-                                        <div id="post-renren-feed-<?=$val['id']?>"  class="media">
+                                        <textarea class="form-control post-renren-text" rows="3" placeholder="您要发布的人人网新鲜事信息或人人状态..."></textarea>
+                                        <div id="post-renren-feed-<?=$val['id']?>"  class="media post-feed">
+                                            <span class="glyphicon glyphicon-remove pull-right remove-post-feed"></span>
                                             <a class="pull-left" href="#">
                                                 <img class="media-object post-renren-image" src="<?=$this->assets_img?>/image-holder.png">
                                             </a>
