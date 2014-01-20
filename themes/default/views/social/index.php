@@ -2,7 +2,7 @@
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/prototype_column.js',  CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_function.js',   CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social.js',            CClientScript::POS_END);
-Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_post.js',            CClientScript::POS_END);
+Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_post.js',       CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_rss.js',        CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_instagram.js',  CClientScript::POS_END);
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/social_pinterest.js',  CClientScript::POS_END);
@@ -101,9 +101,10 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
 
                             <!-- 选择需要发布信息的帐号 -->
                             <div class="post-type">
+                                <!-- 显示人人网的帐号 -->
                                 <div class='btn-group post-type-renren'>
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                       人人帐号 <span class="caret"></span>
+                                       人人网 <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <?php foreach ($renrenAccount as $key => $val) { ?>
@@ -113,11 +114,24 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                                         <?php } ?>
                                     </ul>
                                 </div>
+                                <!-- 显示微博的帐号 -->
+                                <div class='btn-group post-type-weibo'>
+                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                       新浪微博 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <?php foreach ($weiboAccount as $key => $val) { ?>
+                                            <li class="post-weibo" data-id="<?=$val['id']?>" data-type="<?=xzModel::SOCIAL_WEIBO?>">
+                                                <a href="#"><?=$val['weibo_username']?></a>
+                                            </li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
                             </div>
 
                             <!-- 选择需要发布的内容 -->
                             <div class="post-body">
-                                <!-- 显示人人网的信息框 -->
+                                <!-- 显示发布人人网的表单 -->
                                 <?php foreach ($renrenAccount as $key => $val) { ?>
                                     <div style="display:none;" class="post-wrap post-renren-<?=$val['id']?>">
                                         <h5>
@@ -139,6 +153,16 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                <?php }?>
+                                <!-- 显示发布微博的表单 -->
+                                <?php foreach ($weiboAccount as $key => $val) { ?>
+                                    <div style="display:none;" class="post-wrap post-weibo-<?=$val['id']?>">
+                                        <h5>
+                                            <img src="<?=$this->assets_img?>/social-icons/weibo.png" />
+                                            <?=$val['weibo_username']?>
+                                        </h5>
+                                        <textarea class="form-control post-weibo-text" rows="3" placeholder="您要转发的微博或者发表自己微博..."></textarea>
                                     </div>
                                 <?php }?>
                             </div>

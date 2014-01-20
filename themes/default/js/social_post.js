@@ -1,18 +1,11 @@
 // 发布数据的js
 $(function(){
 	// 点击显示人人的发布表单
-	$('.post-renren').toggle(
-		function(){
-			var id = $(this).attr('data-id');
-			$('.post-renren-'+id).slideDown();
-			$(this).addClass('post-type-clicked');
-		},
-		function(){
-			var id = $(this).attr('data-id');
-			$('.post-renren-'+id).slideUp();
-			$(this).removeClass('post-type-clicked');
-		}
-	)
+	toggle_post_account('renren');
+	// 点击显示微博的发布表单
+	toggle_post_account('weibo');
+
+
 
 	// 点击column里面的发布获取数据
 	$(document).on('click', '.post-column', function(){
@@ -113,3 +106,25 @@ $(function(){
 		$(this).closest('.post-feed').addClass('removed-post-feed');
 	})
 })
+
+
+/**
+ * 点击需要发布信息的帐号函数
+ * @param  {[type]} socialType [类似于renren,weibo等]
+ * @return {[type]}            [description]
+ */
+function toggle_post_account(socialType)
+{
+	$('.post-'+socialType).toggle(
+		function(){
+			var id = $(this).attr('data-id');
+			$('.post-'+socialType+'-'+id).slideDown();
+			$(this).addClass('post-type-clicked');
+		},
+		function(){
+			var id = $(this).attr('data-id');
+			$('.post-'+socialType+'-'+id).slideUp();
+			$(this).removeClass('post-type-clicked');
+		}
+	)
+}

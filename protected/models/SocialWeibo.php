@@ -112,4 +112,30 @@ class SocialWeibo extends xzModel
 	{
 		return parent::model($className);
 	}
+
+	/**
+	 * 获取微博的帐号
+	 * @return [type] [description]
+	 */
+	public static function getAccount()
+	{
+		$user_id = Yii::app()->user->id;
+		$cacheName = 'weibo-account-'.$user_id;
+
+		$result = Yii::app()->cache->get($cacheName);
+		if($result === false)
+		{
+			$result = Yii::app()->db->createCommand()
+	                                ->select('*')
+	                                ->from('xz_social_weibo')
+	                                ->where('is_deleted=0 AND user_id='.$user_id)
+	                                ->queryAll();
+
+			//设置一个缓存依赖，当SQL的查询结果变化时，重新缓存
+			$dependency = new CDbCacheDependency("SELECT max(update_time) FROM xz_social_weibo WHERE user_id=".$user_id);
+			Yii::app()->cache->set($cacheName, $result, 30*24*60*60, $dependency);    
+		}
+
+		return $result;		
+	}
 }
