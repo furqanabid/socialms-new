@@ -123,8 +123,7 @@ class SocialController extends xzController
 					// 否则就是发送一条带图片的微博
 					else
 					{
-						$binary_img = $image;
-						$inputArray['pic'] = $binary_img;
+						$inputArray['pic'] = '@'.$image;
 						$res_code[] = $api_weibo->statuses_upload($inputArray);
 					}
 					

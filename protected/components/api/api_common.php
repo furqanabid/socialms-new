@@ -4,6 +4,17 @@
 */
 class api_common 
 {
+    /**
+     * boundary of multipart
+     * @ignore
+     */
+    public $boundary = '';
+
+    /**
+     * 需要发送的headers
+     */
+    public $headers = array();
+
 	public $api_key;
 	public $api_secret;
 	public $api_access_token;
@@ -28,9 +39,10 @@ class api_common
 	 * 使用curl的post方法
 	 * @return [type]      [description]
 	 */
-	public function curl_post($url, $data, $curl_extra = array())
-	{
-     	$ch = curl_init();
+	public function curl_post($url, $data, $curl_extra = array(), $multi = false)
+	{   
+
+      	$ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10.8; rv:24.0) Gecko/20100101 Firefox/24.0'); 
         curl_setopt($ch, CURLOPT_POST,true);
@@ -41,6 +53,13 @@ class api_common
         curl_setopt($ch, CURLOPT_TIMEOUT, 200); 
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION , true);
         curl_setopt($ch, CURLOPT_MAXREDIRS      , 5);
+        curl_setopt($ch, CURLINFO_HEADER_OUT, TRUE );
+
+        if($multi)
+        {
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers );
+        }
+
         // 如果存在额外参数
         if(count($curl_extra) > 0)
         {

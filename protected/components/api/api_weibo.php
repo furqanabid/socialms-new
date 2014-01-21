@@ -207,7 +207,7 @@ class api_weibo extends api_common
         $inputArray['access_token'] = $this->api_access_token;
 
         $url = $this->api_host.'/statuses/upload.json';
-        return $this->exec($url, $inputArray);
+        return $this->exec($url, $inputArray, 'post', true);
     }
 
     /**
@@ -230,12 +230,24 @@ class api_weibo extends api_common
      * 执行API
      * @return [type] [description]
      */
-    public function exec($url, array $data, $method='post')
+    public function exec($url, array $data, $method='post', $multi = false)
     {
         if($method == 'post')
         {
-            $postData = http_build_query($data);
-            $res = $this->curl_post($url, $postData);
+            if($multi)
+            {
+                $postData = $this->build_http_query_multi($data);
+
+                // 需要发送的header
+                $this->headers[] = "Content-Type: multipart/form-data; boundary=".$this->boundary;
+                $this->headers[] = "Authorization: OAuth2 ".$this->api_access_token;
+            }
+            else
+            {
+                $postData = http_build_query($data);
+            }
+
+            $res = $this->curl_post($url, $postData, array(), $multi);
         }
         else
         {
@@ -244,6 +256,47 @@ class api_weibo extends api_common
         }
 
         return json_decode($res);
+    }
+    
+
+    /**
+     * @ignore
+     */
+    public function build_http_query_multi($params) 
+    {
+        if (!$params) return '';
+
+        uksort($params, 'strcmp');
+
+        $pairs = array();
+
+        $this->boundary = $boundary = uniqid('------------------');
+        $MPboundary = '--'.$boundary;
+        $endMPboundary = $MPboundary. '--';
+        $multipartbody = '';
+
+        foreach ($params as $parameter => $value) {
+
+            if( in_array($parameter, array('pic', 'image')) && $value{0} == '@' ) {
+                $url = ltrim( $value, '@' );
+                $content = file_get_contents( $url );
+                $array = explode( '?', basename( $url ) );
+                $filename = $array[0];
+
+                $multipartbody .= $MPboundary . "\r\n";
+                $multipartbody .= 'Content-Disposition: form-data; name="' . $parameter . '"; filename="' . $filename . '"'. "\r\n";
+                $multipartbody .= "Content-Type: image/unknown\r\n\r\n";
+                $multipartbody .= $content. "\r\n";
+            } else {
+                $multipartbody .= $MPboundary . "\r\n";
+                $multipartbody .= 'content-disposition: form-data; name="' . $parameter . "\"\r\n\r\n";
+                $multipartbody .= $value."\r\n";
+            }
+
+        }
+
+        $multipartbody .= $endMPboundary;
+        return $multipartbody;
     }
 }
 ?>
