@@ -139,16 +139,17 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                                             <?=$val['renren_username']?>
                                         </h5>
                                         <textarea class="form-control post-renren-text" rows="3" placeholder="您要发布的人人网新鲜事信息或人人状态..."></textarea>
+
                                         <div id="post-renren-feed-<?=$val['id']?>"  class="media post-feed">
                                             <span class="glyphicon glyphicon-remove pull-right remove-post-feed"></span>
                                             <a class="pull-left" href="#">
-                                                <img class="media-object post-renren-image" src="<?=$this->assets_img?>/image-holder.png">
+                                                <img class="media-object post-feed-image" src="<?=$this->assets_img?>/image-holder.png">
                                             </a>
                                             <div class="media-body">
                                                 <h5 class="media-heading">
-                                                    <a href="#" target="_blank" class="post-renren-title">新鲜事标题</a>
+                                                    <a href="#" target="_blank" class="post-feed-title">新鲜事标题</a>
                                                 </h5>
-                                                <div class="media-content post-renren-description">
+                                                <div class="media-content post-feed-description">
                                                     新鲜事内容
                                                 </div>
                                             </div>
@@ -163,6 +164,21 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                                             <?=$val['weibo_username']?>
                                         </h5>
                                         <textarea class="form-control post-weibo-text" rows="3" placeholder="您要转发的微博或者发表自己微博..."></textarea>
+
+                                        <div id="post-weibo-feed-<?=$val['id']?>"  class="media post-feed">
+                                            <span class="glyphicon glyphicon-remove pull-right remove-post-feed"></span>
+                                            <a class="pull-left" href="#">
+                                                <img class="media-object post-feed-image" src="<?=$this->assets_img?>/image-holder.png">
+                                            </a>
+                                            <div class="media-body">
+                                                <h5 class="media-heading">
+                                                    <a href="#" target="_blank" class="post-feed-title">新鲜事标题</a>
+                                                </h5>
+                                                <div class="media-content post-feed-description">
+                                                    新鲜事内容
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 <?php }?>
                             </div>

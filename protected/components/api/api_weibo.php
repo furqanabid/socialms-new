@@ -187,6 +187,30 @@ class api_weibo extends api_common
     }
 
     /**
+     * 发布一条新微博
+     * @return [type] [description]
+     */
+    public function statuses_update($inputArray)
+    {
+        $inputArray['access_token'] = $this->api_access_token;
+
+        $url = $this->api_host.'/statuses/update.json';
+        return $this->exec($url, $inputArray);
+    }
+
+     /**
+     * 上传图片并发布一条新微博
+     * @return [type] [description]
+     */
+    public function statuses_upload($inputArray)
+    {
+        $inputArray['access_token'] = $this->api_access_token;
+
+        $url = $this->api_host.'/statuses/upload.json';
+        return $this->exec($url, $inputArray);
+    }
+
+    /**
      * [设置当前用户主页置顶微博
      * @param [type] $id [description]
      */

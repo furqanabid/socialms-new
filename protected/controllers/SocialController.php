@@ -103,7 +103,32 @@ class SocialController extends xzController
 						// 发送数据
 						$res_code[] = $api_renren->feed_put($inputArray);
 					}
-				break;			
+				break;	
+
+				// 如果是新浪微博的数据
+				case xzModel::SOCIAL_WEIBO :
+					// 实例化API
+					$weiboAccount = SocialWeibo::model()->findByPk($val['id']);
+					$api_weibo = new api_weibo(WEIBO_API_KEY, WEIBO_API_SECRET);
+					$api_weibo->api_access_token = $weiboAccount->weibo_access_token;
+
+					$inputArray['status'] = urlencode($val['text']);
+					$image = isset($val['image']) ? $val['image'] : '';
+
+					// 如果不存在image,则说明是直接发送微博
+					if( empty($image) || strstr($image, 'image-holder') )
+					{
+						$res_code[] = $api_weibo->statuses_update($inputArray);
+					}
+					// 否则就是发送一条带图片的微博
+					else
+					{
+						$binary_img = $image;
+						$inputArray['pic'] = $binary_img;
+						$res_code[] = $api_weibo->statuses_upload($inputArray);
+					}
+					
+				break;		
 			}	
 		}
 

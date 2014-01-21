@@ -34,10 +34,10 @@ $(function(){
 		}
 		
 
-		$('.post-renren-title').text(title);
-		$('.post-renren-title').attr('href', link);
-		$('.post-renren-description').text(description);
-		$('.post-renren-image').attr('src', image);		
+		$('.post-feed-title').text(title);
+		$('.post-feed-title').attr('href', link);
+		$('.post-feed-description').text(description);
+		$('.post-feed-image').attr('src', image);		
 	})
 
 	// 发布
@@ -62,19 +62,39 @@ $(function(){
 					// 人人网的数据
 					case '7':
 						data["socialPost["+i+"][text]"] = $.trim( $('.post-renren-'+id).find('.post-renren-text').val() );
+
 						// 如果没有删除新鲜事表单
 						if( !$('.post-renren-'+id).find('.post-feed').hasClass('removed-post-feed') )
 						{
-							data["socialPost["+i+"][title]"] = $.trim( $('.post-renren-'+id).find('.post-renren-title').text() );
-							data["socialPost["+i+"][link]"] = $('.post-renren-'+id).find('.post-renren-title').attr('href');
-							data["socialPost["+i+"][description]"] = $.trim( $('.post-renren-'+id).find('.post-renren-description').text() );
-							data["socialPost["+i+"][image]"] = $('.post-renren-'+id).find('.post-renren-image').attr('src');
+							data["socialPost["+i+"][title]"] = $.trim( $('.post-renren-'+id).find('.post-feed-title').text() );
+							data["socialPost["+i+"][link]"] = $('.post-renren-'+id).find('.post-feed-title').attr('href');
+							data["socialPost["+i+"][description]"] = $.trim( $('.post-renren-'+id).find('.post-feed-description').text() );
+							data["socialPost["+i+"][image]"] = $('.post-renren-'+id).find('.post-feed-image').attr('src');
 						}
 						
 
 						if(data["socialPost["+i+"][text]"] == '')
 						{
-							error = '请输入需要发送的人人状态...';
+							error = '请输入需要发送的人人网数据！';
+						}
+					break;
+
+					// 新浪微博的数据
+					case '8':
+						data["socialPost["+i+"][text]"] = $.trim( $('.post-weibo-'+id).find('.post-weibo-text').val() );
+
+						// 如果没有删除新鲜事表单
+						if( !$('.post-weibo-'+id).find('.post-feed').hasClass('removed-post-feed') )
+						{
+							data["socialPost["+i+"][title]"] = $.trim( $('.post-weibo-'+id).find('.post-feed-title').text() );
+							data["socialPost["+i+"][link]"] = $('.post-weibo-'+id).find('.post-feed-title').attr('href');
+							data["socialPost["+i+"][description]"] = $.trim( $('.post-weibo-'+id).find('.post-feed-description').text() );
+							data["socialPost["+i+"][image]"] = $('.post-weibo-'+id).find('.post-feed-image').attr('src');
+						}
+
+						if(data["socialPost["+i+"][text]"] == '')
+						{
+							error = '请输入需要发送的新浪微博数据！';
 						}
 					break;
 				}
