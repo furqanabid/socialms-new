@@ -227,6 +227,22 @@ class api_weibo extends api_common
     }
 
     /**
+     * 转发一条微博
+     * @return [type] [description]
+     */
+    public function statuses_repost()
+    {
+        $params = array(
+            'id' => $this->weibo_id,
+            'status' => $this->status,
+            'access_token' => $this->api_access_token,
+        );
+        
+        $url = $this->api_host.'/statuses/repost.json';
+        return $this->exec($url, $params);
+    }
+
+    /**
      * 执行API
      * @return [type] [description]
      */

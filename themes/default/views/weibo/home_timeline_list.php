@@ -48,8 +48,15 @@
 
                 <!-- 评论界面 -->
                 <textarea class="form-control write_weibo_comment" rows="3" placeholder='输入你的评论，按Enter键提交' style="display:none;"></textarea>
+
+                <!-- 转发界面 -->
+                <textarea class="form-control write-weibo-repost" rows="3" placeholder='输入您要转发的内容，默认是"转发微博"，按Enter键提交' style="display:none;"></textarea>
+
                 <!-- 一些操作如评论等 -->
                 <div class="pull-right social_action weibo_action" data-idstr="<?=$weibo->idstr?>" data-uidstr="<?=$weibo->user->idstr?>">
+                    <a href="javascript:void(0);" data-type='repost' title="转发">
+                        <span class="glyphicon glyphicon-share"></span>
+                    </a>
                     <a href="javascript:void(0);" data-type='comment' title="评论">
                         <span class="glyphicon glyphicon-comment"></span>
                     </a>

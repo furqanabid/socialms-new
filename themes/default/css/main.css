@@ -539,7 +539,7 @@ time {
   padding: 5px 5px;
   font-size: 13px;
   margin-bottom: 10px; }
-.weibo_wrap .write_weibo_comment {
+.weibo_wrap .write_weibo_comment, .weibo_wrap .write-weibo-repost {
   margin-bottom: 10px; }
 
 /*END Weibo CSS*/

@@ -220,6 +220,11 @@ class weiboController extends xzController
                 case 'top':
                     $data = $this->weibo->setTop();
                 break;
+
+                case 'repost':
+                    $this->weibo->status = isset($_POST['status']) ? $_POST['status'] : '转发微博';
+                    $data = $this->weibo->statuses_repost();
+                break;
             }
 
             xz::outputJson($data);

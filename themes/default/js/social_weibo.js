@@ -151,6 +151,11 @@ $(function(){
                 that.closest('.weibo_wrap').find('.write_weibo_comment').toggle();
             break;
 
+            // 如果是转发微博
+            case 'repost':
+                that.closest('.weibo_wrap').find('.write-weibo-repost').toggle();
+            break;
+
             // 如果是favorite和unfollow
             case 'favorite':
             case 'unfavorite':
@@ -177,7 +182,7 @@ $(function(){
         }
     })
 
-    // flickr处理留言动作
+    // 处理留言动作
     $(document).on('keypress','.write_weibo_comment', function(e){
         var code = e.keyCode || e.which;
         // 如果按了是enter键
@@ -204,6 +209,42 @@ $(function(){
                 data : data,
                 dataType : 'json',
                 url  : root_url+'/weibo/operate/tab/comment',
+            }).done(function(res){
+                that.attr('disabled',false).val('');
+                if(!res.error) 
+                {
+                    that.closest('.social_wrap').find('.action_info').html('您的操作处理成功!').slideDown().delay(5000).slideUp();
+                }
+                else
+                {
+                    that.closest('.social_wrap').find('.action_info').html(res.error).slideDown().delay(5000).slideUp();
+                }         
+            })
+        } 
+    })
+
+    // 处理转发
+    $(document).on('keypress','.write-weibo-repost', function(e){
+        var code = e.keyCode || e.which;
+        // 如果按了是enter键
+        if(code == 13)
+        {
+            var status = $.trim($(this).val());
+
+            $(this).attr('disabled',true);
+            var data = {
+                id : $(this).closest('.insert_columns').attr('data-social-account'),
+                status : status,
+                weibo_idstr : $(this).closest('.weibo_wrap').find('.social_action').attr('data-idstr'),
+                weibo_uidstr : $(this).closest('.weibo_wrap').find('.social_action').attr('data-uidstr'),
+            }
+
+            var that = $(this);
+            $.ajax({
+                type : 'POST',
+                data : data,
+                dataType : 'json',
+                url  : root_url+'/weibo/operate/tab/repost',
             }).done(function(res){
                 that.attr('disabled',false).val('');
                 if(!res.error) 
