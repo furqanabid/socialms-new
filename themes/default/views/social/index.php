@@ -94,6 +94,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                         <img src="<?=$this->assets_img?>/social-icons/write.png" />
                         发布内容
                         <button type="button" class="btn btn-success pull-right publish-post">发布</button>
+                        <span class="glyphicon glyphicon-trash pull-right clear_data"></span>
                     </div>
                     <div class="column_container_wrap social_wrap_div">
                         <div class="publish-post-info" style="display:none;"></div>
@@ -138,7 +139,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                                             <img src="<?=$this->assets_img?>/social-icons/renren.png" />
                                             <?=$val['renren_username']?>
                                         </h5>
-                                        <textarea class="form-control post-renren-text" rows="3" placeholder="您要发布的人人网新鲜事信息或人人状态..."></textarea>
+                                        <textarea class="form-control post-text post-renren-text" rows="3" placeholder="您要发布的人人网新鲜事信息或人人状态..."></textarea>
 
                                         <div id="post-renren-feed-<?=$val['id']?>"  class="media post-feed">
                                             <span class="glyphicon glyphicon-remove pull-right remove-post-feed"></span>
@@ -163,7 +164,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                                             <img src="<?=$this->assets_img?>/social-icons/weibo.png" />
                                             <?=$val['weibo_username']?>
                                         </h5>
-                                        <textarea class="form-control post-weibo-text" rows="3" placeholder="您要转发的微博或者发表自己微博..."></textarea>
+                                        <textarea class="form-control post-text post-weibo-text" rows="3" placeholder="您要转发的微博或者发表自己微博..."></textarea>
 
                                         <div id="post-weibo-feed-<?=$val['id']?>"  class="media post-feed">
                                             <span class="glyphicon glyphicon-remove pull-right remove-post-feed"></span>

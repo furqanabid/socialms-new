@@ -15,9 +15,9 @@ $(function(){
 		// 点击column里面的发布，我们就让所有的feed显示出来
 		$('.post-body').find('.post-feed').removeClass('removed-post-feed');
 
-		var title = $parent.find('.post-column-title').text().substr(0,29) || type;
+		var title = $.trim( $parent.find('.post-column-title').text() ).substr(0,29) || type;
 		var link = $parent.find('.post-column-title').attr('href');
-		var description = $parent.find('.post-column-description').text().substr(0,199);
+		var description = $.trim( $parent.find('.post-column-description').text() ).substr(0,199);
 		var image;
 
 		if(type == 'instagram')
@@ -117,6 +117,7 @@ $(function(){
 				dataType: "json",
 				data: data,
 			}).done(function(res){
+				// 循环获得所有存在的错误
 				for (var i in res) 
 				{
 					if(typeof res[i].error != 'undefined')
@@ -132,6 +133,7 @@ $(function(){
 					}
 				}	
 
+				// 处理错误数据
 				if(errors)
 				{
 					$('#post').find('.publish-post-info').html(errors).fadeIn( 400 ).delay( 3000 ).fadeOut( 400 );;
@@ -139,6 +141,9 @@ $(function(){
 				else
 				{
 					$('#post').find('.publish-post-info').html('内容发送成功！').fadeIn( 400 ).delay( 3000 ).fadeOut( 400 );
+
+					// 发送成功，清除已经存在的数据
+					clear_publish_data();
 				}
 			})
 		}
@@ -147,6 +152,14 @@ $(function(){
 	// 移除post-feed
 	$('.remove-post-feed').click(function(){
 		$(this).closest('.post-feed').addClass('removed-post-feed');
+	})
+
+	// 清空发布表单的内容
+	$('.clear_data').click(function(){
+		if(confirm('您确定清空发布表单里面的内容吗？'))
+		{
+			clear_publish_data();
+		}
 	})
 })
 
@@ -170,4 +183,16 @@ function toggle_post_account(socialType)
 			$(this).removeClass('post-type-clicked');
 		}
 	)
+}
+
+/**
+ * 清空已经存在publish表单的数据
+ * @return {[type]} [description]
+ */
+function clear_publish_data()
+{
+	$('.post-text').val('');
+	$('.post-feed-title').html('新鲜事标题');
+	$('.post-feed-description').html('新鲜事内容');
+	$('.post-feed-image').attr('src', root_img+'/image-holder.png');
 }
