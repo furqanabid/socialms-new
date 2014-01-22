@@ -96,8 +96,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                         <button type="button" class="btn btn-success pull-right publish-post">发布</button>
                     </div>
                     <div class="column_container_wrap social_wrap_div">
+                        <div class="publish-post-info" style="display:none;"></div>
                         <div class="column_container">
-                            <img class='ajax_loader pull-right' style='margin:10px 5px' src='<?=$this->assets_img?>/ajax-loader.gif' />
 
                             <!-- 选择需要发布信息的帐号 -->
                             <div class="post-type">

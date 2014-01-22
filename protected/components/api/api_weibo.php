@@ -268,16 +268,15 @@ class api_weibo extends api_common
 
         uksort($params, 'strcmp');
 
-        $pairs = array();
-
-        $this->boundary = $boundary = uniqid('------------------');
-        $MPboundary = '--'.$boundary;
+        $this->boundary  = uniqid('------------------');
+        $MPboundary = '--'.$this->boundary;
         $endMPboundary = $MPboundary. '--';
         $multipartbody = '';
 
         foreach ($params as $parameter => $value) {
 
-            if( in_array($parameter, array('pic', 'image')) && $value{0} == '@' ) {
+            if( in_array($parameter, array('pic', 'image')) && $value{0} == '@' ) 
+            {
                 $url = ltrim( $value, '@' );
                 $content = file_get_contents( $url );
                 $array = explode( '?', basename( $url ) );
@@ -287,7 +286,9 @@ class api_weibo extends api_common
                 $multipartbody .= 'Content-Disposition: form-data; name="' . $parameter . '"; filename="' . $filename . '"'. "\r\n";
                 $multipartbody .= "Content-Type: image/unknown\r\n\r\n";
                 $multipartbody .= $content. "\r\n";
-            } else {
+            } 
+            else 
+            {
                 $multipartbody .= $MPboundary . "\r\n";
                 $multipartbody .= 'content-disposition: form-data; name="' . $parameter . "\"\r\n\r\n";
                 $multipartbody .= $value."\r\n";

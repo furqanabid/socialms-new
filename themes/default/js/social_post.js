@@ -47,7 +47,7 @@ $(function(){
 
 		if($('.post-type-clicked').length > 0)
 		{
-			$(this).closest('#post').find('.ajax_loader').show();
+			$(this).closest('#post').find('.publish-post-info').html("内容处理中，请稍后......").show();
 			// 得到被选定的类型
 			$('.post-type-clicked').each(function(i){
 				var type = $(this).attr('data-type');
@@ -104,11 +104,12 @@ $(function(){
 			if(error)
 			{
 				alert(error);
-				$(this).closest('#post').find('.ajax_loader').hide();
+				$(this).closest('#post').find('.publish-post-info').hide();
 				return false;
 			}
 
 			var that = $(this);
+			var errors = '';
 			// 发送数据
 			$.ajax({
 				type : 'POST',
@@ -116,7 +117,29 @@ $(function(){
 				dataType: "json",
 				data: data,
 			}).done(function(res){
-				that.closest('#post').find('.ajax_loader').hide();
+				for (var i in res) 
+				{
+					if(typeof res[i].error != 'undefined')
+					{
+						if(res[i].error.message)
+						{
+							errors += '人人网错误：'+res[i].error.message + '<br>';
+						}
+						else if(res[i].error)
+						{
+							errors += '新浪微博错误：'+res[i].error + '<br>';
+						}
+					}
+				}	
+
+				if(errors)
+				{
+					$('#post').find('.publish-post-info').html(errors).fadeIn( 400 ).delay( 3000 ).fadeOut( 400 );;
+				}
+				else
+				{
+					$('#post').find('.publish-post-info').html('内容发送成功！').fadeIn( 400 ).delay( 3000 ).fadeOut( 400 );
+				}
 			})
 		}
 	})

@@ -1,4 +1,4 @@
-@charset "IBM437";
+@charset "UTF-8";
 body {
   background: #eeeeee url("../images/paper.jpg"); }
 
@@ -599,6 +599,29 @@ time {
     border: 1px solid #dfdfdf;
     width: 88px;
     height: 58px; }
+#post .publish-post-info {
+  position: fixed;
+  top: 145px;
+  left: 50px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: -5px 5px 10px #9abfe6;
+  -moz-box-shadow: -5px 5px 10px #9abfe6;
+  -ms-box-shadow: -5px 5px 10px #9abfe6;
+  -o-box-shadow: -5px 5px 10px #9abfe6;
+  box-shadow: -5px 5px 10px #9abfe6;
+  background: #1c4480;
+  padding: 10px;
+  text-align: center;
+  width: 400px;
+  clear: both;
+  font-size: 15px;
+  color: #fff;
+  border: solid 2px #9abfe6;
+  z-index: 5; }
 
 .post-column {
   margin-top: 10px;

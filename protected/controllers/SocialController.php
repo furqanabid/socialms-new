@@ -112,7 +112,7 @@ class SocialController extends xzController
 					$api_weibo = new api_weibo(WEIBO_API_KEY, WEIBO_API_SECRET);
 					$api_weibo->api_access_token = $weiboAccount->weibo_access_token;
 
-					$inputArray['status'] = urlencode($val['text']);
+					$inputArray['status'] = $val['text'];
 					$image = isset($val['image']) ? $val['image'] : '';
 
 					// 如果不存在image,则说明是直接发送微博
