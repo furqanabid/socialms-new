@@ -226,6 +226,13 @@ time{color: rgb(28, 110, 156)}
                     height: 40px;
                 }
 
+                .expand_post{
+                    font-size: 26px;
+                    margin: 6px 8px;
+                    cursor: pointer;
+                    display: none;
+                }
+
                 .social_icons {
                     background-image: url("../images/socialsprites.png");
                     background-repeat: no-repeat;
@@ -713,10 +720,10 @@ time{color: rgb(28, 110, 156)}
         z-index: 5;
     }
 
-    .clear_data{
+    .clear_data,.compact_post{
         font-size: 20px;
         line-height: 32px;
-        margin: 0 10px;
+        margin: 0 10px 0 0;
         cursor: pointer;
     }
 }

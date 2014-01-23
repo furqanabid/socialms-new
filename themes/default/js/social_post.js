@@ -161,6 +161,20 @@ $(function(){
 			clear_publish_data();
 		}
 	})
+
+	// 隐藏post列
+	$('.compact_post').click(function(){
+		$('.siderbar_content').hide();
+		$('#scrollable_columns').css({'left':'42px'});
+		$('.expand_post').show();
+	})
+
+	// 显示post列
+	$('.expand_post').click(function(){
+		$('#scrollable_columns').removeAttr('style');
+		$('.siderbar_content').show();
+		$(this).hide();
+	})
 })
 
 

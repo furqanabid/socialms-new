@@ -34,7 +34,11 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                 <?php foreach ($userViews as $key => $val) {?>
                     <option value="<?=$val['id']?>"><?=$val['name']?></option>
                 <?php } ?>
-            </select>                
+            </select>     
+            <div style="margin-top:5px;">
+                <input type="radio" name="view-type" value="0"> 扩展类型
+                <input type="radio" name="view-type" value="1"> 紧凑类型
+            </div>
             <div style="margin-top:5px;">                                                            
                 <button type="button" class="btn btn-sm btn-primary add_new_view">新增</button>
                 <button type="button" class="btn btn-sm btn-danger del_view">删除</button>
@@ -54,6 +58,9 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
             <!-- Social Icon Navigation -->
             <nav class="siderbar_nav">
                 <ul class="nav nav-tabs" id="navigation_tab">
+                    <li>
+                        <span class="glyphicon glyphicon-arrow-right expand_post"></span>
+                    </li>
                     <li class="active post">
                         <a href="#post" class="social_icons" data-toggle="tab"></a>
                     </li>
@@ -95,6 +102,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                         发布内容
                         <button type="button" class="btn btn-success pull-right publish-post">发布</button>
                         <span class="glyphicon glyphicon-trash pull-right clear_data"></span>
+                        <span class="glyphicon glyphicon-arrow-left pull-right compact_post"></span>
                     </div>
                     <div class="column_container_wrap social_wrap_div">
                         <div class="publish-post-info" style="display:none;"></div>

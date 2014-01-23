@@ -211,6 +211,11 @@ time {
         border-top: 1px solid #ddd;
         margin-right: 0;
         height: 40px; }
+      #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .expand_post {
+        font-size: 26px;
+        margin: 6px 8px;
+        cursor: pointer;
+        display: none; }
       #scrollable_columns #page_wrap #vertical_sidebar #navigation_tab .social_icons {
         background-image: url("../images/socialsprites.png");
         background-repeat: no-repeat;
@@ -622,10 +627,10 @@ time {
   color: #fff;
   border: solid 2px #9abfe6;
   z-index: 5; }
-#post .clear_data {
+#post .clear_data, #post .compact_post {
   font-size: 20px;
   line-height: 32px;
-  margin: 0 10px;
+  margin: 0 10px 0 0;
   cursor: pointer; }
 
 .post-column {
