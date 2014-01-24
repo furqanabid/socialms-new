@@ -418,7 +418,11 @@ time{color: rgb(28, 110, 156)}
                 width: 24px;
                 height: 16px;
                 cursor: pointer;
-                background-image: url("../images/left_column_add.png");
+                background-image: url("../images/left_column.png");
+            }
+
+            .left-clicked{
+                background-image: url("../images/left_column_clicked.png");
             }
 
             .add_column_right{
@@ -426,7 +430,11 @@ time{color: rgb(28, 110, 156)}
                 width: 24px;
                 height: 16px;
                 cursor: pointer;
-                background-image: url("../images/right_column_add.png");
+                background-image: url("../images/right_column.png");
+            }
+
+            .right-clicked{
+                background-image: url("../images/right_column_clicked.png");
             }
         }
     }

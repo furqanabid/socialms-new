@@ -1,4 +1,4 @@
-@charset "UTF-8";
+@charset "IBM437";
 body {
   background: #eeeeee url("../images/paper.jpg"); }
 
@@ -379,13 +379,17 @@ time {
         width: 24px;
         height: 16px;
         cursor: pointer;
-        background-image: url("../images/left_column_add.png"); }
+        background-image: url("../images/left_column.png"); }
+      #scrollable_columns #short-feed-title .column_container .left-clicked {
+        background-image: url("../images/left_column_clicked.png"); }
       #scrollable_columns #short-feed-title .column_container .add_column_right {
         margin-right: 25px;
         width: 24px;
         height: 16px;
         cursor: pointer;
-        background-image: url("../images/right_column_add.png"); }
+        background-image: url("../images/right_column.png"); }
+      #scrollable_columns #short-feed-title .column_container .right-clicked {
+        background-image: url("../images/right_column_clicked.png"); }
 
 #short-feed-right, #short-feed-left {
   display: inline-block;

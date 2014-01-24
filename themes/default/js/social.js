@@ -88,18 +88,12 @@ $(function(){
 		$('#short-feed-title').find('.column_container').html(short_feed_title);
 
 		// 点击left或者right按钮
-		$(document).on('click', '.add_column_left', function(){
-			var columnId = $(this).closest('.short-feed-wrap').attr('id').replace('short-feed-', '');
-			$('#short-feed-left').append( $('#column_'+columnId) );
-			$('#short-feed-left').find('section').hide();
-			$('#column_'+columnId).show();
+		$(document).on('click', '.add_column_left', function(event, type){
+			left_clicked($(this), type);
 		})
 
-		$(document).on('click', '.add_column_right', function(){
-			var columnId = $(this).closest('.short-feed-wrap').attr('id').replace('short-feed-', '');
-			$('#short-feed-right').append( $('#column_'+columnId) );
-			$('#short-feed-right').find('section').hide();
-			$('#column_'+columnId).show();
+		$(document).on('click', '.add_column_right', function(event, type){
+			right_clicked($(this), type);
 		})
 	}
 
@@ -194,4 +188,38 @@ function build_short_feed(columnId, title)
 				"<span class='pull-left action-feed-icon add_column_left'></span>"+
 				"<span class='pull-right action-feed-icon add_column_right'></span>"+
 			"</div>";
+}
+
+// short feed left click
+function left_clicked(obj, clicktype) {
+	// if the right column had clicked
+	if(obj.siblings('.add_column_right').hasClass('right-clicked') && typeof clicktype == 'undefined')
+	{		
+		$('.left-clicked').siblings('.add_column_right').trigger('click','auto');				
+	}
+
+    $('.add_column_left').removeClass('left-clicked');
+    obj.addClass('left-clicked'); 
+
+    var columnId = obj.closest('.short-feed-wrap').attr('id').replace('short-feed-', '');
+    $('#short-feed-left').append( $('#column_'+columnId) );
+	$('#short-feed-left').find('section').hide();
+	$('#column_'+columnId).show();
+}
+
+// short feed right click
+function right_clicked(obj, clicktype) {
+	// if the right column had clicked
+	if(obj.siblings('.add_column_left').hasClass('left-clicked') && typeof clicktype == 'undefined')
+	{		
+		$('.right-clicked').siblings('.add_column_left').trigger('click','auto');				
+	}
+
+    $('.add_column_right').removeClass('right-clicked');
+    obj.addClass('right-clicked'); 
+
+    var columnId = obj.closest('.short-feed-wrap').attr('id').replace('short-feed-', '');
+    $('#short-feed-right').append( $('#column_'+columnId) );
+	$('#short-feed-right').find('section').hide();
+	$('#column_'+columnId).show();
 }
