@@ -52,14 +52,14 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
 </header>
 
 <!-- 内容区域 -->
-<div id="scrollable_columns" class="clearfix">
+<div id="scrollable_columns" class="clearfix" <?=($view_type==1) ? "style='left:40px;'" : '';?> >
     <div id="page_wrap">
-        <section id="vertical_sidebar">
+        <section id="vertical_sidebar" <?=($view_type==1) ? "style='z-index:0;'" : '';?> >
             <!-- Social Icon Navigation -->
             <nav class="siderbar_nav">
                 <ul class="nav nav-tabs" id="navigation_tab">
                     <li>
-                        <span class="glyphicon glyphicon-arrow-right expand_post"></span>
+                        <span class="glyphicon glyphicon-arrow-right expand_post" <?=($view_type==1) ? "style='display:block;'" : '';?>></span>
                     </li>
                     <li class="active post">
                         <a href="#post" class="social_icons" data-toggle="tab"></a>
@@ -93,7 +93,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                     </li>
                 </ul>
             </nav>
-            <div class="tab-content siderbar_content">
+            <div class="tab-content siderbar_content" <?=($view_type==1) ? "style='display:none;'" : '';?>>
 
                 <!-- Post -->
                 <div class="tab-pane active" id="post">
@@ -498,7 +498,25 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
             </div>
         </section>
         <span id="main_div_for_inserting_columns">
-            
+            <?php
+                if($view_type == 1)
+                {
+            ?>  
+                    <div id='short-feed-left'></div>
+                    <section id='short-feed-title'>
+                        <div class="column_title">
+                            您的Column列表
+                        </div>
+                        <div class="column_container_wrap">
+                            <div class="column_container">
+                                
+                            </div>
+                        </div>
+                    </section>
+                    <div id='short-feed-right'></div>
+            <?php
+                }
+            ?>
         </span>
     </div>
 </div>

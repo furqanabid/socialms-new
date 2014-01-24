@@ -141,7 +141,7 @@ class UserView extends xzModel
         if($result === false)
         {
             $result = Yii::app()->db->createCommand()
-                                    ->select('id,name,is_active')
+                                    ->select('id,name,view_type,is_active')
                                     ->from('xz_user_view')
                                     ->where('is_deleted=0 AND user_id='.$user_id)
                                     ->queryAll();        
@@ -160,12 +160,13 @@ class UserView extends xzModel
     {
     	$user_id = Yii::app()->user->id;
     	$result = Yii::app()->db->createCommand()
-    	                        ->select('id')
+    	                        ->select('id,view_type')
     	                        ->from('xz_user_view')
     	                        ->where('is_deleted=0 AND is_active=1 AND user_id='.$user_id)
     	                        ->queryRow();  
 
     	Yii::app()->session['user_view'] = $result['id'];
+    	Yii::app()->session['view_type'] = $result['view_type'];
     }
 
     /**

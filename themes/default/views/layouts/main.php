@@ -15,6 +15,7 @@
         Yii::app()->clientScript->registerScript('social_variables','
                 var root_url = "'.$_SERVER['SCRIPT_NAME'].'";
                 var root_img = "'.$this->assets_img.'";
+                var view_type = "'.Yii::app()->session["view_type"].'";
         ',CClientScript::POS_HEAD);
     ?>
 	<title>

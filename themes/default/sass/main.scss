@@ -377,6 +377,68 @@ time{color: rgb(28, 110, 156)}
             }
         }
     }
+
+    #short-feed-title{
+        width: 300px;
+        z-index: 3;
+        margin:0 -3px;
+
+        .column_container{
+            padding:0 0 0 5px!important;
+
+            .short-feed-wrap{
+                position: relative;
+                height: 60px;
+                width: 99%;
+                color: white;
+                border-bottom: 1px solid #fff;
+                color: white;
+                margin-bottom: 1px;
+                
+                background-color: #61b23c;
+                background-image: -webkit-gradient(linear, left top, left bottom, from(#A2A3A1), to(#585857));
+                background-image: -webkit-linear-gradient(top, #A2A3A1, #585857);
+                background-image: -moz-linear-gradient(top, #A2A3A1, #585857);
+                background-image: -o-linear-gradient(top, #A2A3A1, #585857);
+                background-image: -ms-linear-gradient(top, #A2A3A1, #585857);
+                background-image: linear-gradient(top, #A2A3A1, #585857);
+                filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#A2A3A1', EndColorStr='#585857');
+            }
+
+            .feed-top{
+                padding: 5px;
+
+                .feed-title{
+                    margin-left: 10px;
+                }
+            }
+
+            .add_column_left{
+                margin-left: 25px;
+                width: 24px;
+                height: 16px;
+                cursor: pointer;
+                background-image: url("../images/left_column_add.png");
+            }
+
+            .add_column_right{
+                margin-right: 25px;
+                width: 24px;
+                height: 16px;
+                cursor: pointer;
+                background-image: url("../images/right_column_add.png");
+            }
+        }
+    }
+}
+
+#short-feed-right,#short-feed-left{
+    display: inline-block;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    vertical-align: top;
+    white-space: normal;
 }
 
 .button_div{

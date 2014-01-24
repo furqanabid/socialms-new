@@ -29,6 +29,13 @@ socialColumnAccount.prototype.display = function() {
 		return;
 	}	
 
+	// 如果视图类型是紧凑
+	if(view_type == 1)
+	{
+		var short_feed_str = build_short_feed(data.columnId, data.name);
+		$('#short-feed-title').find('.column_container').prepend(short_feed_str);
+	}
+
 	switch(socialType)
 	{
 		// Rss

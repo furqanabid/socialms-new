@@ -74,6 +74,36 @@ $(function(){
 	});
 
 
+	// 如果view_type=1即紧凑，则调用执行
+	if(view_type == 1)
+	{
+		var short_feed_title = '';
+		$('.insert_columns').each(function(){
+			var columnId = $(this).attr('id').replace('column_','');
+			var title = $.trim( $(this).find('.column_title_tab_name').text() );
+
+			short_feed_title += build_short_feed(columnId, title);
+		})
+
+		$('#short-feed-title').find('.column_container').html(short_feed_title);
+
+		// 点击left或者right按钮
+		$(document).on('click', '.add_column_left', function(){
+			var columnId = $(this).closest('.short-feed-wrap').attr('id').replace('short-feed-', '');
+			$('#short-feed-left').append( $('#column_'+columnId) );
+			$('#short-feed-left').find('section').hide();
+			$('#column_'+columnId).show();
+		})
+
+		$(document).on('click', '.add_column_right', function(){
+			var columnId = $(this).closest('.short-feed-wrap').attr('id').replace('short-feed-', '');
+			$('#short-feed-right').append( $('#column_'+columnId) );
+			$('#short-feed-right').find('section').hide();
+			$('#column_'+columnId).show();
+		})
+	}
+
+
 	// add view div
 	$('.add_view').click(function(){
 		$('.view_container').toggle();
@@ -152,3 +182,16 @@ $(function(){
 		});	
 	});
 })
+
+// 生成short feed的函数
+function build_short_feed(columnId, title)
+{
+	return "<div id='short-feed-"+columnId+"' class='short-feed-wrap'>"+
+				"<div class='feed-top'>"+
+					"<span class='feed-icon'></span>"+
+					"<span class='feed-title'>"+title+"</span>"+
+				"</div>"+
+				"<span class='pull-left action-feed-icon add_column_left'></span>"+
+				"<span class='pull-right action-feed-icon add_column_right'></span>"+
+			"</div>";
+}

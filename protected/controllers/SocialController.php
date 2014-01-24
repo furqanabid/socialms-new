@@ -42,13 +42,14 @@ class SocialController extends xzController
 		$userColumns = array();
 		$userViews = array();
 
-		$UserViews = UserView::getUserView();
+		$userViews = UserView::getUserView();
 		$userColumns = UserColumn::getColumns();
 		$renrenAccount = SocialRenren::getAccount();
 		$weiboAccount = SocialWeibo::getAccount();
 
 		$this->render('index', array(
-			'userViews' => $UserViews,
+			'userViews' => $userViews,
+			'view_type' => Yii::app()->session['view_type'],
 			'userColumns' => $userColumns,
 			'renrenAccount' => $renrenAccount,
 			'weiboAccount' => $weiboAccount

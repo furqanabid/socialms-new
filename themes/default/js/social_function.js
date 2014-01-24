@@ -11,6 +11,12 @@
 function buildColumn(columnId, socialAccountId, socialType, title)
 {
 	var icon, socialTab='', holderTop='';
+    var showOrHide='';
+    if(view_type == 1)
+    {
+        showOrHide = "style='display:none;'";
+    }
+
 	switch(socialType)
 	{
         // Rss
@@ -103,7 +109,7 @@ function buildColumn(columnId, socialAccountId, socialType, title)
 	if(socialTab != '')
 		holderTop = 'holdertop';
 
-	var columnHtml = "<section class='insert_columns "+socialType+"_"+socialAccountId+"' id='column_"+columnId+"' data-social-account='"+socialAccountId+"'>"+
+	var columnHtml = "<section "+showOrHide+" class='insert_columns "+socialType+"_"+socialAccountId+"' id='column_"+columnId+"' data-social-account='"+socialAccountId+"'>"+
 						"<div class='column_title'>"+
 							"<span class='column_title_tab_name'>"+icon+" "+title+"</span>"+
 							"<div class='dropdown pull-right column_configuration_dropdown'>"+

@@ -165,6 +165,7 @@ $(function(){
 	// 隐藏post列
 	$('.compact_post').click(function(){
 		$('.siderbar_content').hide();
+		$('#vertical_sidebar').css({'z-index':'0'});
 		$('#scrollable_columns').css({'left':'42px'});
 		$('.expand_post').show();
 	})
@@ -172,6 +173,7 @@ $(function(){
 	// 显示post列
 	$('.expand_post').click(function(){
 		$('#scrollable_columns').removeAttr('style');
+		$('#vertical_sidebar').css({'z-index':'2'});
 		$('.siderbar_content').show();
 		$(this).hide();
 	})
