@@ -1,3 +1,50 @@
+// short feed left click
+function left_clicked(obj, clicktype) {
+	// if the right column had clicked
+	if(obj.siblings('.add_column_right').hasClass('right-clicked') && typeof clicktype == 'undefined')
+	{		
+		$('.left-clicked').siblings('.add_column_right').trigger('click','auto');				
+	}
+
+    $('.add_column_left').removeClass('left-clicked');
+    obj.addClass('left-clicked'); 
+
+    var columnId = obj.closest('.short-feed-wrap').attr('id').replace('short-feed-', '');
+    $('#short-feed-left').append( $('#column_'+columnId) );
+	$('#short-feed-left').find('section').hide();
+	$('#column_'+columnId).show();
+}
+
+// short feed right click
+function right_clicked(obj, clicktype) {
+	// if the right column had clicked
+	if(obj.siblings('.add_column_left').hasClass('left-clicked') && typeof clicktype == 'undefined')
+	{		
+		$('.right-clicked').siblings('.add_column_left').trigger('click','auto');				
+	}
+
+    $('.add_column_right').removeClass('right-clicked');
+    obj.addClass('right-clicked'); 
+
+    var columnId = obj.closest('.short-feed-wrap').attr('id').replace('short-feed-', '');
+    $('#short-feed-right').append( $('#column_'+columnId) );
+	$('#short-feed-right').find('section').hide();
+	$('#column_'+columnId).show();
+}
+
+// 生成short feed的函数
+function build_short_feed(columnId, title)
+{
+	return "<div id='short-feed-"+columnId+"' class='short-feed-wrap'>"+
+				"<div class='feed-top'>"+
+					"<span class='feed-icon'></span>"+
+					"<span class='feed-title'>"+title+"</span>"+
+				"</div>"+
+				"<span class='pull-left action-feed-icon add_column_left'></span>"+
+				"<span class='pull-right action-feed-icon add_column_right'></span>"+
+			"</div>";
+}
+
 // All js for social
 $(function(){
 	// 得到页面存在的column信息,并且生成column
@@ -87,6 +134,7 @@ $(function(){
 
 		$('#short-feed-title').find('.column_container').html(short_feed_title);
 
+
 		// 点击left或者right按钮
 		$(document).on('click', '.add_column_left', function(event, type){
 			left_clicked($(this), type);
@@ -95,6 +143,9 @@ $(function(){
 		$(document).on('click', '.add_column_right', function(event, type){
 			right_clicked($(this), type);
 		})
+
+		$('.add_column_left').eq(0).trigger('click');
+		$('.add_column_right').eq(1).trigger('click');
 	}
 
 
@@ -175,51 +226,24 @@ $(function(){
 			 	alert(res.msg);
 		});	
 	});
+
+	// 改变视图的查看类型
+	$('.view_type input').click(function(){
+		var data = {
+			id : $('.select_view').val(),
+			view_type : $(this).val()
+		}
+		
+		$.ajax({
+			type : 'POST',
+			data : data,
+			dataType : 'json',
+			url :  root_url+'/userView/viewType',
+		}).done(function(res){
+			if(res.success)
+			{
+				window.location.reload();
+			}
+		});	
+	})
 })
-
-// 生成short feed的函数
-function build_short_feed(columnId, title)
-{
-	return "<div id='short-feed-"+columnId+"' class='short-feed-wrap'>"+
-				"<div class='feed-top'>"+
-					"<span class='feed-icon'></span>"+
-					"<span class='feed-title'>"+title+"</span>"+
-				"</div>"+
-				"<span class='pull-left action-feed-icon add_column_left'></span>"+
-				"<span class='pull-right action-feed-icon add_column_right'></span>"+
-			"</div>";
-}
-
-// short feed left click
-function left_clicked(obj, clicktype) {
-	// if the right column had clicked
-	if(obj.siblings('.add_column_right').hasClass('right-clicked') && typeof clicktype == 'undefined')
-	{		
-		$('.left-clicked').siblings('.add_column_right').trigger('click','auto');				
-	}
-
-    $('.add_column_left').removeClass('left-clicked');
-    obj.addClass('left-clicked'); 
-
-    var columnId = obj.closest('.short-feed-wrap').attr('id').replace('short-feed-', '');
-    $('#short-feed-left').append( $('#column_'+columnId) );
-	$('#short-feed-left').find('section').hide();
-	$('#column_'+columnId).show();
-}
-
-// short feed right click
-function right_clicked(obj, clicktype) {
-	// if the right column had clicked
-	if(obj.siblings('.add_column_left').hasClass('left-clicked') && typeof clicktype == 'undefined')
-	{		
-		$('.right-clicked').siblings('.add_column_left').trigger('click','auto');				
-	}
-
-    $('.add_column_right').removeClass('right-clicked');
-    obj.addClass('right-clicked'); 
-
-    var columnId = obj.closest('.short-feed-wrap').attr('id').replace('short-feed-', '');
-    $('#short-feed-right').append( $('#column_'+columnId) );
-	$('#short-feed-right').find('section').hide();
-	$('#column_'+columnId).show();
-}

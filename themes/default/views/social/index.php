@@ -35,7 +35,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
                     <option value="<?=$val['id']?>"><?=$val['name']?></option>
                 <?php } ?>
             </select>     
-            <div style="margin-top:5px;">
+            <div style="margin-top:5px;" class="view_type">
                 <input type="radio" name="view-type" value="0"> 扩展类型
                 <input type="radio" name="view-type" value="1"> 紧凑类型
             </div>
@@ -504,7 +504,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl.'/js/soc
             ?>  
                     <div id='short-feed-left'></div>
                     <section id='short-feed-title'>
-                        <div class="column_title">
+                        <div class="column_title short-column-title">
                             您的Column列表
                         </div>
                         <div class="column_container_wrap">

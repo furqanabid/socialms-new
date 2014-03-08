@@ -26,7 +26,7 @@ class UserViewController extends xzController
     {
         return array(
             array('allow', 
-                    'actions'=>array('del','add','change'),
+                    'actions'=>array('del','add','change','viewType'),
                     'users'=>array('@'),
             ),
             array('deny',  
@@ -103,6 +103,40 @@ class UserViewController extends xzController
             $model = UserView::model()->findByPk($id);
             $model->is_active = 1;
             $model->save();
+
+            Yii::app()->session['view_type'] = $model->view_type;
         }
+    }
+
+    /**
+     * 改变视图的查看类型
+     */
+    public function actionViewType()
+    {
+        if(isset($_POST['id']))
+        {
+            if($_POST['id'] != Yii::app()->session['user_view'])
+            {
+                // 更新active
+                UserView::updateActive();
+            }
+           
+
+            $model = UserView::model()->findByPk($_POST['id']);
+            $model->view_type = $_POST['view_type']; 
+            $model->is_active = 1;
+            $model->save();
+
+            Yii::app()->session['view_type'] = $_POST['view_type'];
+            Yii::app()->session['user_view'] = $_POST['id'];
+
+            $data = array('success' => true);
+        }
+        else
+        {
+            $data = array('success' => false);
+        }
+
+        echo json_encode($data);
     }
 }
