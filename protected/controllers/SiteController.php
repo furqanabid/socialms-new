@@ -75,7 +75,7 @@ class SiteController extends xzController
                 UserView::createDefaultView();
 
                 //redirect the user to page he/she came from
-                $this->redirect($this->createUrl('/site/social'));
+                $this->redirect($this->createUrl('/social'));
             }
         }
 

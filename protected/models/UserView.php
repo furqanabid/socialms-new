@@ -125,7 +125,13 @@ class UserView extends xzModel
 		self::model()->isNewRecord = true;
 		self::model()->validate();
 		if(! self::model()->save())
+		{
 			var_dump(self::model()->attributes);
+		}
+		else
+		{
+			Yii::app()->session['user_view'] = self::model()->id;
+		}
 	} 
 
 	/**

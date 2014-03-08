@@ -159,7 +159,7 @@ $(function(){
 	})
 
 	// 改变视图
-	$('.change_view_button').click(function(){
+	$(document).on('click','.change_view_button',function(){
 		$(this).html('加载中...');
 		var data = {
 			id : $(this).attr('data-id')
